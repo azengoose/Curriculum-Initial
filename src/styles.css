@@ -7,9 +7,83 @@ body {
   margin: auto;
   max-width: 1200px;
 }
-/* HEADER STYLES */
-
+@font-face {
+  font-family: HK Grotesk;
+  src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Regular.otf?v=1603136326027")
+    format("opentype");
+}
+@font-face {
+  font-family: HK Grotesk;
+  font-weight: bold;
+  src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Bold.otf?v=1603136323437")
+    format("opentype");
+}
+/* HERO STYLES */
+#home-hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 720px;
+  height: 200px;
+  padding: 45px;
+  margin: auto;
+  margin-top: 5px;
+  background-color: aliceblue;
+  border-radius: 5%;
+}
+#hero-h1 {
+  color: #850595;
+  font-family: HK Grotesk;
+  font-weight: bold;
+  font-size: 4.5rem;
+  letter-spacing: -1.96px;
+}
+#hero-h3 {
+  font-family: HK Grotesk;
+  font-weight: normal;
+  line-height: 106%;
+}
+.hero-div {
+  max-width: 60%;
+  margin: 25px;
+}
+/* HOME NAV STYLES */
+#home-main-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.home-main-btn-div {
+  margin: 10px;
+}
+.home-main-btn {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-radius: 4%;
+  background-color: aliceblue;
+  padding: 0 20px 10px 20px;
+  align-items: center;
+  transition: 0.1s;
+}
+.home-main-btn:hover {
+  background-color: rgba(64, 166, 255, 0.26);
+}
+.home-main-btn:active {
+  background-color: rgba(64, 166, 255, 0.418);
+}
+.home-main-btn-h3 {
+  font-size: 1.2em;
+}
+.home-main-img {
+  height: 200px;
+  border-radius: 7%;
+}
 /* CURRICULUM STYLES */
+.featured-curriculums {
+  padding: 10px 0;
+  border-radius: 3%;
+}
 .curriculum-wrapper {
   display: flex;
   justify-content: space-evenly;
@@ -20,4 +94,10 @@ body {
   margin: 5px;
   max-width: 600px;
   background-color: aliceblue;
+}
+.curriculum-description,
+.curriculum-resources {
+  background-color: antiquewhite;
+  padding: 1px 15px;
+  margin-top: 5px;
 }

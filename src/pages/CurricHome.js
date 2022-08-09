@@ -4,7 +4,7 @@ import { curriculum } from "../data/test_data.js";
 export default function CurricHome() {
   return (
     <>
-      <div className="">
+      <div className="featured-curriculums">
         <h3>Featured curriculums: </h3>
         <div className="curriculum-wrapper">
           {curriculum.map(
@@ -22,20 +22,19 @@ export default function CurricHome() {
             ) => {
               return (
                 <div className="curriculum-container" key={index}>
-                  <h3 className="element-title">{Title}</h3>
-                  <p className="element-description">
-                    Description: {Description}
-                  </p>
-                  <p> Curriculum Designers: {Designers}</p>
-                  <p> Duration: {Duration}</p>
-                  <p> Pricing: {Price}</p>
-                  <p> Location: {Location}</p>
-                  <p>
-                    {" "}
-                    Resources:
+                  <h3 className="curriculum-title">{Title}</h3>
+                  <div className="curriculum-description">
+                    <p>Description: {Description}</p>
+                    <p> Curriculum Designers: {Designers}</p>
+                    <p> Duration: {Duration}</p>
+                    <p> Pricing: {Price}</p>
+                    <p> Location: {Location}</p>
+                  </div>
+                  <div className="curriculum-resources">
+                    <p> Resources: </p>
                     {Resources.map((e, i) => {
                       return (
-                        <div key={i}>
+                        <div className="curriculum-resource" key={i}>
                           <p>{e.Title}</p>
                           <p>
                             {e.Length ? <span>Length: {e.Length}</span> : " "}
@@ -50,7 +49,7 @@ export default function CurricHome() {
                         </div>
                       );
                     })}
-                  </p>
+                  </div>
                 </div>
               );
             }

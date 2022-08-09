@@ -14,28 +14,54 @@ import { Link } from "react-router-dom";
 import CurricHome from "./pages/CurricHome.js";
 import Navbar from "./pages/components/Navbar.js";
 
+import exploreImg from "./images/explore.png";
+import searchImg from "./images/search.png";
+
 export default function App() {
   return (
     <>
       <Navbar />
       <div className="wrapper">
         <div id="home-hero">
-          <h1>iterxue</h1>
-          <h3>Create and share curriculums and learning pathways.</h3>
+          <div className="hero-div">
+            <h1 id="hero-h1">iterxue</h1>
+          </div>
+          <div id="hero-right" className="hero-div">
+            <h3 id="hero-h3">
+              Embark on a learning journey. Discover, create and share learning
+              pathways.
+            </h3>
+          </div>
         </div>
         <div id="home-main-nav">
-          <div>
-            <button>Explore</button>
-            <img
-              alt="explore painting"
-              src="https://labs.openai.com/e/djeFoPly8ei0kkhnLgDhIZkP/original"
-            />
+          <div className="home-main-btn-div">
+            <Link className="home-main-btn link" to="/e">
+              <h3 className="home-main-btn-h3">Explore</h3>
+              <img
+                className="home-main-img"
+                alt="explore painting"
+                src={exploreImg}
+              />
+            </Link>
           </div>
-          <button>Search</button>
+          <div className="home-main-btn-div">
+            <Link className="home-main-btn link" to="/">
+              <h3 className="home-main-btn-h3">Search</h3>
+              <img
+                className="home-main-img"
+                alt="search painting"
+                src={searchImg}
+              />
+            </Link>
+          </div>
         </div>
         <CurricHome />
       </div>
       <footer>
+        <Link className="link" to="/e">
+          Explore
+        </Link>{" "}
+        - {""}
         <Link className="link" to="/a">
           About
         </Link>

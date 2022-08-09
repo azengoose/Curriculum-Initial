@@ -8,7 +8,7 @@ export default function Navbar() {
         <header id="nav">
           <div id="nav-bar">
             <div id="nav-title" className="nav-item">
-              <Link className="link" to="/">
+              <Link className="link nav-link" to="/">
                 <h3>iterxue</h3>
               </Link>
             </div>

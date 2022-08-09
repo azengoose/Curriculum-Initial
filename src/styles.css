@@ -1,13 +1,23 @@
+/* GENERAL STYLES */
 body {
   font-family: sans-serif;
   text-align: center;
 }
-#user-container {
-  position: absolute;
-  right: 0;
-  top: 0;
+.wrapper {
+  margin: auto;
+  max-width: 1200px;
 }
-#sign-in {
-  text-align: center;
-  padding: 10px;
+/* HEADER STYLES */
+
+/* CURRICULUM STYLES */
+.curriculum-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+}
+.curriculum-container {
+  text-align: left;
+  padding: 0 1.4em;
+  margin: 5px;
+  max-width: 600px;
+  background-color: aliceblue;
 }

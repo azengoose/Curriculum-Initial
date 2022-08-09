@@ -1,42 +1,13 @@
+// Ignore file.
+// used as template for firebase demo project
+
 import "./fire.css";
 
 export default function FireMain() {
   return (
     <>
       <div>
-        <header className="">
-          <div className="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
-            <div className="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
-              <h3>Lujourn</h3>
-            </div>
-            <div id="user-container">
-              <div hidden id="user-pic"></div>
-              <div hidden id="user-name"></div>
-              <button
-                hidden
-                id="sign-out"
-                className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white"
-              >
-                Sign-out
-              </button>
-              <button
-                id="sign-in"
-                className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white"
-              >
-                <i className="material-icons">account_circle</i>Sign-in with
-                Google
-              </button>
-            </div>
-          </div>
-        </header>
-
-        <main>
-          <h3>Create Resource:</h3>
-          <p>
-            (Need to create backend functionality that redirects to new page and
-            connects database with field inputs)
-          </p>
-        </main>
+        <main></main>
 
         {/* <main className="mdl-layout__content mdl-color--grey-100">
           <div

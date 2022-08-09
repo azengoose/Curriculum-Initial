@@ -1,4 +1,13 @@
-.App {
+body {
   font-family: sans-serif;
   text-align: center;
+}
+#user-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#sign-in {
+  text-align: center;
+  padding: 10px;
 }

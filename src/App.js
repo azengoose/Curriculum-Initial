@@ -1,11 +1,12 @@
 // Dev Plan-Log
 // Once signed in, a user is able to create their own curriculum,
 // upload their own resources, edit and delete their creations.
-// -> Requires AUTH
-// What parts of the resources and curriculums need to be filled in
-// is determined in the database fields. -> Requires FIRESTORE CLOUD
+// Can be a private repo or submitted to the public.
+// Unsigned, a user can browse public curriculums and resources
+// and less importantly, can start making a curriculum (but
+// needs to sign in to save it, then can share link)
 
-// Need a better name: Journey, Curriculum, Lujourn, Iterlu, Luiter
+// Names: Journey, Curriculum, Lujourn, Iterlu, Luiter
 // Discolu, Tabilu, Tabijourney, Manabulu, Xuejourn, Iterxue
 
 import "./styles.css";

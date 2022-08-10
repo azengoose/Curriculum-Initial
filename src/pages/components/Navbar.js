@@ -1,10 +1,13 @@
 import "./navbar.css";
 import { Link } from "react-router-dom";
 
+import Auth from "../../data/auth.js";
+
 export default function Navbar() {
   return (
     <>
       <div>
+        <Auth />
         <header id="nav">
           <div id="nav-bar">
             <div id="nav-title" className="nav-item">

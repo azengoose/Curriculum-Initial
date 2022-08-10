@@ -5,7 +5,7 @@ export default function CurricHome() {
   return (
     <>
       <div className="featured-curriculums">
-        <h3>Featured curriculums: </h3>
+        <h3 id="featured-curriculums-title">Featured curriculums: </h3>
         <div className="curriculum-wrapper">
           {curriculum.map(
             (

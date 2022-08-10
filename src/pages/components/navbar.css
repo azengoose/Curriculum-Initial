@@ -1,17 +1,4 @@
-#nav-bar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  top: 0px;
-  left: 0;
-  width: 100%;
-  height: 40px;
-  background-color: aliceblue;
-  color: rgb(39, 0, 110);
-}
-#nav-title {
-  left: 0%;
-}
+/* LINK STYLES (GENERAL) */
 .link,
 a {
   text-decoration: none;
@@ -26,24 +13,34 @@ a:active {
   color: rgba(255, 0, 34, 0.842);
 }
 .nav-link {
-  font-size: 0.8em;
+  font-size: 1em;
+  font-family: HK Grotesk;
+  font-weight: normal;
+  color: black;
 }
-#user-container {
+/* NAVBAR POSITIONING */
+#nav-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  top: 0px;
+  left: 0;
+  background-color: white;
+  color: rgb(39, 0, 110);
+  padding: 10px 25px;
 }
 .nav-item {
-  padding: 0 15px;
+  margin: 0 5px;
 }
 .nav-right {
   display: flex;
   flex-direction: row;
   width: 30%;
   justify-content: flex-end;
-}
-
-#sign-in {
+  align-items: center;
 }
 .sign-btn {
-  margin-top: 14px;
   border: none;
-  background-color: rgb(221, 237, 250);
+  background-color: rgba(255, 255, 255, 0);
 }

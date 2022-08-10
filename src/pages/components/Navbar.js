@@ -9,13 +9,13 @@ export default function Navbar() {
           <div id="nav-bar">
             <div id="nav-title" className="nav-item">
               <Link className="link nav-link" to="/">
-                <h3>iterxue</h3>
+                iterxue
               </Link>
             </div>
             <div className="nav-right">
               <div className="nav-about nav-item">
                 <Link className="link nav-link" to="/a">
-                  <h3>About</h3>
+                  About
                 </Link>
               </div>
               <div id="user-container" className="nav-item">

@@ -6,12 +6,9 @@
 
 import { Link } from "react-router-dom";
 
-import Navbar from "./components/Navbar.js";
-
 export default function About() {
   return (
     <>
-      <Navbar />
       <h2>About</h2>
       <p>
         From <em>iter</em>, Latin for journey, trip, course, path and (

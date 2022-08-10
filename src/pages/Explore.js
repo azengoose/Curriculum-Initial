@@ -3,12 +3,10 @@
 // Categorisations displayed visually
 
 import { curriculum } from "../data/test_data.js";
-import Navbar from "./components/Navbar.js";
 
 export default function Explore() {
   return (
     <>
-      <Navbar />
       <h2>Explore Curriculums</h2>
       <div className="curriculum-wrapper">
         {curriculum.map(

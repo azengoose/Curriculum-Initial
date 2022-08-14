@@ -20,7 +20,14 @@ export const curriculum = [
       },
       { Title: "4. Mentor — Counselor to the craft." }
     ],
-    reviews: [
+    Steps: [
+      {
+        Title: "Input",
+        Description:
+          "Take in and consume resources that are for the independence of thinking."
+      }
+    ],
+    Reviews: [
       {
         Name: "Angus",
         Stars: 3,
@@ -86,7 +93,7 @@ export const curriculum = [
         Length: "3-7 days"
       }
     ],
-    reviews: [
+    Reviews: [
       {
         Name: "John Doe",
         Stars: 3,
@@ -97,6 +104,60 @@ export const curriculum = [
         Name: "Angus",
         Stars: 2,
         ReviewText: "Needs more testing. "
+      }
+    ],
+    Steps: [
+      {
+        Title: "Input",
+        Description:
+          "Take in and consume resources that are for the independence of thinking."
+      }
+    ]
+  },
+  {
+    Title: "Thinking Independently",
+    Description:
+      "An experimental set of resources to develop critical thinking and a lifestyle of thinking for yourself.",
+    Type: "Journey",
+    Designers: "Angus",
+    Location: "Any",
+    Price: "Free",
+    Duration: "3 Months > Lifetime",
+    Resources: [
+      {
+        Title: "1. Apprentice — Novice with limited knowledge or experience.",
+        Length: "15-25 years"
+      },
+      { Title: "2. Journeyman/woman — Credentialed, skilled practitioner." },
+      {
+        Title:
+          "3. Master — Advanced credentials, skills and experienced practitioner."
+      },
+      { Title: "4. Mentor — Counselor to the craft." }
+    ],
+    Steps: [
+      {
+        Title: "Input",
+        Description:
+          "Take in and consume resources that are for the independence of thinking."
+      },
+      {
+        Title: "Output",
+        Description:
+          "Start writing, start producing original works that pull from a variety of sources, creatively forming independent conclusions."
+      },
+      {
+        Title: "Beyond",
+        Description:
+          "Practice moderated skepticism, continue input and output that fosters independence of thinking."
+      }
+    ],
+    Reviews: [
+      {
+        Name: "Angus",
+        Stars: 3,
+        ReviewText:
+          "It's a nice idea to include this here, but just read the book or a summary online."
       }
     ]
   }

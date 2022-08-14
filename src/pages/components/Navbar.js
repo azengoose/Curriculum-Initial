@@ -1,13 +1,54 @@
 import "./navbar.css";
 import { Link } from "react-router-dom";
 
-import Auth from "../../data/auth.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut
+} from "firebase/auth";
+import "../../data/config.js";
 
 export default function Navbar() {
+  function signIn() {
+    try {
+      var provider = new GoogleAuthProvider();
+      signInWithPopup(getAuth(), provider);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  function signOutUser() {
+    signOut(getAuth());
+  }
+  function initFirebaseAuth() {
+    onAuthStateChanged(getAuth(), authStateObserver);
+  }
+  function getUserName() {
+    return getAuth().currentUser.displayName;
+  }
+  var userNameElement = document.getElementById("user-name");
+  var signInButtonElement = document.getElementById("sign-in");
+  var signOutButtonElement = document.getElementById("sign-out");
+  function authStateObserver(user) {
+    if (user) {
+      var userName = getUserName();
+      userNameElement.textContent = userName;
+
+      userNameElement.removeAttribute("hidden");
+      signOutButtonElement.removeAttribute("hidden");
+      signInButtonElement.setAttribute("hidden", "true");
+    } else {
+      userNameElement.setAttribute("hidden", "true");
+      signOutButtonElement.setAttribute("hidden", "true");
+      signInButtonElement.removeAttribute("hidden");
+    }
+  }
+  initFirebaseAuth();
   return (
     <>
       <div>
-        <Auth />
         <header id="nav">
           <div id="nav-bar">
             <div id="nav-title" className="nav-item">
@@ -27,14 +68,12 @@ export default function Navbar() {
                 <button
                   hidden
                   id="sign-out"
-                  className="sign-btn mdl-js-ripple-effect mdl-color-text--white"
+                  className="sign-btn"
+                  onClick={signOutUser}
                 >
                   Sign-out
                 </button>
-                <button
-                  id="sign-in"
-                  className="sign-btn mdl-js-ripple-effect mdl-color-text--white"
-                >
+                <button id="sign-in" className="sign-btn" onClick={signIn}>
                   <i className="material-icons">account_circle</i>
                 </button>
               </div>

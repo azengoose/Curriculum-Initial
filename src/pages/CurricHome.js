@@ -16,7 +16,8 @@ export default function CurricHome() {
                 Duration,
                 Price,
                 Location,
-                Resources
+                Resources,
+                Steps
               },
               index
             ) => {
@@ -46,6 +47,17 @@ export default function CurricHome() {
                               ""
                             )}
                           </p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div className="curriculum-steps">
+                    <p> Steps: </p>
+                    {Steps.map((e, i) => {
+                      return (
+                        <div className="curriculum-step" key={i}>
+                          <p>{e.Title}</p>
+                          <p>{e.Description}</p>
                         </div>
                       );
                     })}

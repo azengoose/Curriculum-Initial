@@ -1,13 +1,13 @@
 // Dev Plan-Log
-// Once signed in, a user is able to create their own curriculum,
-// upload their own resources, edit and delete their creations.
-// Can be a private repo or submitted to the public.
-// Unsigned, a user can browse public curriculums and resources
-// and less importantly, can start making a curriculum (but
-// needs to sign in to save it, then can share link)
+// AUTH - done, add styling
+// STORAGE - in progress
+// LINKS - dynamic links per curriculum resource
 
-// Names: Journey, Curriculum, Lujourn, Iterlu, Luiter
-// Discolu, Tabilu, Tabijourney, Manabulu, Xuejourn, Iterxue
+// Separation of Projects:
+// RESOURCES: Source data of resources, eg. from ClassCentral
+// CURRICULUMS: Source data of curriculums
+// ITERXUE: Combine these projects into one website.
+// VISUALISATIONS: Additional creative research project
 
 import "./styles.css";
 import { Link } from "react-router-dom";
@@ -52,6 +52,9 @@ export default function App() {
             />
           </Link>
         </div>
+      </div>
+      <div style={{ paddingTop: 20 }}>
+        <Link to="/cc">Create Curriculum</Link>
       </div>
       <CurricHome />
     </>

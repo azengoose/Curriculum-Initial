@@ -1,0 +1,47 @@
+/* CURRICULUM STYLES */
+.featured-curriculums {
+  padding: 10px 0;
+  border-radius: 3%;
+}
+.featured-curriculum-wrapper {
+  column-count: 2;
+  grid-gap: 5px;
+  justify-content: center;
+}
+#featured-curriculums-title {
+  font-family: HK Grotesk;
+  font-weight: bold;
+}
+.curriculum-title {
+  font-family: HK Grotesk;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+.curriculum-container {
+  display: inline-block;
+  text-align: left;
+  padding: 0 1.4em;
+  margin: 5px;
+  max-width: 550px;
+  background-color: rgb(255, 250, 241);
+}
+.curriculum-description,
+.curriculum-resources,
+.curriculum-steps {
+  background-color: white;
+  padding: 1px 15px;
+  margin-top: 5px;
+}
+.explore-curriculum {
+  max-width: 1600px;
+}
+#explore-curriculum-title {
+  font-family: HK Grotesk;
+  font-weight: bold;
+  font-size: 3.1em;
+}
+.explore-curriculum-wrapper {
+  column-count: 3;
+  grid-gap: 5px;
+  justify-content: center;
+}

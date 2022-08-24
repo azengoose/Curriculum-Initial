@@ -34,15 +34,18 @@ export default function Navbar() {
   function authStateObserver(user) {
     if (user) {
       var userName = getUserName();
+      console.log(userName);
       userNameElement.textContent = userName;
 
       userNameElement.removeAttribute("hidden");
       signOutButtonElement.removeAttribute("hidden");
       signInButtonElement.setAttribute("hidden", "true");
     } else {
-      userNameElement.setAttribute("hidden", "true");
-      signOutButtonElement.setAttribute("hidden", "true");
-      signInButtonElement.removeAttribute("hidden");
+      try {
+        userNameElement.setAttribute("hidden", "true");
+        signOutButtonElement.setAttribute("hidden", "true");
+        signInButtonElement.removeAttribute("hidden");
+      } catch (error) {}
     }
   }
   initFirebaseAuth();

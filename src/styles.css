@@ -1,4 +1,6 @@
 :root {
+  --theme: #850595;
+  --theme-dark: #690477;
   --bg-grad: radial-gradient(
     circle,
     rgb(235, 248, 255) 0%,
@@ -26,6 +28,19 @@ body {
   font-weight: bold;
   src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Bold.otf?v=1603136323437")
     format("opentype");
+}
+.theme-btn {
+  margin: 15px;
+  padding: 15px;
+  font-size: 1.14em;
+  background-color: white;
+  border: 1px solid var(--theme-dark);
+  border-radius: 5px;
+  transition: 0.24s;
+}
+.theme-btn:hover {
+  background-color: rgb(255, 230, 242);
+  cursor: pointer;
 }
 /* Note: Begin with mobile styles > tablet > desktop */
 /* HERO STYLES */
@@ -84,6 +99,11 @@ body {
 .home-main-btn:active {
   background-color: rgba(64, 166, 255, 0.418);
 }
+.h2-theme {
+  font-family: HK Grotesk;
+  font-weight: bold;
+  font-size: 3em;
+}
 h3 {
   color: purple;
 }
@@ -94,34 +114,9 @@ h3 {
   height: 200px;
   border-radius: 7%;
 }
-/* CURRICULUM STYLES */
-.featured-curriculums {
-  padding: 10px 0;
-  border-radius: 3%;
-}
-#featured-curriculums-title {
-  font-family: HK Grotesk;
-  font-weight: bold;
-}
-.curriculum-title {
-  font-family: HK Grotesk;
-  font-weight: bold;
-  font-size: 1.3em;
-}
-.curriculum-wrapper {
-  display: flex;
-  justify-content: space-evenly;
-}
-.curriculum-container {
-  text-align: left;
-  padding: 0 1.4em;
-  margin: 5px;
-  max-width: 600px;
-  background-color: rgb(255, 250, 241);
-}
-.curriculum-description,
-.curriculum-resources {
-  background-color: white;
-  padding: 1px 15px;
-  margin-top: 5px;
+/* FORMS */
+.form-small-input-div {
+  column-count: 2;
+  grid-gap: 5px;
+  justify-content: center;
 }

@@ -6,24 +6,20 @@ import {
   getFirestore,
   collection,
   addDoc,
-  doc,
-  getDoc,
-  getDocs,
   onSnapshot,
   serverTimestamp,
   query
 } from "firebase/firestore";
 import firebaseApp from "../data/config.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const db = getFirestore(firebaseApp);
 const curriculumRef = collection(db, "curriculums");
-const testRef = collection(db, "test");
-const docRef = doc(db, "test", "3nPSLe3DWA7MCuxlU2BB");
+// const testRef = collection(db, "test");
+// const docRef = doc(db, "test", "3nPSLe3DWA7MCuxlU2BB");
 
 export default function CreateCurriculum() {
   const [designerName, setDesignerName] = useState("");
-
   const submit = (e) => {
     e.preventDefault();
     addDoc(curriculumRef, {
@@ -36,62 +32,22 @@ export default function CreateCurriculum() {
     console.log("added name");
   };
 
-  // // Working Code to Console Log single Doc
-  // const docSnap = getDoc(docRef);
-  // docSnap.then((docSnap) => {
-  //   if (docSnap) {
-  //     console.log("Document data:", docSnap.data());
-  //   } else {
-  //     console.log("No such document!");
-  //   }
-  // });
-
-  // // working Code to get several Docs
-  // const vare = getDocs(testRef).then((snap) => {
-  //   snap.forEach((doc) => {
-  //     console.log(doc.id, " => ", doc.data());
-  //     return <p>hello</p>;
-  //   });
-  // });
-  const [data, setData] = useState("");
-
+  const [curriculums, setCurriculums] = useState([]);
   const q = query(curriculumRef);
-  // const data = []
-  onSnapshot(q, (qSnapshot) => {
-    // const data = [];
-    qSnapshot.forEach((doc) => {
-      const d = doc.data();
-      setData([d.Title, d.Info]);
-    });
-    // console.log("Data: ", data.join(", "));
-    console.log(data);
-  });
-  console.log(data);
 
-  // // Not Working: Console logs a promise => cannot map
-  // const vare = getDocs(testRef).then((querySnapshot) => {
-  //   var data = [];
-  //   querySnapshot.forEach((doc) => {
-  //     var id = doc.id;
-  //     var dat = doc.data();
-  //     data.push({ id: id, string: dat.string });
-  //     console.log(doc.data(), doc.data().type, data);
-  //     return data;
-  //   });
-  //   return null;
-  // });
-  // console.log(vare)
+  useEffect(() => {
+    onSnapshot(q, (snapshot) => {
+      setCurriculums(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          Data: [doc.data()]
+        }))
+      );
+    });
+  }, []);
 
   return (
     <>
-      <div className="data-ouput">
-        <p>
-          {/* {dataArray.map((e, i) => {
-            <div key={i}>{e}</div>;
-          })} */}
-        </p>
-      </div>
-      {/*  */}
       <h2 className="h2-theme">Create Curriculum</h2>
       <div style={{ maxWidth: 500, margin: "auto", textAlign: "left" }}>
         <p>
@@ -134,9 +90,43 @@ export default function CreateCurriculum() {
           </button>
         </form>
       </div>
-      <Link className="link" to="/">
-        Back to Home
-      </Link>
+      <div className="data-ouput">
+        {curriculums.map(({ id, Data }, index) => {
+          return (
+            <div key={index}>
+              <p>
+                {id}
+                {Data.map(({ Title, Info }, i) => {
+                  return (
+                    <div key={i}>
+                      {Title}
+                      {Info}
+                    </div>
+                  );
+                })}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+      <button className="theme-btn">
+        <Link className="link" to="/">
+          Back to Home
+        </Link>
+      </button>
     </>
   );
 }
+
+// // Working Code to Log single Doc and several Docs
+// const docSnap = getDoc(docRef);
+// docSnap.then((docSnap) => {
+//     console.log("Document data:", docSnap.data())
+// });
+//
+// const Docs = getDocs(testRef).then((snap) => {
+//   snap.forEach((doc) => {
+//     console.log(doc.id, " => ", doc.data());
+//     return <p>hello</p>;
+//   });
+// });

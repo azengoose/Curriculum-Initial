@@ -8,6 +8,7 @@ import "./curriculum.css";
 import { curriculum } from "../data/test_data.js";
 
 export default function CurricHome() {
+  console.log();
   return (
     <>
       <div className="featured-curriculums">

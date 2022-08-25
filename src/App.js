@@ -53,9 +53,9 @@ export default function App() {
           </Link>
         </div>
       </div>
-      <div style={{ paddingTop: 20 }}>
+      <button className="theme-btn">
         <Link to="/cc">Create Curriculum</Link>
-      </div>
+      </button>
       <CurricHome />
     </>
   );

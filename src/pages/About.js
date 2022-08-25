@@ -7,7 +7,6 @@
 // Plans: quotes, futurism
 
 import { Link } from "react-router-dom";
-import CreateCurriculum from "./CreateCurriculum.js";
 
 export default function About() {
   return (
@@ -25,7 +24,6 @@ export default function About() {
       <Link className="link" to="/">
         Back to Home
       </Link>
-      <CreateCurriculum />
     </>
   );
 }

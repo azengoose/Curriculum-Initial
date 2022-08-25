@@ -5,95 +5,138 @@ import { Link } from "react-router-dom";
 import {
   getFirestore,
   collection,
-  doc,
   addDoc,
-  getDoc
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+  serverTimestamp,
+  query
 } from "firebase/firestore";
 import firebaseApp from "../data/config.js";
 import { useState } from "react";
 
 const db = getFirestore(firebaseApp);
-const curriculumRef = collection(db, "curriculum");
-const userRef = collection(db, "users");
+const curriculumRef = collection(db, "curriculums");
+const testRef = collection(db, "test");
+const docRef = doc(db, "test", "3nPSLe3DWA7MCuxlU2BB");
 
 export default function CreateCurriculum() {
-  async function addCurriculum() {
-    try {
-      await addDoc(curriculumRef, {
-        Designers: "Angus",
-        Duration: "1-2 Months",
-        Location: "Online",
-        Pricing: "Free"
-      });
-
-      const docRef = doc(db, "curriculum", "Shorting Linguistics");
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-      } else {
-        console.log("No such document!");
-      }
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  }
-  const [customerName, setCustomerName] = useState("");
-  const [customerPassword, setCustomerPassword] = useState("");
+  const [designerName, setDesignerName] = useState("");
 
   const submit = (e) => {
     e.preventDefault();
-    addDoc(userRef, {
-      name: customerName,
-      password: customerPassword
+    addDoc(curriculumRef, {
+      created: serverTimestamp(),
+      Designers: designerName,
+      Duration: "1-2 Months",
+      Location: "Online",
+      Pricing: "Free"
     });
-
-    setCustomerName("");
-    setCustomerPassword("");
-    console.log(userRef.id);
+    console.log("added name");
   };
+
+  // // Working Code to Console Log single Doc
+  // const docSnap = getDoc(docRef);
+  // docSnap.then((docSnap) => {
+  //   if (docSnap) {
+  //     console.log("Document data:", docSnap.data());
+  //   } else {
+  //     console.log("No such document!");
+  //   }
+  // });
+
+  // // working Code to get several Docs
+  // const vare = getDocs(testRef).then((snap) => {
+  //   snap.forEach((doc) => {
+  //     console.log(doc.id, " => ", doc.data());
+  //     return <p>hello</p>;
+  //   });
+  // });
+  const [data, setData] = useState("");
+
+  const q = query(curriculumRef);
+  // const data = []
+  onSnapshot(q, (qSnapshot) => {
+    // const data = [];
+    qSnapshot.forEach((doc) => {
+      const d = doc.data();
+      setData([d.Title, d.Info]);
+    });
+    // console.log("Data: ", data.join(", "));
+    console.log(data);
+  });
+  console.log(data);
+
+  // // Not Working: Console logs a promise => cannot map
+  // const vare = getDocs(testRef).then((querySnapshot) => {
+  //   var data = [];
+  //   querySnapshot.forEach((doc) => {
+  //     var id = doc.id;
+  //     var dat = doc.data();
+  //     data.push({ id: id, string: dat.string });
+  //     console.log(doc.data(), doc.data().type, data);
+  //     return data;
+  //   });
+  //   return null;
+  // });
+  // console.log(vare)
+
   return (
     <>
-      <Link className="link" to="/">
-        Back to Home
-      </Link>
-      <div className="App">
-        <div className="App__form">
-          <input
-            type="text"
-            placeholder="Name"
-            value={customerName}
-            onChange={(e) => setCustomerName(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Password"
-            value={customerPassword}
-            onChange={(e) => setCustomerPassword(e.target.value)}
-          />
-          <button onClick={submit}>Submit</button>
-        </div>
+      <div className="data-ouput">
+        <p>
+          {/* {dataArray.map((e, i) => {
+            <div key={i}>{e}</div>;
+          })} */}
+        </p>
+      </div>
+      {/*  */}
+      <h2 className="h2-theme">Create Curriculum</h2>
+      <div style={{ maxWidth: 500, margin: "auto", textAlign: "left" }}>
+        <p>
+          Curriculums can only be submitted for pending. It is judged by the
+          public in an intermediary period and by a rotating committee, before
+          being established into the database proper.
+        </p>
       </div>
       <div className="form-div">
-        <form>
-          <h2>Create Curriculum</h2>
+        <form className="create-form">
           <div className="form-small-input-div">
             <label>
               Enter your name: {""}
-              <input placeholder="Enter Designer Name" />
+              <input
+                type="text"
+                placeholder="Enter Designer Name"
+                value={designerName}
+                onChange={(e) => setDesignerName(e.target.value)}
+              />
             </label>
             <label>
               Enter the duration: {""}
               <input placeholder="Duration" />
             </label>
-            <input placeholder="Location" />
-            <input placeholder="Pricing" />
+            <label>
+              Choose the location: {""}
+              <input placeholder="Location" />
+            </label>
+            <label>
+              Enter estimated or exact pricing: {""}
+              <input placeholder="Pricing" />
+            </label>
           </div>
-          <textarea placeholder="Description" />
+          <label>
+            Enter description:
+            <textarea placeholder="Description" />
+          </label>
+          <button className="theme-btn" type="submit" onClick={submit}>
+            Submit
+          </button>
         </form>
-        <button type="submit" onClick={addCurriculum}>
-          Submit
-        </button>
       </div>
+      <Link className="link" to="/">
+        Back to Home
+      </Link>
     </>
   );
 }

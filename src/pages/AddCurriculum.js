@@ -1,5 +1,4 @@
-// A testing page for the creating curriculum form
-// and outputting data of all current curriculums
+// For submitting externally completed curriculums
 
 import { Link } from "react-router-dom";
 import {
@@ -11,25 +10,25 @@ import {
   query
 } from "firebase/firestore";
 import firebaseApp from "../data/config.js";
-import AddCurriculum from "./AddCurriculum.js";
 import { useState, useEffect } from "react";
 
 const db = getFirestore(firebaseApp);
-const OldcurriculumRef = collection(db, "curriculums");
 const curriculumRef = collection(db, "external_curriculums");
-// const testRef = collection(db, "test");
-// const docRef = doc(db, "test", "3nPSLe3DWA7MCuxlU2BB");
 
-export default function CreateCurriculum() {
-  const [designerName, setDesignerName] = useState("");
+export default function AddCurriculum() {
+  const [authorsName, setAuthorsName] = useState("");
+  const [lastUpdate, setLastUpdate] = useState("");
+  const [curriculumLink, setCurriculumLink] = useState("");
+  const [title, setTitle] = useState("");
+
   const submit = (e) => {
     e.preventDefault();
     addDoc(curriculumRef, {
       created: serverTimestamp(),
-      Designers: designerName,
-      Duration: "1-2 Months",
-      Location: "Online",
-      Pricing: "Free"
+      Authors: authorsName,
+      LastUpdated: lastUpdate,
+      Link: curriculumLink,
+      Title: title
     });
     console.log("added name");
   };
@@ -50,38 +49,54 @@ export default function CreateCurriculum() {
 
   return (
     <>
-      <h2 className="h2-theme">Create Curriculum</h2>
+      <h2 className="h2-theme">Submit Curriculum</h2>
       <div style={{ maxWidth: 500, margin: "auto", textAlign: "left" }}>
         <p>
-          Curriculums can only be submitted for pending. It is judged by the
-          public in an intermediary period and by a rotating committee, before
-          being established into the database proper.
+          Submit externally completed curriculums. For example, these can be
+          websites, blogs, uploaded videos, images, diagrams. Curriculums can
+          only be submitted for pending. It is judged by the public in an
+          intermediary period and by a rotating committee, before being
+          established into the database proper.
         </p>
       </div>
-      <AddCurriculum />
       <div className="form-div">
         <form className="create-form">
           <div className="form-small-input-div">
             <label>
-              Enter your name: {""}
+              Enter author name(s): {""}
               <input
                 type="text"
-                placeholder="Enter Designer Name"
-                value={designerName}
-                onChange={(e) => setDesignerName(e.target.value)}
+                placeholder="Enter Authors"
+                value={authorsName}
+                onChange={(e) => setAuthorsName(e.target.value)}
               />
             </label>
             <label>
-              Enter the duration: {""}
-              <input placeholder="Duration" />
+              Enter the title:
+              <input
+                type="text"
+                placeholder="Enter Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </label>
             <label>
-              Choose the location: {""}
-              <input placeholder="Location" />
+              Enter link:
+              <input
+                type="text"
+                placeholder="Enter link"
+                value={curriculumLink}
+                onChange={(e) => setCurriculumLink(e.target.value)}
+              />
             </label>
             <label>
-              Enter estimated or exact pricing: {""}
-              <input placeholder="Pricing" />
+              Enter last updated:
+              <input
+                type="text"
+                placeholder="Enter last updated"
+                value={lastUpdate}
+                onChange={(e) => setLastUpdate(e.target.value)}
+              />
             </label>
           </div>
           <label>
@@ -94,7 +109,9 @@ export default function CreateCurriculum() {
         </form>
       </div>
       <div className="data-ouput">
-        <h3 style={{ fontSize: "1.47em" }}>Internal Curriculum Examples</h3>
+        <h3 style={{ fontSize: "1.47em" }}>
+          External Completed Curriculum Examples
+        </h3>
         <div className="external-curriculums-wrapper">
           {curriculums.map(({ Data }, index) => {
             return (

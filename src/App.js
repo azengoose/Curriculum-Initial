@@ -10,53 +10,28 @@
 // VISUALISATIONS: Additional creative research project
 
 import "./styles.css";
-import { Link } from "react-router-dom";
-
-import CurricHome from "./pages/CurricHome.js";
-
-import exploreImg from "./images/explore.png";
-import searchImg from "./images/search.png";
+import Paths from "./router.js";
+import Navbar from "./pages/components/Navbar.js";
+import Footer from "./pages/components/Footer.js";
 
 export default function App() {
   return (
     <>
-      <div id="home-hero">
-        <div className="hero-div">
-          <h1 id="hero-h1">iterxue</h1>
-        </div>
-        <div id="hero-right" className="hero-div">
-          <h3 id="hero-h3">
-            Embark on a learning journey. Discover, create and share learning
-            pathways.
-          </h3>
-        </div>
+      <Navbar />
+      <div className="wrapper">
+        <Paths />
       </div>
-      <div id="home-main-nav">
-        <div className="home-main-btn-div">
-          <Link className="home-main-btn link" to="/e">
-            <h3 className="home-main-btn-h3">Explore</h3>
-            <img
-              className="home-main-img"
-              alt="explore painting"
-              src={exploreImg}
-            />
-          </Link>
-        </div>
-        <div className="home-main-btn-div">
-          <Link className="home-main-btn link" to="/">
-            <h3 className="home-main-btn-h3">Search</h3>
-            <img
-              className="home-main-img"
-              alt="search painting"
-              src={searchImg}
-            />
-          </Link>
-        </div>
-      </div>
-      <button className="theme-btn">
-        <Link to="/cc">Create Curriculum</Link>
-      </button>
-      <CurricHome />
+      <Footer />
     </>
   );
 }
+
+// Not Working: opens external links in new tab
+// var all_links = document.querySelectorAll("a");
+// for (var i = 0; i < all_links.length; i++) {
+//   var a = all_links[i];
+//   if (a.hostname !== location.hostname) {
+//     a.rel = "noopener";
+//     a.target = "_blank";
+//   }
+// }

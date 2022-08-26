@@ -45,3 +45,13 @@
   grid-gap: 5px;
   justify-content: center;
 }
+.external-curriculums-wrapper {
+  column-count: 3;
+  margin: 10px;
+}
+.each-ext-cur-div {
+  border: 1px solid rgb(193, 135, 255);
+  border-radius: 5px;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+}

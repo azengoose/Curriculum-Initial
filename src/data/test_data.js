@@ -210,6 +210,10 @@ export const curriculum = [
     Location: "Online",
     Price: "Free",
     Duration: "1-2 Months",
+    Vision:
+      "The goals of this is to have a baseline understanding of the whole of Linguistics, to allow further specialisation further, or to maintain this generalised understanding. ",
+    Rationales:
+      "The Coursera course, Miracles of the Human Language, is quite popular: you can check the reviews on the website yourself for a better assessment. This is followed by the very friendly Lingthusiasm blog, and then by a more structured, little bit more theoretical VLC courses, which I found extremely helpful for containing a lot of structure in the concepts already for ease of chunking; they provide good ready-made chunking models.",
     Resources: [
       {
         Title: "Miracles of the Human Language",

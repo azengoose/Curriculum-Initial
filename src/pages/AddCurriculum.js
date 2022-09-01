@@ -113,7 +113,7 @@ export default function AddCurriculum() {
           External Completed Curriculum Examples
         </h3>
         <div className="external-curriculums-wrapper">
-          {curriculums.map(({ Data }, index) => {
+          {curriculums.slice(0, 3).map(({ Data }, index) => {
             return (
               <div key={index}>
                 {Data.map(({ Title, Link, LastUpdated, Authors }, i) => {
@@ -136,6 +136,11 @@ export default function AddCurriculum() {
       <button className="theme-btn">
         <Link className="link" to="/">
           Back to Home
+        </Link>
+      </button>
+      <button className="theme-btn">
+        <Link className="link" to="/e">
+          Explore Other Curriculums
         </Link>
       </button>
     </>

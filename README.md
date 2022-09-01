@@ -1,2 +1,3 @@
 # Curriculum-Initial
-Created with CodeSandbox
+
+Initial Experimentation with a curriculum directory.

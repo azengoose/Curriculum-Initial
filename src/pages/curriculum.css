@@ -48,10 +48,14 @@
 .external-curriculums-wrapper {
   column-count: 3;
   margin: 10px;
+  column-gap: 20px;
 }
 .each-ext-cur-div {
   border: 1px solid rgb(193, 135, 255);
   border-radius: 5px;
   padding: 10px;
   background-color: rgb(255, 255, 255);
+  display: inline-block;
+  width: 95%;
+  margin-bottom: 10px;
 }

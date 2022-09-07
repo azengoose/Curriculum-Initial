@@ -35,11 +35,13 @@ export default function Navbar() {
     if (user) {
       var userName = getUserName();
       console.log(userName);
-      userNameElement.textContent = userName;
-
-      userNameElement.removeAttribute("hidden");
-      signOutButtonElement.removeAttribute("hidden");
-      signInButtonElement.setAttribute("hidden", "true");
+      if (userName) {
+        if (userNameElement) userNameElement.textContent = userName;
+      }
+      if (userNameElement) userNameElement.removeAttribute("hidden");
+      if (signOutButtonElement) signOutButtonElement.removeAttribute("hidden");
+      if (signInButtonElement)
+        signInButtonElement.setAttribute("hidden", "true");
     } else {
       try {
         userNameElement.setAttribute("hidden", "true");

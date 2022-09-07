@@ -1,3 +1,28 @@
+// Database Structure
+//
+// >> internal_curriculums (collection)
+//     > curriculum A (document ID)
+//         Title: ...
+//         Description: ...
+//         Type: ...
+//         Authors: ...
+//         LastUpdated: ...
+//         Pricing: ...
+//         Duration: ...
+//         >> resources (collection)
+//             > resource A (document ID)
+//                 Title: ...
+//                 Link: ...
+//                 Duration: ...
+//         >> steps (collection)
+//             > step 1 (document ID)
+//                 Title: ...
+//                 Description: ...
+//         >> reviews (collection)
+//             > review A (document ID)
+//                 Author: ...
+//                 ReviewText: ...
+
 export const curriculum = [
   {
     Title: "Mastery",
@@ -326,3 +351,92 @@ export const curriculum = [
     ]
   }
 ];
+
+export function DummyCurriculum() {
+  return (
+    <div className="data-ouput">
+      <div
+        id="explore-curriculum-wrapper"
+        className="explore-curriculum-wrapper"
+      >
+        {curriculum.map(
+          (
+            {
+              Title,
+              Description,
+              Designers,
+              LastUpdate,
+              Duration,
+              Price,
+              Location,
+              Resources,
+              Steps,
+              Reviews
+            },
+            index
+          ) => {
+            return (
+              <div className="curriculum-container" key={index}>
+                <h3 className="curriculum-title">{Title}</h3>
+                <div className="curriculum-description">
+                  <p>Description: {Description}</p>
+                  <p> Curriculum Designers: {Designers}</p>
+                  <p>
+                    Last Updated:
+                    {LastUpdate ? <span> {LastUpdate}</span> : " N/A"}
+                  </p>
+                  <p> Duration: {Duration}</p>
+                  <p> Pricing: {Price}</p>
+                  <p> Location: {Location}</p>
+                </div>
+                <div className="curriculum-resources">
+                  <p> Resources: </p>
+                  {Resources.map((e, i) => {
+                    return (
+                      <div className="curriculum-resource" key={i}>
+                        <p>{e.Title}</p>
+                        <p>
+                          {e.Length ? <span>Length: {e.Length}</span> : " "}
+                          {e.Link ? (
+                            <span>
+                              , <a href={e.Link}>Go to Resource</a>
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="curriculum-steps">
+                  <p> Steps: </p>
+                  {Steps.map((e, i) => {
+                    return (
+                      <div className="curriculum-step" key={i}>
+                        <p>{e.Title}</p>
+                        <p>{e.Description}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="curriculum-reviews">
+                  <p> Reviews: </p>
+                  {Reviews.map((e, i) => {
+                    return (
+                      <div className="curriculum-review" key={i}>
+                        <p>by {e.Name}</p>
+                        <p>Rating: {e.Stars} out of 5 </p>
+                        <p>{e.ReviewText}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          }
+        )}
+      </div>
+    </div>
+  );
+}

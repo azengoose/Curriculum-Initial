@@ -21,9 +21,21 @@ export default function About() {
         For the journey of learning.
       </p>
       <p>Images on home page created by DALL-E 2 X Angus.</p>
-      <Link className="link" to="/">
-        Back to Home
-      </Link>
+      <button className="theme-btn">
+        <Link className="link" to="/">
+          Back to Home
+        </Link>
+      </button>
+      <button className="theme-btn">
+        <Link className="link" to="/Shorting-Linguistics">
+          Shorting-Linguistics
+        </Link>
+      </button>
+      <button className="theme-btn">
+        <Link className="link" to="/Shorting-Computer-Science">
+          Shorting-Computer-Science
+        </Link>
+      </button>
     </>
   );
 }

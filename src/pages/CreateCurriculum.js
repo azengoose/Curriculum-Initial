@@ -1,52 +1,53 @@
-// A testing page for the creating curriculum form
-// and outputting data of all current curriculums
+// For creating internally completed curriculums
 
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import {
   getFirestore,
   collection,
   addDoc,
-  onSnapshot,
-  serverTimestamp,
-  query
+  serverTimestamp
 } from "firebase/firestore";
 import firebaseApp from "../data/config.js";
-import AddCurriculum from "./AddCurriculum.js";
-import { useState, useEffect } from "react";
+import { monthYear } from "./components/Time";
+
+import InternalCurriculums from "./components/curriculums/InternalCurriculums.js";
 
 const db = getFirestore(firebaseApp);
-const OldcurriculumRef = collection(db, "curriculums");
-const curriculumRef = collection(db, "external_curriculums");
-// const testRef = collection(db, "test");
-// const docRef = doc(db, "test", "3nPSLe3DWA7MCuxlU2BB");
+const curriculumRef = collection(db, "internal_curriculums");
 
 export default function CreateCurriculum() {
-  const [designerName, setDesignerName] = useState("");
+  const [authorsName, setAuthorsName] = useState("");
+  const [description, setDescription] = useState("");
+  const [duration, setDuration] = useState("");
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [pricing, setPricing] = useState("");
+
   const submit = (e) => {
     e.preventDefault();
-    addDoc(curriculumRef, {
-      created: serverTimestamp(),
-      Designers: designerName,
-      Duration: "1-2 Months",
-      Location: "Online",
-      Pricing: "Free"
-    });
-    console.log("added name");
+    if (authorsName && title) {
+      addDoc(curriculumRef, {
+        created: serverTimestamp(),
+        Authors: authorsName,
+        Duration: duration,
+        Location: location,
+        Pricing: pricing,
+        LastUpdated: monthYear, // from imported Time
+        Title: title,
+        Description: description
+      });
+      console.log("added name");
+    } else {
+      const message = "All fields required.";
+      var msg = document.getElementById("form-message");
+      msg.textContent = message;
+      function tempErrorMessage() {
+        msg.textContent = "";
+      }
+      setTimeout(tempErrorMessage, 5000);
+    }
   };
-
-  const [curriculums, setCurriculums] = useState([]);
-  const q = query(curriculumRef);
-
-  useEffect(() => {
-    onSnapshot(q, (snapshot) => {
-      setCurriculums(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          Data: [doc.data()]
-        }))
-      );
-    });
-  }, []);
 
   return (
     <>
@@ -58,67 +59,85 @@ export default function CreateCurriculum() {
           being established into the database proper.
         </p>
       </div>
-      <AddCurriculum />
       <div className="form-div">
         <form className="create-form">
           <div className="form-small-input-div">
             <label>
-              Enter your name: {""}
+              Enter title: {""}
               <input
                 type="text"
-                placeholder="Enter Designer Name"
-                value={designerName}
-                onChange={(e) => setDesignerName(e.target.value)}
+                placeholder="A Complete Guide to Fishing"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </label>
+            <label>
+              Enter author names: {""}
+              <input
+                type="text"
+                placeholder="Enter authors"
+                value={authorsName}
+                onChange={(e) => setAuthorsName(e.target.value)}
               />
             </label>
             <label>
               Enter the duration: {""}
-              <input placeholder="Duration" />
+              <input
+                type="text"
+                placeholder="Duration"
+                value={duration}
+                onChange={(e) => setDuration(e.target.value)}
+              />
             </label>
             <label>
               Choose the location: {""}
-              <input placeholder="Location" />
+              <input
+                type="text"
+                placeholder="Location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
             </label>
             <label>
               Enter estimated or exact pricing: {""}
-              <input placeholder="Pricing" />
+              <input
+                type="text"
+                placeholder="Pricing"
+                value={pricing}
+                onChange={(e) => setPricing(e.target.value)}
+              />
             </label>
           </div>
           <label>
             Enter description:
-            <textarea placeholder="Description" />
+            <textarea
+              type="text"
+              placeholder="Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </label>
           <button className="theme-btn" type="submit" onClick={submit}>
             Submit Curriculum
           </button>
         </form>
       </div>
-      <div className="data-ouput">
-        <h3 style={{ fontSize: "1.47em" }}>Internal Curriculum Examples</h3>
-        <div className="external-curriculums-wrapper">
-          {curriculums.map(({ Data }, index) => {
-            return (
-              <div key={index}>
-                {Data.map(({ Title, Link, LastUpdated, Authors }, i) => {
-                  return (
-                    <div className="each-ext-cur-div" key={i}>
-                      <a href={Link}>{Title}</a>
-                      <p>
-                        Last Updated:
-                        {LastUpdated ? <span> {LastUpdated}</span> : " N/A"}
-                      </p>{" "}
-                      <p>designed by {Authors}</p>
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
-      </div>
+
+      <InternalCurriculums />
+
       <button className="theme-btn">
         <Link className="link" to="/">
           Back to Home
+        </Link>
+      </button>
+      <button className="theme-btn">
+        <Link className="link" to="/e">
+          Explore Other Curriculums
+        </Link>
+      </button>
+      <button className="theme-btn">
+        <Link className="link" to="/ac">
+          Add a Curriculum
         </Link>
       </button>
     </>
@@ -137,3 +156,7 @@ export default function CreateCurriculum() {
 //     return <p>hello</p>;
 //   });
 // });
+
+// // For Testing a collection and doc
+// const testRef = collection(db, "test");
+// const docRef = doc(db, "test", "3nPSLe3DWA7MCuxlU2BB");

@@ -5,12 +5,12 @@ import {
   getFirestore,
   collection,
   addDoc,
-  onSnapshot,
-  serverTimestamp,
-  query
+  serverTimestamp
 } from "firebase/firestore";
 import firebaseApp from "../data/config.js";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+
+import ExternalCurriculums from "./components/curriculums/ExternalCurriculums";
 
 const db = getFirestore(firebaseApp);
 const curriculumRef = collection(db, "external_curriculums");
@@ -23,29 +23,25 @@ export default function AddCurriculum() {
 
   const submit = (e) => {
     e.preventDefault();
-    addDoc(curriculumRef, {
-      created: serverTimestamp(),
-      Authors: authorsName,
-      LastUpdated: lastUpdate,
-      Link: curriculumLink,
-      Title: title
-    });
-    console.log("added name");
+    if (authorsName && curriculumLink && title && lastUpdate) {
+      addDoc(curriculumRef, {
+        created: serverTimestamp(),
+        Authors: authorsName,
+        LastUpdated: lastUpdate,
+        Link: curriculumLink,
+        Title: title
+      });
+      console.log("Curriculum successfully submitted.");
+    } else {
+      const message = "All fields required.";
+      var msg = document.getElementById("form-message");
+      msg.textContent = message;
+      function tempErrorMessage() {
+        msg.textContent = "";
+      }
+      setTimeout(tempErrorMessage, 5000);
+    }
   };
-
-  const [curriculums, setCurriculums] = useState([]);
-  const q = query(curriculumRef);
-
-  useEffect(() => {
-    onSnapshot(q, (snapshot) => {
-      setCurriculums(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          Data: [doc.data()]
-        }))
-      );
-    });
-  }, []);
 
   return (
     <>
@@ -60,8 +56,9 @@ export default function AddCurriculum() {
         </p>
       </div>
       <div className="form-div">
-        <form className="create-form">
+        <form className="create-form" onSubmit={submit}>
           <div className="form-small-input-div">
+            <span id="form-message"></span>
             <label>
               Enter author name(s): {""}
               <input
@@ -99,40 +96,16 @@ export default function AddCurriculum() {
               />
             </label>
           </div>
-          <label>
+          {/* <label>
             Enter description:
-            <textarea placeholder="Description" />
-          </label>
-          <button className="theme-btn" type="submit" onClick={submit}>
-            Submit Curriculum
-          </button>
+            <textarea required placeholder="Description" />
+          </label> */}
+          <input className="theme-btn" type="submit" />
         </form>
       </div>
-      <div className="data-ouput">
-        <h3 style={{ fontSize: "1.47em" }}>
-          External Completed Curriculum Examples
-        </h3>
-        <div className="external-curriculums-wrapper">
-          {curriculums.slice(0, 3).map(({ Data }, index) => {
-            return (
-              <div key={index}>
-                {Data.map(({ Title, Link, LastUpdated, Authors }, i) => {
-                  return (
-                    <div className="each-ext-cur-div" key={i}>
-                      <a href={Link}>{Title}</a>
-                      <p>
-                        Last Updated:
-                        {LastUpdated ? <span> {LastUpdated}</span> : " N/A"}
-                      </p>{" "}
-                      <p>designed by {Authors}</p>
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
-      </div>
+
+      <h3 style={{ fontSize: "1.47em" }}>External Curriculum Examples</h3>
+      <ExternalCurriculums />
       <button className="theme-btn">
         <Link className="link" to="/">
           Back to Home
@@ -143,19 +116,11 @@ export default function AddCurriculum() {
           Explore Other Curriculums
         </Link>
       </button>
+      <button className="theme-btn">
+        <Link className="link" to="/cc">
+          Create a Curriculum
+        </Link>
+      </button>
     </>
   );
 }
-
-// // Working Code to Log single Doc and several Docs
-// const docSnap = getDoc(docRef);
-// docSnap.then((docSnap) => {
-//     console.log("Document data:", docSnap.data())
-// });
-//
-// const Docs = getDocs(testRef).then((snap) => {
-//   snap.forEach((doc) => {
-//     console.log(doc.id, " => ", doc.data());
-//     return <p>hello</p>;
-//   });
-// });

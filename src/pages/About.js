@@ -13,12 +13,12 @@ export default function About() {
 
       <BtnHome />
       <button className="theme-btn">
-        <Link className="link" to="/Shorting-Linguistics">
+        <Link className="link" to="/curriculum/Shorting-Linguistics">
           Shorting-Linguistics
         </Link>
       </button>
       <button className="theme-btn">
-        <Link className="link" to="/Shorting-Computer-Science">
+        <Link className="link" to="/curriculum/Shorting-Computer-Science">
           Shorting-Computer-Science
         </Link>
       </button>

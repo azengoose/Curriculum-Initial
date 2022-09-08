@@ -24,24 +24,27 @@ import {
   where
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
+import { BtnHome, BtnExplore } from "./components/Buttons";
 import firebaseApp from "../data/config.js";
 import InternalCurriculums from "./components/curriculums/InternalCurriculums.js";
 
 const db = getFirestore(firebaseApp);
 const curriculumRef = collection(db, "internal_curriculums");
 const resourcesRef = collectionGroup(db, "resources");
+const reviewsRef = collectionGroup(db, "reviews");
 
 export default function Curriculum() {
   // Adapts content based on the path provided.
   var path = window.location.pathname;
   var remadeTitle = path.slice(1).replace(/-/g, " ");
 
+  const { id } = useParams();
+
   // Singular output, not plural
   const [curriculum, setCurriculum] = useState([]);
-  var q = query(curriculumRef, where("Title", "==", remadeTitle));
-
+  const q = query(curriculumRef, where("Title", "==", remadeTitle));
   useEffect(
     () => {
       onSnapshot(q, (snapshot) => {
@@ -77,30 +80,86 @@ export default function Curriculum() {
     []
   );
 
+  const [reviews, setReviews] = useState([]);
+  const reviewq = query(reviewsRef);
+  useEffect(
+    () => {
+      onSnapshot(reviewq, (snapshot) => {
+        setReviews(
+          snapshot.docs.map((doc) => ({
+            Name: doc.data().Name,
+            Review: doc.data().Review,
+            ParentDocID: doc.ref.parent.parent.id
+          }))
+        );
+      });
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
   return (
     <>
+      <h2>{id}</h2>
+
       {curriculum.map(({ Data, id }, index) => {
         return (
           <div className="curriculum-singles-wrapper" key={index}>
             {Data.map(
               (
-                { Title, Duration, Location, Pricing, LastUpdated, Authors },
+                {
+                  Title,
+                  Duration,
+                  Location,
+                  Pricing,
+                  LastUpdated,
+                  Authors,
+                  Description,
+                  Rationales,
+                  Vision,
+                  Steps
+                },
                 i
               ) => {
                 return (
                   <>
-                    <h2 className="h2-theme">{Title}</h2>
+                    <h2 className="theme-h2">{Title}</h2>
                     <div className="curriculum-singles-container" key={i}>
                       <div className="curriculum-singles-summary">
                         <h3>Summary</h3>
+                        <p> {Description}</p>
                         <p>
-                          Last Updated:
+                          Designed by {Authors}, updated
                           {LastUpdated ? <span> {LastUpdated}</span> : " N/A"}
-                        </p>{" "}
-                        <p>designed by {Authors}</p>
-                        <p> Duration: {Duration}</p>
-                        <p> Pricing: {Pricing}</p>
-                        <p> Location: {Location}</p>
+                        </p>
+                        <div className="singles-duration-price-location">
+                          <div>
+                            Duration <hr />
+                            {Duration}
+                          </div>
+                          <div>
+                            Pricing <hr />
+                            {Pricing}
+                          </div>
+                          <div>
+                            Location <hr />
+                            {Location}
+                          </div>
+                        </div>
+                        <p> Vision: {Vision}</p>
+                        <p> Rationales: {Rationales}</p>
+                        <h3>Steps:</h3>
+                        <div className="singles-steps">
+                          {Steps.map((e, i) => {
+                            return (
+                              <div key={i}>
+                                <p>
+                                  {i + 1} {e.Title}
+                                </p>
+                                <p>{e.Description}</p>
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
                       <div className="curriculum-singles-resources">
                         <h3> Resources: </h3>
@@ -132,6 +191,22 @@ export default function Curriculum() {
                           }
                         )}
                       </div>
+                      <div className="curriculum-singles-reviews">
+                        <h3> Reviews: </h3>
+                        {reviews.map(({ Name, Review, ParentDocID }, i) => {
+                          if (ParentDocID === id) {
+                            return (
+                              <div key={i}>
+                                <p>
+                                  {Name}: {Review}
+                                </p>
+                              </div>
+                            );
+                          } else {
+                            return null;
+                          }
+                        })}
+                      </div>
                     </div>
                   </>
                 );
@@ -141,19 +216,11 @@ export default function Curriculum() {
         );
       })}
 
-      <h3>Other Internal Curriculums</h3>
+      <h3 className="theme-h3">Other Internal Curriculums</h3>
       <InternalCurriculums />
 
-      <button className="theme-btn">
-        <Link className="link" to="/">
-          Back to Home
-        </Link>
-      </button>
-      <button className="theme-btn">
-        <Link className="link" to="/e">
-          Explore Other Curriculums
-        </Link>
-      </button>
+      <BtnHome />
+      <BtnExplore />
     </>
   );
 }
@@ -163,3 +230,37 @@ export default function Curriculum() {
 //  recommendations.
 // Use novel visualisations of learning pathways such as
 //  learning trees as in video games to show prerequisites.
+
+// // For Steps as a separate collection
+// const stepsRef = collectionGroup(db, "steps");
+// const [steps, setSteps] = useState([]);
+// const stepq = query(stepsRef);
+// useEffect(
+//   () => {
+//     onSnapshot(stepq, (snapshot) => {
+//       setSteps(
+//         snapshot.docs.map((doc) => ({
+//           Title: doc.data().Title,
+//           Description: doc.data().Description,
+//           ParentDocID: doc.ref.parent.parent.id
+//         }))
+//       );
+//     });
+//   }, // eslint-disable-next-line react-hooks/exhaustive-deps
+//   []
+// );
+// {/* <div className="curriculum-singles-steps">
+//   <h3> Steps: </h3>
+//   {steps.map(({ Title, Description, ParentDocID }, i) => {
+//     if (ParentDocID === id) {
+//       return (
+//         <div key={i}>
+//           <p>{Title}</p>
+//           <p>{Description}</p>
+//         </div>
+//       );
+//     } else {
+//       return null;
+//     }
+//   })}
+// </div> */}

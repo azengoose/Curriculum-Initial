@@ -11,6 +11,7 @@ import firebaseApp from "../data/config.js";
 import { useState } from "react";
 
 import ExternalCurriculums from "./components/curriculums/ExternalCurriculums";
+import { BtnHome, BtnCreateCurriculum, BtnExplore } from "./components/Buttons";
 
 const db = getFirestore(firebaseApp);
 const curriculumRef = collection(db, "external_curriculums");
@@ -45,7 +46,7 @@ export default function AddCurriculum() {
 
   return (
     <>
-      <h2 className="h2-theme">Submit Curriculum</h2>
+      <h2 className="theme-h2">Submit Curriculum</h2>
       <div style={{ maxWidth: 500, margin: "auto", textAlign: "left" }}>
         <p>
           Submit externally completed curriculums. For example, these can be
@@ -104,23 +105,12 @@ export default function AddCurriculum() {
         </form>
       </div>
 
-      <h3 style={{ fontSize: "1.47em" }}>External Curriculum Examples</h3>
+      <h3 className="theme-h3">External Curriculum Examples</h3>
       <ExternalCurriculums />
-      <button className="theme-btn">
-        <Link className="link" to="/">
-          Back to Home
-        </Link>
-      </button>
-      <button className="theme-btn">
-        <Link className="link" to="/e">
-          Explore Other Curriculums
-        </Link>
-      </button>
-      <button className="theme-btn">
-        <Link className="link" to="/cc">
-          Create a Curriculum
-        </Link>
-      </button>
+
+      <BtnHome />
+      <BtnExplore />
+      <BtnCreateCurriculum />
     </>
   );
 }

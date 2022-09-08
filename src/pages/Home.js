@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import CurricHome from "./components/curriculums/CurricHome.js";
+import { BtnAddCurriculum, BtnCreateCurriculum } from "./components/Buttons";
 
 import exploreImg from "../images/explore.png";
 import searchImg from "../images/search.png";
@@ -21,7 +22,7 @@ export default function Home() {
       </div>
       <div id="home-main-nav">
         <div className="home-main-btn-div">
-          <Link className="home-main-btn link" to="/e">
+          <Link className="home-main-btn link" to="/explore">
             <h3 className="home-main-btn-h3">Explore</h3>
             <img
               className="home-main-img"
@@ -41,12 +42,10 @@ export default function Home() {
           </Link>
         </div>
       </div>
-      <button className="theme-btn">
-        <Link to="/cc">Create Curriculum</Link>
-      </button>
-      <button className="theme-btn">
-        <Link to="/ac">Submit Curriculum</Link>
-      </button>
+
+      <BtnCreateCurriculum />
+      <BtnAddCurriculum />
+
       <CurricHome />
     </>
   );

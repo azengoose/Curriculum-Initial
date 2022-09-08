@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import firebaseApp from "../data/config.js";
 import { monthYear } from "./components/Time";
+import { BtnHome, BtnExplore, BtnAddCurriculum } from "./components/Buttons";
 
 import InternalCurriculums from "./components/curriculums/InternalCurriculums.js";
 
@@ -51,7 +52,7 @@ export default function CreateCurriculum() {
 
   return (
     <>
-      <h2 className="h2-theme">Create Curriculum</h2>
+      <h2 className="theme-h2">Create Curriculum</h2>
       <div style={{ maxWidth: 500, margin: "auto", textAlign: "left" }}>
         <p>
           Curriculums can only be submitted for pending. It is judged by the
@@ -62,6 +63,7 @@ export default function CreateCurriculum() {
       <div className="form-div">
         <form className="create-form">
           <div className="form-small-input-div">
+            <span id="form-message"></span>
             <label>
               Enter title: {""}
               <input
@@ -123,23 +125,12 @@ export default function CreateCurriculum() {
         </form>
       </div>
 
+      <h3 className="theme-h3">Curriculum Examples</h3>
       <InternalCurriculums />
 
-      <button className="theme-btn">
-        <Link className="link" to="/">
-          Back to Home
-        </Link>
-      </button>
-      <button className="theme-btn">
-        <Link className="link" to="/e">
-          Explore Other Curriculums
-        </Link>
-      </button>
-      <button className="theme-btn">
-        <Link className="link" to="/ac">
-          Add a Curriculum
-        </Link>
-      </button>
+      <BtnHome />
+      <BtnExplore />
+      <BtnAddCurriculum />
     </>
   );
 }

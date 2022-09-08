@@ -38,7 +38,7 @@ export default function InternalCurriculums() {
   return (
     <>
       <div className="data-ouput">
-        <div className="external-curriculums-wrapper">
+        <div className="internal-curriculums-wrapper">
           {curriculums.map(({ id, Data }, index) => {
             return (
               <div key={index}>
@@ -55,7 +55,7 @@ export default function InternalCurriculums() {
                     i
                   ) => {
                     return (
-                      <div key={i} className="each-ext-cur-div">
+                      <div key={i} className="each-int-cur-div">
                         {/* Problem: Using Link doesn't update */}
                         {/* <Link
                           className="link"
@@ -63,9 +63,7 @@ export default function InternalCurriculums() {
                         >
                           {Title}
                         </Link> */}
-                        <a href={"/" + Title.replace(/\s/g, "-")}>
-                          new {Title}
-                        </a>
+                        <a href={"/" + Title.replace(/\s/g, "-")}>{Title}</a>
                         <p>
                           Last Updated:
                           {LastUpdated ? <span> {LastUpdated}</span> : " N/A"}

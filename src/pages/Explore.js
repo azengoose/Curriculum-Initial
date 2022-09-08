@@ -14,7 +14,7 @@
 // -> Easy implement with button style toggle
 // 3. VISUAL EXPERIMENTATION IS SEPARATE PROJECT
 
-import { Link } from "react-router-dom";
+import { BtnHome } from "./components/Buttons";
 
 import InternalCurriculums from "./components/curriculums/InternalCurriculums.js";
 import ExternalCurriculums from "./components/curriculums/ExternalCurriculums.js";
@@ -23,26 +23,20 @@ export default function Explore() {
   return (
     <>
       <div className="explore-curriculum">
-        <h2 id="explore-curriculum-title">Explore Curriculums</h2>
+        <h2 className="theme-h2">Explore Curriculums</h2>
 
-        <h3 style={{ fontSize: "1.47em" }}>External Completed Curriculums</h3>
+        <h3 className="theme-h3">External Completed Curriculums</h3>
         <ExternalCurriculums />
 
-        <h3 style={{ fontSize: "1.47em" }}>Internal Curriculums</h3>
+        <h3 className="theme-h3">Internal Curriculums</h3>
         <InternalCurriculums />
       </div>
-      <button className="theme-btn">
-        <Link className="link" to="/">
-          Back to Home
-        </Link>
-      </button>
+
+      <BtnHome />
     </>
   );
 }
 
-// const grid_style = {
-//   display: "block"
-// };
 // function ToggleCurriculum() {
 //   // Function is to Filter types of curriculums
 //   //    Completed Page (and on other website), Video (eg YT),

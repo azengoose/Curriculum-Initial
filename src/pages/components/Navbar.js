@@ -63,7 +63,7 @@ export default function Navbar() {
             </div>
             <div className="nav-right">
               <div className="nav-about nav-item">
-                <Link className="link nav-link" to="/a">
+                <Link className="link nav-link" to="/about">
                   About
                 </Link>
               </div>

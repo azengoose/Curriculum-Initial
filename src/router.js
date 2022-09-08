@@ -9,16 +9,21 @@ import CreateCurriculum from "./pages/CreateCurriculum";
 import AddCurriculum from "./pages/AddCurriculum.js";
 import NotFound from "./pages/NotFound.js";
 
+import Curriculum from "./pages/Curriculum";
+
+import { Link, useParams } from "react-router-dom";
+
 export default function Paths() {
   return (
     <>
       <ScrollToTop>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/a" element={<About />} />
-          <Route path="/e" element={<Explore />} />
-          <Route path="/cc" element={<CreateCurriculum />} />
-          <Route path="/ac" element={<AddCurriculum />} />
+          <Route index path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/create" element={<CreateCurriculum />} />
+          <Route path="/add" element={<AddCurriculum />} />
+          <Route path="/c/:id" element={<Curriculum />} />
           {RouterGenerate()}
           <Route path="*" element={<NotFound />} />
         </Routes>

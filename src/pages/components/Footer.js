@@ -6,10 +6,10 @@ export default function Footer() {
     <>
       <footer>
         <div id="footer-div">
-          <Link className="link nav-link" to="/e">
+          <Link className="link nav-link" to="/explore">
             Explore
           </Link>
-          <Link className="link nav-link" to="/a">
+          <Link className="link nav-link" to="/about">
             About
           </Link>
         </div>

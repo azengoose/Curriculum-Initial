@@ -28,6 +28,7 @@ export default function Home() {
               className="home-main-img"
               alt="explore painting"
               src={exploreImg}
+              loading=" lazy"
             />
           </Link>
         </div>
@@ -38,6 +39,7 @@ export default function Home() {
               className="home-main-img"
               alt="search painting"
               src={searchImg}
+              loading=" lazy"
             />
           </Link>
         </div>

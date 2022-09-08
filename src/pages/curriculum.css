@@ -55,10 +55,19 @@
   margin-bottom: 10px;
 }
 .each-ext-cur-div:hover {
-  background-color: rgb(247, 251, 255);
+  background-color: rgb(247, 255, 254);
   box-shadow: 0px 0px 25px 0px rgba(230, 163, 230, 0.211);
   border-color: rgb(222, 215, 255);
   transition: 0.2s ease-in-out;
+  color: rgb(6, 113, 184);
+}
+.ext-cur-title {
+  font-size: 1.04em;
+  margin: 0 0 5px 0;
+}
+.ext-cur-summary p {
+  margin: 0.5em;
+  color: black;
 }
 /* Tablet */
 @media only screen and (min-width: 480px) {
@@ -88,6 +97,15 @@
   box-shadow: 0px 0px 25px 0px rgba(230, 163, 230, 0.211);
   border-color: rgb(228, 203, 255);
   transition: 0.2s ease-in-out;
+  color: blueviolet;
+}
+.int-cur-title {
+  font-size: 1.1em;
+  margin: 5px 0 15px 0;
+}
+.int-cur-summary p {
+  color: black;
+  margin: 0.4em;
 }
 /* Tablet */
 @media only screen and (min-width: 560px) {

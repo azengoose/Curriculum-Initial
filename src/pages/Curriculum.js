@@ -28,7 +28,7 @@ import { motion } from "framer-motion";
 
 import { BtnHome, BtnExplore } from "./components/Buttons";
 import firebaseApp from "../data/config.js";
-import InternalCurriculums from "./components/curriculums/InternalCurriculums.js";
+// import InternalCurriculums from "./components/curriculums/InternalCurriculums.js";
 
 import NotFound from "./NotFound";
 
@@ -216,8 +216,8 @@ export default function Curriculum() {
           );
         })}
 
-        <h3 className="theme-h3">Other Internal Curriculums</h3>
-        <InternalCurriculums />
+        {/* <h3 className="theme-h3">Other Internal Curriculums</h3>
+        <InternalCurriculums /> */}
 
         <BtnHome />
         <BtnExplore />

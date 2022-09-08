@@ -39,14 +39,18 @@ export default function ExternalCurriculums() {
               <div key={index}>
                 {Data.map(({ Title, Link, LastUpdated, Authors }, i) => {
                   return (
-                    <div className="each-ext-cur-div" key={i}>
-                      <a href={Link}>{Title}</a>
-                      <p>
-                        Last Updated:
-                        {LastUpdated ? <span> {LastUpdated}</span> : " N/A"}
-                      </p>{" "}
-                      <p>designed by {Authors}</p>
-                    </div>
+                    <a href={Link}>
+                      <div className="each-ext-cur-div" key={i}>
+                        <p className="ext-cur-title">{Title}</p>
+                        <div className="ext-cur-summary">
+                          <p>
+                            Last Updated:
+                            {LastUpdated ? <span> {LastUpdated}</span> : " N/A"}
+                          </p>
+                          <p>By {Authors}</p>
+                        </div>
+                      </div>
+                    </a>
                   );
                 })}
               </div>

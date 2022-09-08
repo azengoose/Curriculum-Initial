@@ -11,7 +11,7 @@ import {
   query
 } from "firebase/firestore";
 import firebaseApp from "../../../data/config.js";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 
@@ -39,7 +39,7 @@ export default function InternalCurriculums() {
     <>
       <div className="data-ouput">
         <div className="internal-curriculums-wrapper">
-          {curriculums.map(({ id, Data }, index) => {
+          {curriculums.map(({ Data }, index) => {
             return (
               <div key={index}>
                 {Data.map(
@@ -55,24 +55,25 @@ export default function InternalCurriculums() {
                     i
                   ) => {
                     return (
-                      <div key={i} className="each-int-cur-div">
-                        {/* Problem: Using Link doesn't update */}
-                        {/* <Link
-                          className="link"
-                          to={"/" + Title.replace(/\s/g, "-")}
-                        >
-                          {Title}
-                        </Link> */}
-                        <a href={"/" + Title.replace(/\s/g, "-")}>{Title}</a>
-                        <p>
-                          Last Updated:
-                          {LastUpdated ? <span> {LastUpdated}</span> : " N/A"}
-                        </p>{" "}
-                        <p>designed by {Authors}</p>
-                        <p> Duration: {Duration}</p>
-                        <p> Pricing: {Pricing}</p>
-                        <p> Location: {Location}</p>
-                      </div>
+                      <Link to={"/curriculum/" + Title.replace(/\s/g, "-")}>
+                        <div key={i} className="each-int-cur-div">
+                          <p className="int-cur-title">{Title}</p>
+                          <div className="int-cur-summary">
+                            <p>
+                              Last Updated:
+                              {LastUpdated ? (
+                                <span> {LastUpdated}</span>
+                              ) : (
+                                " N/A"
+                              )}
+                            </p>
+                            <p> By {Authors}</p>
+                            <p> Duration: {Duration}</p>
+                            <p> Pricing: {Pricing}</p>
+                            <p> Location: {Location}</p>
+                          </div>
+                        </div>
+                      </Link>
                     );
                   }
                 )}

@@ -1,6 +1,5 @@
 // For submitting externally completed curriculums
 
-import { Link } from "react-router-dom";
 import {
   getFirestore,
   collection,
@@ -12,6 +11,7 @@ import { useState } from "react";
 
 import ExternalCurriculums from "./components/curriculums/ExternalCurriculums";
 import { BtnHome, BtnCreateCurriculum, BtnExplore } from "./components/Buttons";
+import { TextAddCurriculum } from "./text/Text";
 
 const db = getFirestore(firebaseApp);
 const curriculumRef = collection(db, "external_curriculums");
@@ -47,14 +47,8 @@ export default function AddCurriculum() {
   return (
     <>
       <h2 className="theme-h2">Submit Curriculum</h2>
-      <div style={{ maxWidth: 500, margin: "auto", textAlign: "left" }}>
-        <p>
-          Submit externally completed curriculums. For example, these can be
-          websites, blogs, uploaded videos, images, diagrams. Curriculums can
-          only be submitted for pending. It is judged by the public in an
-          intermediary period and by a rotating committee, before being
-          established into the database proper.
-        </p>
+      <div className="centered-p">
+        <TextAddCurriculum />
       </div>
       <div className="form-div">
         <form className="create-form" onSubmit={submit}>

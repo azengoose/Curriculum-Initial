@@ -18,7 +18,7 @@ export default function NotFound() {
         <p>
           If you want to find out more about the website you're currently on,
           see{" "}
-          <Link className="link" to="/a">
+          <Link className="link" to="/about">
             About Us.
           </Link>
         </p>

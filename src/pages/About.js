@@ -1,9 +1,10 @@
 // About page
 //  with imported text components
 
-import { Link } from "react-router-dom";
-import TextAbout from "./text/TextAbout";
+import { TextAbout } from "./text/Text";
 import { BtnHome } from "./components/Buttons";
+
+import { Essays } from "./text/Essays";
 
 export default function About() {
   return (
@@ -11,17 +12,9 @@ export default function About() {
       <h2 className="theme-h2">About</h2>
       <TextAbout />
 
+      <Essays />
+
       <BtnHome />
-      <button className="theme-btn">
-        <Link className="link" to="/curriculum/Shorting-Linguistics">
-          Shorting-Linguistics
-        </Link>
-      </button>
-      <button className="theme-btn">
-        <Link className="link" to="/curriculum/Shorting-Computer-Science">
-          Shorting-Computer-Science
-        </Link>
-      </button>
     </>
   );
 }

@@ -1,6 +1,5 @@
 // For creating internally completed curriculums
 
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import {
   getFirestore,
@@ -11,6 +10,7 @@ import {
 import firebaseApp from "../data/config.js";
 import { monthYear } from "./components/Time";
 import { BtnHome, BtnExplore, BtnAddCurriculum } from "./components/Buttons";
+import { TextCreateCurriculum } from "./text/Text";
 
 import InternalCurriculums from "./components/curriculums/InternalCurriculums.js";
 
@@ -53,12 +53,8 @@ export default function CreateCurriculum() {
   return (
     <>
       <h2 className="theme-h2">Create Curriculum</h2>
-      <div style={{ maxWidth: 500, margin: "auto", textAlign: "left" }}>
-        <p>
-          Curriculums can only be submitted for pending. It is judged by the
-          public in an intermediary period and by a rotating committee, before
-          being established into the database proper.
-        </p>
+      <div className="centered-p">
+        <TextCreateCurriculum />
       </div>
       <div className="form-div">
         <form className="create-form">

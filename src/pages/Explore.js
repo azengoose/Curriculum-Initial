@@ -15,6 +15,7 @@
 // 3. VISUAL EXPERIMENTATION IS SEPARATE PROJECT
 
 import { BtnHome } from "./components/Buttons";
+import { Link } from "react-router-dom";
 
 import InternalCurriculums from "./components/curriculums/InternalCurriculums.js";
 import ExternalCurriculums from "./components/curriculums/ExternalCurriculums.js";
@@ -25,12 +26,15 @@ export default function Explore() {
       <div className="explore-curriculum">
         <h2 className="theme-h2">Explore Curriculums</h2>
 
-        <h3 className="theme-h3">External Completed Curriculums</h3>
+        <h3 className="theme-h3">Externally Completed Curriculums</h3>
         <ExternalCurriculums />
 
-        <h3 className="theme-h3">Internal Curriculums</h3>
+        <h3 className="theme-h3">Curriculums</h3>
         <InternalCurriculums />
       </div>
+      <Link className="link" to="/overall">
+        <button className="theme-btn">Overall Models</button>
+      </Link>
 
       <BtnHome />
     </>

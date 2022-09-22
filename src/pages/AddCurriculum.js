@@ -9,8 +9,12 @@ import {
 import firebaseApp from "../data/config.js";
 import { useState } from "react";
 
-import ExternalCurriculums from "./components/curriculums/ExternalCurriculums";
-import { BtnHome, BtnCreateCurriculum, BtnExplore } from "./components/Buttons";
+import ExternalCurriculums from "../components/curriculums/ExternalCurriculums";
+import {
+  BtnHome,
+  BtnCreateCurriculum,
+  BtnExplore
+} from "../components/Buttons";
 import { TextAddCurriculum } from "./text/Text";
 
 const db = getFirestore(firebaseApp);
@@ -58,6 +62,7 @@ export default function AddCurriculum() {
               Enter author name(s): {""}
               <input
                 type="text"
+                className="form-input"
                 placeholder="Enter Authors"
                 value={authorsName}
                 onChange={(e) => setAuthorsName(e.target.value)}

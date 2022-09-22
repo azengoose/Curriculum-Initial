@@ -37,3 +37,6 @@ export function BtnCreateCurriculum() {
     </Link>
   );
 }
+export function Spacer() {
+  return <div style={{ height: 40 }}></div>;
+}

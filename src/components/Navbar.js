@@ -8,7 +8,7 @@ import {
   signInWithPopup,
   signOut
 } from "firebase/auth";
-import "../../data/config.js";
+import "../data/config.js";
 
 export default function Navbar() {
   function signIn() {

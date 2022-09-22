@@ -10,7 +10,7 @@ import {
   onSnapshot,
   query
 } from "firebase/firestore";
-import firebaseApp from "../../../data/config.js";
+import firebaseApp from "../../data/config.js";
 import { Link } from "react-router-dom";
 
 import { useState, useEffect } from "react";
@@ -55,8 +55,11 @@ export default function InternalCurriculums() {
                     i
                   ) => {
                     return (
-                      <Link to={"/curriculum/" + Title.replace(/\s/g, "-")}>
-                        <div key={i} className="each-int-cur-div">
+                      <Link
+                        key={i}
+                        to={"/curriculum/" + Title.replace(/\s/g, "-")}
+                      >
+                        <div className="each-int-cur-div">
                           <p className="int-cur-title">{Title}</p>
                           <div className="int-cur-summary">
                             <p>

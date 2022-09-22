@@ -14,11 +14,11 @@
 // -> Easy implement with button style toggle
 // 3. VISUAL EXPERIMENTATION IS SEPARATE PROJECT
 
-import { BtnHome } from "./components/Buttons";
+import { BtnHome } from "../components/Buttons";
 import { Link } from "react-router-dom";
 
-import InternalCurriculums from "./components/curriculums/InternalCurriculums.js";
-import ExternalCurriculums from "./components/curriculums/ExternalCurriculums.js";
+import InternalCurriculums from "../components/curriculums/InternalCurriculums.js";
+import ExternalCurriculums from "../components/curriculums/ExternalCurriculums.js";
 
 export default function Explore() {
   return (
@@ -32,8 +32,8 @@ export default function Explore() {
         <h3 className="theme-h3">Curriculums</h3>
         <InternalCurriculums />
       </div>
-      <Link className="link" to="/overall">
-        <button className="theme-btn">Overall Models</button>
+      <Link className="link" to="/essays">
+        <button className="theme-btn">Main Categories</button>
       </Link>
 
       <BtnHome />

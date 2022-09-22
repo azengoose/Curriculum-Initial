@@ -8,19 +8,20 @@
 // CURRICULUMS: Source data of curriculums
 // ITERXUE: Combine these projects into one website.
 // VISUALISATIONS: Additional creative research project
+import { Suspense } from "react";
 
 import "./styles.css";
 import Paths from "./router.js";
-import Navbar from "./pages/components/Navbar.js";
-import Footer from "./pages/components/Footer.js";
+import Navbar from "./components/Navbar.js";
+import Footer from "./components/Footer.js";
 
 export default function App() {
   return (
     <>
       <Navbar />
-      <div className="wrapper">
+      <Suspense fallback={<div>Loading...</div>}>
         <Paths />
-      </div>
+      </Suspense>
       <Footer />
     </>
   );

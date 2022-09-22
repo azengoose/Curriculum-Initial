@@ -1,4 +1,85 @@
-/* CURRICULUM STYLES */
+/* TOGGLE FILTER */
+.checked {
+  background-color: rgb(207, 196, 255);
+  transition: 0.4s;
+}
+.unchecked {
+  background-color: rgb(255, 255, 255);
+  transition: 0.4s;
+}
+.toggle {
+  padding: 5px 10px;
+  border: 1px solid rgb(255, 230, 227);
+  font-family: HK Grotesk;
+}
+.filter-container {
+  max-width: 800px;
+  font-size: 0.89em;
+  align-items: center;
+  color: #4d4d4d;
+  padding: 10px 5px;
+  margin: 12px auto 28px auto;
+  border-radius: 0.5em;
+  box-shadow: 0 0 1em 0 rgba(188, 0, 226, 0.253);
+}
+.check-div {
+  display: inline-block;
+}
+input,
+label {
+  cursor: pointer;
+}
+input[type="checkbox"] {
+  appearance: none;
+}
+.check-label {
+  font-family: HK Grotesk;
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(139, 139, 139, 0.3);
+  border-radius: 24px;
+  margin: 3px 0;
+  padding: 5px 12px;
+  transition: 0.2s;
+}
+.check-label:hover {
+  color: purple;
+  background-color: rgb(248, 233, 255);
+}
+.check-label::before {
+  content: "+";
+  font-weight: 900;
+  padding: 2px 6px 2px 2px;
+  transition: transform 0.3s ease-in-out;
+}
+.check-label:focus {
+  border: 2px solid #e9a1ff;
+}
+input[type="checkbox"]:checked + label {
+  color: rgb(85, 0, 71);
+  background-color: rgba(242, 203, 255, 0.76);
+  border: 2px solid rgba(105, 115, 255, 0.61);
+}
+input[type="checkbox"]:checked + label::before {
+  content: "=";
+  transform: rotate(-360deg);
+  transition: transform 0.3s ease-in-out;
+}
+input[type="checkbox"]:focus + label {
+  border: 2px solid #e9a1ff;
+}
+
+/* TAGS */
+.subject-tag {
+  background-color: rgb(218, 225, 245);
+  width: fit-content;
+  padding: 0 10px;
+  margin: auto;
+  border-radius: 3px;
+  color: black;
+}
+
+/* FEATURED CURRICULUM STYLES */
 .featured-curriculums {
   padding: 10px 0;
   border-radius: 3%;
@@ -132,21 +213,37 @@
   text-align: left;
   background-color: rgb(255, 255, 255);
   border-radius: 15px;
+  padding: 0 1em;
 }
 .curriculum-singles-summary {
-  padding: 1em 1em 0 1em;
   border-radius: 10px;
 }
 .singles-duration-price-location {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 15px;
+  text-align: center;
 }
-.curriculum-singles-resources {
-  padding: 0 1em;
+.singles-steps-title {
+  font-size: 1.1em;
 }
-.curriculum-singles-reviews {
-  padding: 0 1em;
+.singles-resources {
+  display: flex;
+  flex-direction: column;
+}
+.each-singles-resources {
+  padding: 0 20px;
+  margin: 5px 0;
+  border: 1px solid rgb(255, 243, 242);
+  background-color: aliceblue;
+  transition: 0.2s ease-in-out;
+}
+.each-singles-resources:hover {
+  background-color: rgb(248, 252, 255);
+  border: 1px solid rgb(250, 216, 255);
+}
+.singles-resources-title {
+  font-size: 1.1em;
 }
 /* Tablet */
 @media only screen and (min-width: 560px) {
@@ -154,17 +251,60 @@
     margin: 50px 0;
   }
   .curriculum-singles-container {
-    max-width: 570px;
-    padding: 0 1.4em 2.5em 1.4em;
+    padding: 0 2em 2.5em 2em;
     margin: 5px;
-    background-color: rgb(255, 255, 255);
-    border-radius: 15px;
     box-shadow: 0px 0px 45px 0px rgba(230, 163, 230, 0.411);
   }
+  .singles-2-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+  }
   .singles-steps :nth-child(even) p {
+    margin-left: 20%;
+  }
+  .singles-steps {
+    margin: 0 50px 0 20px;
+  }
+  .each-singles-steps {
+    margin: 30px 0;
+  }
+  .each-singles-steps:nth-child(even) h3 {
     text-align: right;
+  }
+  .singles-steps-description {
+    text-align: revert;
+  }
+  .singles-resources {
+    padding: 0 1em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
   }
 }
 /* Desktop */
 @media only screen and (min-width: 900px) {
+  .curriculum-singles-container {
+    margin: 25px;
+  }
+  .singles-duration-price-location {
+    grid-column-gap: 5%;
+  }
+  .singles-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 45px;
+  }
+  .each-singles-steps {
+    margin: 0;
+  }
+  .singles-steps :nth-child(even) p {
+    margin: 0px;
+  }
+}
+/* Desktop */
+@media only screen and (min-width: 1200px) {
+  .curriculum-singles-container {
+    max-width: 1320px;
+  }
 }

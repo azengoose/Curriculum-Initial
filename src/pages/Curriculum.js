@@ -26,7 +26,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import { BtnHome, BtnExplore } from "./components/Buttons";
+import { BtnHome, BtnExplore, Spacer } from "../components/Buttons";
+import Guidelines from "../components/Guidelines";
+// import { About, Guidelines } from "./text/MarkdownConvert";
 import firebaseApp from "../data/config.js";
 // import InternalCurriculums from "./components/curriculums/InternalCurriculums.js";
 
@@ -125,7 +127,7 @@ export default function Curriculum() {
                       <h2 className="theme-h2">{Title}</h2>
                       <div className="curriculum-singles-container" key={i}>
                         <div className="curriculum-singles-summary">
-                          <h3>Summary</h3>
+                          <h3 className="theme-h3">Summary</h3>
                           <p> {Description}</p>
                           <p>
                             Designed by {Authors}, updated
@@ -133,66 +135,78 @@ export default function Curriculum() {
                           </p>
                           <div className="singles-duration-price-location">
                             <div>
-                              Duration <hr />
+                              <h3>Duration</h3> <hr />
                               {Duration}
                             </div>
                             <div>
-                              Pricing <hr />
+                              <h3>Pricing</h3> <hr />
                               {Pricing}
                             </div>
                             <div>
-                              Location <hr />
+                              <h3>Location</h3> <hr />
                               {Location}
                             </div>
                           </div>
-                          <p> Vision: {Vision}</p>
-                          <p> Rationales: {Rationales}</p>
-                          <h3>Steps:</h3>
+                          <div className="singles-2-col">
+                            <div>
+                              <h3>Vision:</h3>
+                              <p> {Vision}</p>
+                            </div>
+                            <div>
+                              <h3>Rationales:</h3> <p> {Rationales}</p>
+                            </div>
+                          </div>
+                          <h3 className="theme-h3">Steps:</h3>
                           <div className="singles-steps">
                             {Steps.map((e, i) => {
                               return (
-                                <div key={i}>
-                                  <p>
+                                <div className="each-singles-steps" key={i}>
+                                  <h3 className="singles-steps-title">
                                     {i + 1} {e.Title}
+                                  </h3>
+                                  <p className="singles-steps-description">
+                                    {e.Description}
                                   </p>
-                                  <p>{e.Description}</p>
                                 </div>
                               );
                             })}
                           </div>
                         </div>
-                        <div className="curriculum-singles-resources">
-                          <h3> Resources: </h3>
-                          {resources.map(
-                            ({ Title, Link, Duration, ParentDocID }, i) => {
-                              if (ParentDocID === id) {
-                                return (
-                                  <div key={i}>
-                                    <p>{Title}</p>
-                                    <p>
-                                      {Duration ? (
-                                        <span>Length: {Duration}</span>
-                                      ) : (
-                                        ""
-                                      )}
-                                      {Link ? (
-                                        <span>
-                                          , <a href={Link}>Go to Resource</a>
-                                        </span>
-                                      ) : (
-                                        ""
-                                      )}
-                                    </p>
-                                  </div>
-                                );
-                              } else {
-                                return null;
+                        <div>
+                          <h3 className="theme-h3"> Resources: </h3>
+                          <div className="singles-resources">
+                            {resources.map(
+                              ({ Title, Link, Duration, ParentDocID }, i) => {
+                                if (ParentDocID === id) {
+                                  return (
+                                    <a
+                                      className="each-singles-resources"
+                                      href={Link ? Link : ""}
+                                      key={i}
+                                    >
+                                      <div>
+                                        <p className="singles-resources-title">
+                                          {Title}
+                                        </p>
+                                        <p>
+                                          {Duration ? (
+                                            <span>Length: {Duration}</span>
+                                          ) : (
+                                            ""
+                                          )}
+                                        </p>
+                                      </div>
+                                    </a>
+                                  );
+                                } else {
+                                  return null;
+                                }
                               }
-                            }
-                          )}
+                            )}
+                          </div>
                         </div>
-                        <div className="curriculum-singles-reviews">
-                          <h3> Reviews: </h3>
+                        <div className="singles-reviews">
+                          <h3 className="theme-h3"> Reviews: </h3>
                           {reviews.map(({ Name, Review, ParentDocID }, i) => {
                             if (ParentDocID === id) {
                               return (
@@ -218,9 +232,10 @@ export default function Curriculum() {
 
         {/* <h3 className="theme-h3">Other Internal Curriculums</h3>
         <InternalCurriculums /> */}
-
+        <Guidelines />
         <BtnHome />
         <BtnExplore />
+        <Spacer />
       </>
     );
   } else {

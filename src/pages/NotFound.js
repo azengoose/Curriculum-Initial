@@ -1,12 +1,12 @@
 // For 404 or Not Found Pages
 
 import { Link } from "react-router-dom";
-import { BtnHome, BtnExplore } from "./components/Buttons";
+import { BtnHome, BtnExplore } from "../components/Buttons";
 
 export default function NotFound() {
   return (
     <>
-      <div>
+      <div className="wrapper">
         <h2 className="theme-h2">Sorry for your loss. </h2>
         <h2>This page link doesn't exist. It happens.</h2>
         <p>

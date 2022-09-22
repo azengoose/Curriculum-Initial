@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import "./home.css";
 
-import CurricHome from "./components/curriculums/CurricHome.js";
-import { BtnAddCurriculum, BtnCreateCurriculum } from "./components/Buttons";
+import CurricHome from "../components/curriculums/CurricHome.js";
+import { BtnAddCurriculum, BtnCreateCurriculum } from "../components/Buttons";
 
 import exploreImg from "../images/explore.png";
 import searchImg from "../images/search.png";

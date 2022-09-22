@@ -30,3 +30,5 @@ const firebaseAppConfig = getFirebaseConfig();
 const firebaseApp = initializeApp(firebaseAppConfig);
 
 export default firebaseApp;
+
+// ALSO can create a .json file or object on the fly from the db

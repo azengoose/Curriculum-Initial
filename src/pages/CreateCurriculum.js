@@ -8,11 +8,11 @@ import {
   serverTimestamp
 } from "firebase/firestore";
 import firebaseApp from "../data/config.js";
-import { monthYear } from "./components/Time";
-import { BtnHome, BtnExplore, BtnAddCurriculum } from "./components/Buttons";
+import { monthYear } from "../components/Time";
+import { BtnHome, BtnExplore, BtnAddCurriculum } from "../components/Buttons";
 import { TextCreateCurriculum } from "./text/Text";
 
-import InternalCurriculums from "./components/curriculums/InternalCurriculums.js";
+import InternalCurriculums from "../components/curriculums/InternalCurriculums.js";
 
 const db = getFirestore(firebaseApp);
 const curriculumRef = collection(db, "internal_curriculums");
@@ -56,7 +56,8 @@ export default function CreateCurriculum() {
       <div className="centered-p">
         <TextCreateCurriculum />
       </div>
-      <div className="form-div">
+
+      {/* <div className="form-div">
         <form className="create-form">
           <div className="form-small-input-div">
             <span id="form-message"></span>
@@ -119,7 +120,7 @@ export default function CreateCurriculum() {
             Submit Curriculum
           </button>
         </form>
-      </div>
+      </div> */}
 
       <h3 className="theme-h3">Curriculum Examples</h3>
       <InternalCurriculums />

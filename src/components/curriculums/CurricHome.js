@@ -4,7 +4,7 @@
 //    the curriculum details. Emphasis on basic readability
 //    and visual engagement.
 
-import "../../curriculum.css";
+import "../../pages/curriculum.css";
 import InternalCurriculums from "./InternalCurriculums";
 
 export default function CurricHome() {

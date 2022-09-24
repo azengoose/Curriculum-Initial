@@ -17,3 +17,14 @@ export const ScrollToTop = (props) => {
 export function Loader({ show }) {
   return show ? <div className="loader"></div> : null;
 }
+
+export const subjectList = [
+  "Art",
+  "Languages",
+  "Math",
+  "Computing",
+  "Music",
+  "Physics"
+  // "Chemistry",
+  // "Psychology"
+];

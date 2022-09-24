@@ -11,8 +11,8 @@ import {
   query
 } from "firebase/firestore";
 import firebaseApp from "../../data/config.js";
-import { Link } from "react-router-dom";
 
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const db = getFirestore(firebaseApp);

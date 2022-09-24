@@ -12,7 +12,8 @@ export default function Home() {
     <>
       <div id="home-hero">
         <div className="hero-div">
-          <h1 id="hero-h1">iterxue</h1>
+          {/* <h1 id="hero-h1">iterxue</h1> */}
+          <h1 id="hero-h1">Explore</h1>
         </div>
         <div id="hero-right" className="hero-div">
           <h3 id="hero-h3">
@@ -21,7 +22,7 @@ export default function Home() {
           </h3>
         </div>
       </div>
-      <div id="home-main-nav">
+      {/* <div id="home-main-nav">
         <div className="home-main-btn-div">
           <Link className="home-main-btn link" to="/explore">
             <h3 className="home-main-btn-h3">Explore</h3>
@@ -44,7 +45,7 @@ export default function Home() {
             />
           </Link>
         </div>
-      </div>
+      </div> */}
 
       <BtnCreateCurriculum />
       <BtnAddCurriculum />

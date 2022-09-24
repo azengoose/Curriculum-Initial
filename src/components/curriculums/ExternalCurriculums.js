@@ -1,5 +1,6 @@
 // Default output externally completed curriculums
 
+import "./external.css";
 import {
   getFirestore,
   collection,
@@ -10,7 +11,7 @@ import {
 import firebaseApp from "../../data/config.js";
 import { useState, useEffect } from "react";
 
-import { Loader } from "../QualityofLife";
+import { Loader, subjectList } from "../QualityofLife";
 
 const db = getFirestore(firebaseApp);
 const curriculumRef = collection(db, "external_curriculums");
@@ -41,17 +42,6 @@ export default function ExternalCurriculums() {
   for (var j = 0; j < curriculums.length; j++) {
     curriculumsList.push(curriculums[j].Data[0].Subjects[0]);
   }
-
-  const subjectList = [
-    "Art",
-    "Languages",
-    "Math",
-    "Computing",
-    "Music",
-    "Physics"
-    // "Chemistry",
-    // "Psychology"
-  ];
 
   const [activeFilters, setActiveFilters] = useState(
     document.getElementsByClassName("checked").length

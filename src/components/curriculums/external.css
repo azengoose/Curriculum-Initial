@@ -1,0 +1,111 @@
+/* TOGGLE FILTER */
+.filter-container {
+  max-width: 800px;
+  font-size: 0.89em;
+  align-items: center;
+  color: #4d4d4d;
+  padding: 10px 5px;
+  margin: 12px auto 28px auto;
+  border-radius: 0.5em;
+  box-shadow: 0 0 1em 0 rgba(188, 0, 226, 0.253);
+}
+.check-div {
+  display: inline-block;
+}
+input,
+label {
+  cursor: pointer;
+}
+input[type="checkbox"] {
+  appearance: none;
+}
+.check-label {
+  font-family: HK Grotesk;
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(139, 139, 139, 0.3);
+  border-radius: 24px;
+  margin: 3px 0;
+  padding: 5px 12px;
+  transition: 0.2s;
+}
+.check-label:hover {
+  color: purple;
+  background-color: rgb(248, 233, 255);
+}
+.check-label::before {
+  content: "+";
+  font-weight: 900;
+  padding: 2px 6px 2px 2px;
+  transition: transform 0.3s ease-in-out;
+}
+.check-label:focus {
+  border: 2px solid #e9a1ff;
+}
+input[type="checkbox"]:checked + label {
+  color: rgb(85, 0, 71);
+  background-color: rgba(242, 203, 255, 0.76);
+  border: 2px solid rgba(105, 115, 255, 0.61);
+}
+input[type="checkbox"]:checked + label::before {
+  content: "=";
+  transform: rotate(-360deg);
+  transition: transform 0.3s ease-in-out;
+}
+input[type="checkbox"]:focus + label {
+  border: 2px solid #e9a1ff;
+}
+
+/* TAGS */
+.subject-tag {
+  background-color: rgb(218, 225, 245);
+  width: fit-content;
+  padding: 0 10px;
+  margin: auto;
+  border-radius: 3px;
+  color: black;
+}
+
+/* EXTERNAL CURRICULUM BLOCKS */
+/* Mobile */
+.external-curriculums-wrapper {
+  column-count: 1;
+}
+.each-ext-cur-div {
+  border: 1px solid rgb(158, 203, 255, 0.233);
+  border-radius: 5px;
+  padding: 18px 10px 10px 10px;
+  background-color: rgb(255, 255, 255);
+  display: inline-block;
+  width: 95%;
+  margin-bottom: 10px;
+}
+.each-ext-cur-div:hover {
+  background-color: rgb(247, 255, 254);
+  box-shadow: 0px 0px 25px 0px rgba(230, 163, 230, 0.211);
+  border-color: rgb(222, 215, 255);
+  transition: 0.2s ease-in-out;
+  color: rgb(6, 113, 184);
+}
+.ext-cur-title {
+  font-size: 1.04em;
+  margin: 0 0 5px 0;
+}
+.ext-cur-summary p {
+  margin: 0.5em;
+  color: black;
+}
+/* Tablet */
+@media only screen and (min-width: 480px) {
+  .external-curriculums-wrapper {
+    column-count: 2;
+    margin: 10px;
+    column-gap: 18px;
+  }
+}
+/* Desktop */
+@media only screen and (min-width: 720px) {
+  .external-curriculums-wrapper {
+    column-count: 3;
+  }
+}

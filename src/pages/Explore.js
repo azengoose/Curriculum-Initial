@@ -26,14 +26,20 @@ export default function Explore() {
       <div className="explore-curriculum">
         <h2 className="theme-h2">Explore Curriculums</h2>
 
+        <div>
+          <button className="">Simple Display</button>
+          <button className="">Masonry Display</button>
+          <button className="">Unique Display</button>
+        </div>
+
         <h3 className="theme-h3">Externally Completed Curriculums</h3>
         <ExternalCurriculums />
 
-        <h3 className="theme-h3">Curriculums</h3>
-        <InternalCurriculums />
+        {/* <h3 className="theme-h3">Curriculums</h3>
+        <InternalCurriculums /> */}
       </div>
       <Link className="link" to="/essays">
-        <button className="theme-btn">Main Categories</button>
+        <button className="theme-btn">About Curriculums</button>
       </Link>
 
       <BtnHome />

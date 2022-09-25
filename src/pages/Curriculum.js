@@ -24,7 +24,7 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion } from "framer-motion/dist/framer-motion";;
 
 import { BtnHome, BtnExplore, Spacer } from "../components/Buttons";
 import Guidelines from "../components/Guidelines";
@@ -58,7 +58,7 @@ export default function Curriculum() {
           }))
         );
       });
-    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, 
     []
   );
 
@@ -79,7 +79,7 @@ export default function Curriculum() {
           }))
         );
       });
-    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, 
     []
   );
 
@@ -96,7 +96,7 @@ export default function Curriculum() {
           }))
         );
       });
-    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, 
     []
   );
 

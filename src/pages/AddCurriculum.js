@@ -25,7 +25,13 @@ export default function AddCurriculum() {
   const [lastUpdate, setLastUpdate] = useState("");
   const [curriculumLink, setCurriculumLink] = useState("");
   const [title, setTitle] = useState("");
-
+  
+  const message = "All fields required.";
+  var msg = document.getElementById("form-message");
+  function tempErrorMessage() {
+        msg.textContent = "";
+        }
+      
   const submit = (e) => {
     e.preventDefault();
     if (authorsName && curriculumLink && title && lastUpdate) {
@@ -38,12 +44,9 @@ export default function AddCurriculum() {
       });
       console.log("Curriculum successfully submitted.");
     } else {
-      const message = "All fields required.";
-      var msg = document.getElementById("form-message");
+
       msg.textContent = message;
-      function tempErrorMessage() {
-        msg.textContent = "";
-      }
+      
       setTimeout(tempErrorMessage, 5000);
     }
   };

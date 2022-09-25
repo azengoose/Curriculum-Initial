@@ -1,21 +1,19 @@
-// About page
-// with imported text components from md
+// About page with imported text components from md
+//      1. Nice Title
+//      2. Short Sentence
+//      3. 2-3 Meaty, concise Paragraphs.
+//      4. Nice Links back to Explore.
+//      5. Subtle Link to comprehensive Essays.
 
-import { BtnHome } from "../components/Buttons";
+import { BtnHome, BtnExplore } from "../components/Buttons";
 import ReactMarkdown from "react-markdown";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import style from "./text/markdown-styles.module.css";
 
 export default function About() {
-  const [content, setContent] = useState("");
   const [about, setAbout] = useState("");
-
-  useEffect(() => {
-    fetch("Essays.md")
-      .then((res) => res.text())
-      .then((text) => setContent(text));
-  }, []);
 
   useEffect(() => {
     fetch("About.md")
@@ -27,11 +25,21 @@ export default function About() {
     <>
       <h2 className="theme-h2">About</h2>
 
-      <ReactMarkdown className={style.reactMarkDown} children={about} />
-
-      <ReactMarkdown className={style.reactMarkDown} children={content} />
+      <ReactMarkdown className={style.reactMarkDown}>{about}</ReactMarkdown>
 
       <BtnHome />
+      <BtnExplore />
+
+      <p className="centered-p">
+        P.S. There is a lot more to think about underneath the surface when it
+        comes to curriculums, creating and curating pathways of education and
+        learning. If you're interested, please indulge in our
+        <Link className="link" to="/essays">
+          {" "}
+          essays
+        </Link>
+        .
+      </p>
     </>
   );
 }

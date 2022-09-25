@@ -1,4 +1,4 @@
-// Default output externally completed curriculums
+// Externally completed curriculums for Explore
 
 import "./external.css";
 import {
@@ -11,7 +11,7 @@ import {
 import firebaseApp from "../../data/config.js";
 import { useState, useEffect } from "react";
 
-import { Loader, subjectList } from "../QualityofLife";
+import { Loader, subjectList } from "../Misc";
 
 const db = getFirestore(firebaseApp);
 const curriculumRef = collection(db, "external_curriculums");
@@ -37,7 +37,7 @@ export default function ExternalCurriculums() {
     []
   );
 
-  //Solution 3: Create lists of the selected subject from Firebase
+  // Create lists of the selected subject from Firebase
   const curriculumsList = [];
   for (var j = 0; j < curriculums.length; j++) {
     curriculumsList.push(curriculums[j].Data[0].Subjects[0]);
@@ -98,14 +98,13 @@ export default function ExternalCurriculums() {
         Filter by Subjects:
         {subjectList.map((subject, i) => {
           return (
-            <div className="check-div">
+            <div className="check-div" key={i}>
               <input
-                key={i}
                 type="checkbox"
                 id={subject}
                 onChange={(e) => toggleCheck(e, subject)}
               />
-              <label for={subject} className="check-label">
+              <label htmlFor={subject} className="check-label">
                 {subject}
               </label>
             </div>
@@ -129,8 +128,8 @@ export default function ExternalCurriculums() {
                 {Data.map(
                   ({ Title, Link, LastUpdated, Authors, Subjects }, i) => {
                     return (
-                      <a href={Link}>
-                        <div className="each-ext-cur-div" key={i}>
+                      <a href={Link} target="_blank" rel="noopener noreferrer" key={i}>
+                        <div className="each-ext-cur-div">
                           <p className="ext-cur-title">{Title}</p>
                           <div className="ext-cur-summary">
                             <p>
@@ -163,41 +162,6 @@ export default function ExternalCurriculums() {
     </>
   );
 }
-
-// Solution One: Get Elements by Class Name and go Up
-// const tags = document.getElementsByClassName("subject-tag");
-// console.log(tags.item(0));
-// console.log(subject);
-// for (var i = 0; i < tags.length; i++) {
-//   console.log(tags.item(i));
-// }
-//   // if (tags[i].className === subject) {
-//   //   console.log("Showing Curriculums");
-//   // } else {
-//   //   console.log("Hiding Curriculums");
-//   //}
-// }
-
-// // Solution two:
-// // Re-access firebase db with collection
-// const subjectRef = query(
-//   curriculumRef,
-//   where("Subjects", "array-contains", "Languages")
-// );
-// useEffect(
-//   () => {
-//     onSnapshot(subjectRef, (snapshot) => {
-//       setCurriculums(
-//         snapshot.docs.map((doc) => ({
-//           id: doc.id,
-//           Data: [doc.data()]
-//         }))
-//       );
-//     });
-//     setLoading(false);
-//   }, // eslint-disable-next-line react-hooks/exhaustive-deps
-//   []
-// );
 
 // // For adjusting GLOBAL Toggle Button Styles when Checked
 // const [checked, setChecked] = useState(false);

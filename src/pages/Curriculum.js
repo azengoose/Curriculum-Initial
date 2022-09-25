@@ -20,14 +20,13 @@ import {
   collectionGroup,
   query,
   onSnapshot,
-  where
+  where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { motion } from "framer-motion/dist/framer-motion";;
+import { motion } from "framer-motion/dist/framer-motion";
 
 import { BtnHome, BtnExplore, Spacer } from "../components/Buttons";
-import Guidelines from "../components/Guidelines";
 // import { About, Guidelines } from "./text/MarkdownConvert";
 import firebaseApp from "../data/config.js";
 
@@ -47,57 +46,48 @@ export default function Curriculum() {
   const [curriculum, setCurriculum] = useState([]);
   // Query collection for matching Title
   const q = query(curriculumRef, where("Title", "==", RemadeTitle));
-  useEffect(
-    () => {
-      onSnapshot(q, (snapshot) => {
-        setCurriculum(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            Data: [doc.data()]
-          }))
-        );
-      });
-    }, 
-    []
-  );
+  useEffect(() => {
+    onSnapshot(q, (snapshot) => {
+      setCurriculum(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          Data: [doc.data()],
+        }))
+      );
+    });
+  }, []);
 
   // CURRENT PROBLEM
   // Only query for resources with parent id doc matching
   //  console.log(curriculum[0].Data[0])
   const [resources, setResources] = useState([]);
   const qu = query(resourcesRef);
-  useEffect(
-    () => {
-      onSnapshot(qu, (snapshot) => {
-        setResources(
-          snapshot.docs.map((doc) => ({
-            Duration: doc.data().Duration,
-            Title: doc.data().Title,
-            Link: doc.data().Link,
-            ParentDocID: doc.ref.parent.parent.id
-          }))
-        );
-      });
-    }, 
-    []
-  );
+  useEffect(() => {
+    onSnapshot(qu, (snapshot) => {
+      setResources(
+        snapshot.docs.map((doc) => ({
+          Duration: doc.data().Duration,
+          Title: doc.data().Title,
+          Link: doc.data().Link,
+          ParentDocID: doc.ref.parent.parent.id,
+        }))
+      );
+    });
+  }, []);
 
   const [reviews, setReviews] = useState([]);
   const reviewq = query(reviewsRef);
-  useEffect(
-    () => {
-      onSnapshot(reviewq, (snapshot) => {
-        setReviews(
-          snapshot.docs.map((doc) => ({
-            Name: doc.data().Name,
-            Review: doc.data().Review,
-            ParentDocID: doc.ref.parent.parent.id
-          }))
-        );
-      });
-    }, 
-    []
-  );
+  useEffect(() => {
+    onSnapshot(reviewq, (snapshot) => {
+      setReviews(
+        snapshot.docs.map((doc) => ({
+          Name: doc.data().Name,
+          Review: doc.data().Review,
+          ParentDocID: doc.ref.parent.parent.id,
+        }))
+      );
+    });
+  }, []);
 
   if (curriculum.length > 0) {
     return (
@@ -117,7 +107,7 @@ export default function Curriculum() {
                     Description,
                     Rationales,
                     Vision,
-                    Steps
+                    Steps,
                   },
                   i
                 ) => {
@@ -229,7 +219,6 @@ export default function Curriculum() {
           );
         })}
 
-        <Guidelines />
         <BtnHome />
         <BtnExplore />
         <Spacer />
@@ -243,7 +232,7 @@ export default function Curriculum() {
         transition={{
           duration: 2,
           ease: "easeInOut",
-          time: [0, 1, 1.05, 1.2, 1.8]
+          time: [0, 1, 1.05, 1.2, 1.8],
         }}
       >
         <NotFound />

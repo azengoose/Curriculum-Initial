@@ -1,5 +1,5 @@
 import { Routes, Route, Outlet } from "react-router-dom";
-import { ScrollToTop } from "./components/QualityofLife.js";
+import { ScrollToTop } from "./components/Misc.js";
 
 import Home from "./pages/Home";
 import About from "./pages/About";

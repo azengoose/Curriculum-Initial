@@ -1,10 +1,3 @@
-From _iter_ Latin for journey, trip, course, path and (_xue_) 学, Chinese for comprehend, learning, knowledge.
+This site is a crossroads sign. From here, it is expected that you'll have a clearer sense of what the world has to offer and where it is you would like to explore. 
 
-_ad iter discendi.(wei le xuexi zhilu)_ 为了学习之旅.
-For the journey of learning.
-
-Currently, this project is in early stages of MVP implementation. If you would like to be involved in the project, or just get to know our ethos, feel free to check out this page (soon) with deeper information, rationales, essays and of course, a proposed curriculum for this project.
-
-### Credits
-
-Images on home page created by DALL-E 2 X Angus. Designers and Developers: Angus, ..., and You?
+This project is currently in early stages. If you have any interest at all in being involved in the project, know it is appreciated. 

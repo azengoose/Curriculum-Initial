@@ -12,7 +12,6 @@ import { monthYear } from "../components/Time";
 import { BtnHome, BtnExplore, BtnAddCurriculum } from "../components/Buttons";
 import { TextCreateCurriculum } from "./text/Text";
 
-import InternalCurriculums from "../components/curriculums/InternalCurriculums.js";
 
 const db = getFirestore(firebaseApp);
 const curriculumRef = collection(db, "internal_curriculums");
@@ -123,7 +122,6 @@ export default function CreateCurriculum() {
       </div> */}
 
       <h3 className="theme-h3">Curriculum Examples</h3>
-      <InternalCurriculums />
 
       <BtnHome />
       <BtnExplore />

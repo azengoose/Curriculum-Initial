@@ -17,7 +17,6 @@
 import { BtnHome } from "../components/Buttons";
 import { Link } from "react-router-dom";
 
-import InternalCurriculums from "../components/curriculums/InternalCurriculums.js";
 import ExternalCurriculums from "../components/curriculums/ExternalCurriculums.js";
 
 export default function Explore() {
@@ -35,8 +34,6 @@ export default function Explore() {
         <h3 className="theme-h3">Externally Completed Curriculums</h3>
         <ExternalCurriculums />
 
-        {/* <h3 className="theme-h3">Curriculums</h3>
-        <InternalCurriculums /> */}
       </div>
       <Link className="link" to="/essays">
         <button className="theme-btn">About Curriculums</button>

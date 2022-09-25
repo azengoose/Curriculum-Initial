@@ -30,7 +30,6 @@ import { BtnHome, BtnExplore, Spacer } from "../components/Buttons";
 import Guidelines from "../components/Guidelines";
 // import { About, Guidelines } from "./text/MarkdownConvert";
 import firebaseApp from "../data/config.js";
-// import InternalCurriculums from "./components/curriculums/InternalCurriculums.js";
 
 import NotFound from "./NotFound";
 
@@ -230,8 +229,6 @@ export default function Curriculum() {
           );
         })}
 
-        {/* <h3 className="theme-h3">Other Internal Curriculums</h3>
-        <InternalCurriculums /> */}
         <Guidelines />
         <BtnHome />
         <BtnExplore />

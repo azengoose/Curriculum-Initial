@@ -8,6 +8,7 @@
   ],
   "main": "src/index.js",
   "dependencies": {
+    "eslint-plugin-react": "^7.31.8",
     "firebase": "9.9.1",
     "framer-motion": "7.3.2",
     "material-icons": "1.11.8",

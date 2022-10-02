@@ -1,4 +1,4 @@
-// Miscellaneous exports 
+// Miscellaneous exports
 
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
@@ -8,15 +8,15 @@ import { useLocation } from "react-router-dom";
 
 export const ScrollToTop = (props) => {
   const location = useLocation();
-  const children = props.children
+  const children = props.children;
   useEffect(() => {
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 0);
   }, [location]);
   return <>{children}</>;
 };
 
 // Loading Spinner
-export function Loader(show) {
+export function Loader({ show }) {
   return show ? <div className="loader"></div> : null;
 }
 
@@ -27,7 +27,9 @@ export const subjectList = [
   "Math",
   "Computing",
   "Music",
-  "Physics"
+  "Physics",
   // "Chemistry",
-  // "Psychology"
+  "Psychology",
+  "History",
+  "Biology",
 ];

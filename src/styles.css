@@ -3,8 +3,8 @@
   --theme-dark: #690477;
   --bg-grad: radial-gradient(
     circle,
-    rgb(235, 248, 255) 0%,
-    rgb(239, 236, 255) 100%
+    rgb(248, 255, 255) 0%,
+    rgb(253, 250, 255) 100%
   );
 }
 @font-face {
@@ -44,7 +44,7 @@ h3 {
 }
 .theme-h2 {
   font-weight: bold;
-  font-size: 3em;
+  font-size: 2em;
 }
 .theme-h3 {
   font-size: 1.47em;
@@ -75,34 +75,37 @@ h3 {
   .centered-p {
     max-width: 860px;
   }
+  .theme-h2 {
+    font-size: 3em;
+  }
+}
+/* Desktop */
+@media only screen and (min-width: 1240px) {
+  .theme-h2 {
+    margin: 75px auto 54px auto;
+  }
 }
 
-/* FORMS in /add and /create */
-.form-small-input-div {
-  display: flex;
-  flex-direction: column;
+/* LINK STYLES (GENERAL) */
+.link,
+a {
+  text-decoration: none;
+  color: rgb(53, 53, 216);
+  cursor: pointer;
 }
-.create-form {
-  margin: 40px;
-  padding: 20px;
-  border: 1px solid rgb(204, 204, 204);
-  align-content: center;
+.link:hover,
+a:hover {
+  color: rgb(73, 17, 126);
 }
-input > .form-input {
-  padding: 7px;
-  margin: 5px;
-  min-width: 200px;
-  max-width: 400px;
-  border: 1px solid rgb(228, 228, 228);
+.link:active,
+a:active {
+  color: rgba(255, 0, 34, 0.842);
 }
-/* *:focus {
-  background-color: rgb(253, 247, 255);
-} */
-textarea {
-  padding: 2px;
-  margin: 15px;
-  border: 1px solid rgb(228, 228, 228);
-  min-width: 70%;
+.nav-link {
+  font-size: 1em;
+  font-family: HK Grotesk;
+  font-weight: normal;
+  color: black;
 }
 
 /* LOADING */

@@ -1,90 +1,11 @@
-/* FEATURED CURRICULUM STYLES */
-.featured-curriculums {
-  padding: 10px 0;
-  border-radius: 3%;
-}
-.featured-curriculum-wrapper {
-  column-count: 2;
-  grid-gap: 5px;
-  justify-content: center;
-}
-.curriculum-title {
-  font-family: HK Grotesk;
-  font-weight: bold;
-  font-size: 1.3em;
-}
-.curriculum-container {
-  display: inline-block;
-  text-align: left;
-  padding: 0 1.4em;
-  margin: 5px;
-  max-width: 550px;
-  background-color: rgb(255, 250, 241);
-}
-.curriculum-description,
-.curriculum-resources,
-.curriculum-steps {
-  background-color: white;
-  padding: 1px 15px;
-  margin-top: 5px;
-}
-
 /* EXPLORE CURRICULUMS */
 .explore-curriculum {
   max-width: 1600px;
 }
-
 .explore-curriculum-wrapper {
   column-count: 3;
   grid-gap: 5px;
   justify-content: center;
-}
-
-/* INTERNAL CURRICULUM BLOCKS */
-/* Mobile */
-.internal-curriculums-wrapper {
-  column-count: 2;
-}
-.each-int-cur-div {
-  border: 1px solid rgba(193, 135, 255, 0.233);
-  border-radius: 5px;
-  padding: 18px 10px 10px 10px;
-  background-color: rgb(255, 255, 255);
-  display: inline-block;
-  width: 90%;
-  margin-bottom: 10px;
-}
-.each-int-cur-div:hover {
-  background-color: rgb(255, 242, 254);
-  box-shadow: 0px 0px 25px 0px rgba(230, 163, 230, 0.211);
-  border-color: rgb(228, 203, 255);
-  transition: 0.2s ease-in-out;
-  color: blueviolet;
-}
-.int-cur-title {
-  font-size: 1.1em;
-  margin: 5px 0 15px 0;
-}
-.int-cur-summary p {
-  color: black;
-  margin: 0.4em;
-}
-/* Tablet */
-@media only screen and (min-width: 560px) {
-  .internal-curriculums-wrapper {
-    column-count: 2;
-    column-gap: 15px;
-  }
-  .each-int-cur-div {
-    width: 95%;
-  }
-}
-/* Desktop */
-@media only screen and (min-width: 900px) {
-  .internal-curriculums-wrapper {
-    column-count: 3;
-    column-gap: 15px;
-  }
 }
 
 /* SINGLE CURRICULUM PAGES */

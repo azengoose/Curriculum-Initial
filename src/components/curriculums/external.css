@@ -1,4 +1,9 @@
 /* TOGGLE FILTER */
+.filter-title {
+  color: black;
+  font-size: 1.35em;
+  margin-bottom: 7px;
+}
 .filter-container {
   max-width: 800px;
   font-size: 0.89em;
@@ -6,8 +11,26 @@
   color: #4d4d4d;
   padding: 10px 5px;
   margin: 12px auto 28px auto;
-  border-radius: 0.5em;
-  box-shadow: 0 0 1em 0 rgba(188, 0, 226, 0.253);
+}
+.filter-container::before {
+  content: "";
+  height: 40px;
+  margin-top: -74px;
+  display: block;
+  position: relative;
+  top: 74px;
+  z-index: -1;
+  background-color: paleturquoise;
+  opacity: 0.5;
+}
+.selected-div {
+  margin-top: 20px;
+}
+.selected-title {
+  color: black;
+  font-family: HK Grotesk;
+  font-size: 1.2em;
+  font-weight: bold;
 }
 .check-div {
   display: inline-block;
@@ -31,7 +54,7 @@ input[type="checkbox"] {
 }
 .check-label:hover {
   color: purple;
-  background-color: rgb(248, 233, 255);
+  background-color: rgb(246, 240, 255);
 }
 .check-label::before {
   content: "+";
@@ -39,12 +62,12 @@ input[type="checkbox"] {
   padding: 2px 6px 2px 2px;
   transition: transform 0.3s ease-in-out;
 }
-.check-label:focus {
+/* .check-label:focus {
   border: 2px solid #e9a1ff;
-}
+} */
 input[type="checkbox"]:checked + label {
   color: rgb(85, 0, 71);
-  background-color: rgba(242, 203, 255, 0.76);
+  background-color: rgba(228, 232, 255);
   border: 2px solid rgba(105, 115, 255, 0.61);
 }
 input[type="checkbox"]:checked + label::before {
@@ -52,18 +75,43 @@ input[type="checkbox"]:checked + label::before {
   transform: rotate(-360deg);
   transition: transform 0.3s ease-in-out;
 }
-input[type="checkbox"]:focus + label {
+/* input[type="checkbox"]:focus + label {
   border: 2px solid #e9a1ff;
-}
+} */
 
 /* TAGS */
+img.link-favicon {
+  width: 14px;
+  margin-left: 3px;
+  position: relative;
+  top: 3px;
+}
+.subject-tag-div {
+  margin: 10px;
+}
 .subject-tag {
-  background-color: rgb(218, 225, 245);
+  background-color: rgb(230, 235, 255);
+  width: fit-content;
+  padding: 0 10px;
+  margin-right: 10px;
+  border-radius: 3px;
+  color: black;
+  font-family: HK Grotesk;
+  font-size: 0.95em;
+}
+.simple-subject {
+  background-color: rgb(230, 235, 255);
   width: fit-content;
   padding: 0 10px;
   margin: auto;
-  border-radius: 3px;
+  border-radius: 4px;
   color: black;
+  font-family: HK Grotesk;
+}
+
+/* Toggle Simple Button */
+.toggle-simple {
+  visibility: hidden;
 }
 
 /* EXTERNAL CURRICULUM BLOCKS */
@@ -71,41 +119,93 @@ input[type="checkbox"]:focus + label {
 .external-curriculums-wrapper {
   column-count: 1;
 }
+.simple-wrapper {
+  background: white;
+}
+.simple-each {
+  border-top: 1px solid;
+}
 .each-ext-cur-div {
-  border: 1px solid rgb(158, 203, 255, 0.233);
+  border: 0.5px solid darkgrey;
   border-radius: 5px;
+  border-bottom: 2px solid black;
   padding: 18px 10px 10px 10px;
   background-color: rgb(255, 255, 255);
   display: inline-block;
   width: 95%;
   margin-bottom: 10px;
+  text-align: left;
 }
 .each-ext-cur-div:hover {
   background-color: rgb(247, 255, 254);
   box-shadow: 0px 0px 25px 0px rgba(230, 163, 230, 0.211);
-  border-color: rgb(222, 215, 255);
+  border-color: rgb(182, 175, 255);
   transition: 0.2s ease-in-out;
-  color: rgb(6, 113, 184);
+  border-bottom-color: mediumpurple;
 }
 .ext-cur-title {
   font-size: 1.04em;
   margin: 0 0 5px 0;
+  padding: 5px 10px;
+  color: black;
+  font-family: HK Grotesk;
+  font-weight: bold;
 }
-.ext-cur-summary p {
+.ext-cur-summary p,
+.simple-summary p {
   margin: 0.5em;
   color: black;
+  margin-left: 10px;
+  font-size: 0.8em;
+}
+.simple-summary {
+  display: flex;
 }
 /* Tablet */
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 560px) {
   .external-curriculums-wrapper {
     column-count: 2;
-    margin: 10px;
     column-gap: 18px;
+    padding: 0 20px;
+  }
+  .simple-each {
+    display: grid;
+    grid-template-columns: 3fr 3fr 1fr;
+    align-items: center;
+    justify-items: start;
+    text-align: left;
+  }
+  .simple-subject {
+    padding: 0 10px;
+    background-color: white;
+    width: fit-content;
+    margin: 0;
+    border-radius: 0px;
+    color: black;
   }
 }
 /* Desktop */
-@media only screen and (min-width: 720px) {
+@media only screen and (min-width: 840px) {
   .external-curriculums-wrapper {
     column-count: 3;
+    max-width: 1080px;
+    margin: auto;
+  }
+  /* Toggle Simple Button */
+  .toggle-simple {
+    visibility: visible;
+    margin: 50px;
+    background: white;
+    padding: 10px 20px;
+    font-size: medium;
+    font-family: system-ui;
+    border: 1px solid #aaa;
+  }
+}
+/* Large Desktop */
+@media only screen and (min-width: 1260px) {
+  .external-curriculums-wrapper {
+    column-count: 4;
+    max-width: 1440px;
   }
 }

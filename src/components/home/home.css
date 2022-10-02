@@ -1,5 +1,45 @@
 /* *** HOME *** */
 
+/* HOME CATEGORY */
+#home-category-backdrop {
+  background-color: rgb(20, 20, 20);
+  top: 0;
+  left: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+}
+.home-category-wrapper {
+  margin: auto;
+  width: 480px;
+  margin-top: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.home-subject-tag {
+  background-color: white;
+  width: fit-content;
+  padding: 0px 1.2em;
+  min-width: 50px;
+  z-index: 2;
+  margin: 10px;
+  border-radius: 2em;
+  font-family: HK Grotesk;
+  font-weight: bold;
+  font-size: 1.4em;
+  cursor: pointer;
+  transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.home-subject-tag:hover {
+  background-color: aquamarine;
+}
+
 /* HERO Mobile */
 #home-hero {
   display: flex;

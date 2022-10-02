@@ -1,16 +1,17 @@
 // Externally completed curriculums for Explore
 
-import "./external.css";
+import { useState, useEffect } from "react";
 import {
   getFirestore,
   collection,
   onSnapshot,
   query,
-  where
+  where,
 } from "firebase/firestore";
 import firebaseApp from "../../data/config.js";
-import { useState, useEffect } from "react";
 
+import "./external.css";
+import { Icon, HostLink } from "./LinkPreview";
 import { Loader, subjectList } from "../Misc";
 
 const db = getFirestore(firebaseApp);
@@ -18,91 +19,71 @@ const curriculumRef = collection(db, "external_curriculums");
 
 export default function ExternalCurriculums() {
   const [loading, setLoading] = useState(true);
-
+  const [simple, setSimple] = useState(false);
   const [curriculums, setCurriculums] = useState([]);
-  const q = query(curriculumRef);
 
-  useEffect(
-    () => {
-      onSnapshot(q, (snapshot) => {
-        setCurriculums(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            Data: [doc.data()]
-          }))
-        );
-      });
-      setLoading(false);
-    }, 
-    []
-  );
+  const [activeFiltersNum, setActiveFiltersNum] = useState(0);
+  const [activeSubjects, setActiveSubjects] = useState([]);
 
-  // Create lists of the selected subject from Firebase
-  const curriculumsList = [];
-  for (var j = 0; j < curriculums.length; j++) {
-    curriculumsList.push(curriculums[j].Data[0].Subjects[0]);
+  function ToggleSimple() {
+    setSimple(!simple);
   }
 
-  const [activeFilters, setActiveFilters] = useState(
-    document.getElementsByClassName("checked").length
-  );
+  function QueryFilterContains() {
+    var q = query(curriculumRef);
+    if (activeFiltersNum > 0) {
+      q = query(
+        curriculumRef,
+        where("Subjects", "array-contains-any", activeSubjects)
+      );
+    }
+    setLoading(true);
+    onSnapshot(q, (snapshot) => {
+      setCurriculums(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          Data: [doc.data()],
+        }))
+      );
+    });
+    setLoading(false);
+  }
 
-  function toggleCheck(e, subject) {
+  function ToggleCheck(e, subject) {
     const match = document.getElementById(subject);
+    match.classList.toggle("checked");
     if (e.target.checked) {
       console.log(`✅ ${subject} Checkbox is checked`);
-      match.classList.add("checked");
-      setActiveFilters(document.getElementsByClassName("checked").length);
-
-      for (var j = 0; j < curriculums.length; j++) {
-        if (subject === curriculumsList[j]) {
-          const q = query(
-            curriculumRef,
-            where("Subjects", "array-contains", subject)
-          );
-          setLoading(true);
-          onSnapshot(q, (snapshot) => {
-            setCurriculums(
-              snapshot.docs.map((doc) => ({
-                id: doc.id,
-                Data: [doc.data()]
-              }))
-            );
-          });
-          setLoading(false);
-          break;
-        }
-      }
+      const next_array = [...activeSubjects, subject];
+      setActiveSubjects(next_array);
     } else {
       console.log(`⛔️ ${subject} Checkbox is NOT checked`);
-      match.classList.remove("checked");
-      setActiveFilters(document.getElementsByClassName("checked").length);
-
-      const q = query(curriculumRef);
-      onSnapshot(q, (snapshot) => {
-        setCurriculums(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            Data: [doc.data()]
-          }))
-        );
-      });
-      setLoading(false);
+      const index = activeSubjects.indexOf(subject);
+      const next_arr = [
+        ...activeSubjects.slice(0, index),
+        ...activeSubjects.slice(index + 1),
+      ];
+      setActiveSubjects(next_arr);
     }
-    console.log(activeFilters);
+    setActiveFiltersNum(document.getElementsByClassName("checked").length);
   }
+
+  useEffect(() => {
+    QueryFilterContains();
+    console.log("Use Effect Triggered");
+  }, [activeSubjects]);
 
   return (
     <>
       <div className="filter-container">
-        Filter by Subjects:
+        <h3 className="filter-title">Filter by Subjects: </h3>
         {subjectList.map((subject, i) => {
           return (
             <div className="check-div" key={i}>
               <input
                 type="checkbox"
                 id={subject}
-                onChange={(e) => toggleCheck(e, subject)}
+                onChange={(e) => ToggleCheck(e, subject)}
               />
               <label htmlFor={subject} className="check-label">
                 {subject}
@@ -110,45 +91,81 @@ export default function ExternalCurriculums() {
             </div>
           );
         })}
-        {activeFilters > 0 ? (
-          <>
-            <br />
-            <br />
-            <span>Only one Filter can be selected at a time.</span>
-          </>
-        ) : null}
+        {activeFiltersNum > 0 ? (
+          <div className="selected-div">
+            <span className="selected-title">Selected Subjects: </span>
+            {activeSubjects.map((e, i) => {
+              return (
+                <span className="subject-tag" key={i}>
+                  {e}
+                </span>
+              );
+            })}
+          </div>
+        ) : (
+          ""
+        )}
       </div>
 
       <Loader show={loading} />
       <div className="data-ouput">
-        <div className="external-curriculums-wrapper">
+        <div
+          className={simple ? "simple-wrapper" : `external-curriculums-wrapper`}
+        >
           {curriculums.map(({ Data }, index) => {
             return (
               <div key={index}>
                 {Data.map(
                   ({ Title, Link, LastUpdated, Authors, Subjects }, i) => {
                     return (
-                      <a href={Link} target="_blank" rel="noopener noreferrer" key={i}>
-                        <div className="each-ext-cur-div">
+                      <a
+                        href={Link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        key={i}
+                      >
+                        <div
+                          className={
+                            simple ? "simple-each" : `each-ext-cur-div`
+                          }
+                        >
                           <p className="ext-cur-title">{Title}</p>
-                          <div className="ext-cur-summary">
+
+                          <div
+                            className={
+                              simple ? "simple-summary" : "ext-cur-summary"
+                            }
+                          >
                             <p>
-                              Last Updated:
-                              {LastUpdated ? (
-                                <span> {LastUpdated}</span>
+                              {simple ? (
+                                <span>Last Updated: {LastUpdated}</span>
                               ) : (
-                                " N/A"
+                                <span>
+                                  {LastUpdated} | {HostLink(Link)} {Icon(Link)}
+                                </span>
                               )}
                             </p>
-                            <p>By {Authors}</p>
+
+                            <p>{Authors}</p>
                           </div>
-                          {Subjects.map((e, i) => {
-                            return (
-                              <div className={e + " subject-tag"} key={i}>
-                                <p className={e}>{e}</p>
-                              </div>
-                            );
-                          })}
+                          <div className="subject-tag-div">
+                            {Subjects
+                              ? Subjects.map((e, i) => {
+                                  return (
+                                    <span
+                                      className={
+                                        simple
+                                          ? `${e} simple-subject`
+                                          : `${e} subject-tag`
+                                      }
+                                      key={i}
+                                    >
+                                      {e}
+                                    </span>
+                                  );
+                                })
+                              : ""}
+                          </div>
                         </div>
                       </a>
                     );
@@ -158,6 +175,11 @@ export default function ExternalCurriculums() {
             );
           })}
         </div>
+      </div>
+      <div>
+        <button className="toggle-simple" onClick={ToggleSimple}>
+          ⚙️ Toggle {simple ? "Default" : "Simple"} Display
+        </button>
       </div>
     </>
   );
@@ -194,3 +216,29 @@ export default function ExternalCurriculums() {
 //     </>
 //   );
 // })}
+
+// Create lists of the selected subject from Firebase
+// const curriculumsList = [];
+// for (var j = 0; j < curriculums.length; j++) {
+//   curriculumsList.push(curriculums[j].Data[0].Subjects[0]);
+// }
+// Query for ONE Subject
+// for (var j = 0; j < curriculums.length; j++) {
+//   if (subject === curriculumsList[j]) {
+//     const q = query(
+//       curriculumRef,
+//       where("Subjects", "array-contains", subject)
+//     );
+//     setLoading(true);
+//     onSnapshot(q, (snapshot) => {
+//       setCurriculums(
+//         snapshot.docs.map((doc) => ({
+//           id: doc.id,
+//           Data: [doc.data()],
+//         }))
+//       );
+//     });
+//     setLoading(false);
+//     break;
+//   }
+//}

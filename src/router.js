@@ -23,11 +23,11 @@ export default function Paths() {
       <ScrollToTop>
         <Routes>
           <Route path="/curriculum/:id" element={<Curriculum />} />
+          <Route path="/explore" element={<Explore />} />
           <Route element={<Layout />}>
             <Route index path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/essays" element={<Essays />} />
-            <Route path="/explore" element={<Explore />} />
             <Route path="/create" element={<CreateCurriculum />} />
             <Route path="/add" element={<AddCurriculum />} />
             <Route path="*" element={<NotFound />} />

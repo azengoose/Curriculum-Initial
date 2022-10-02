@@ -1,23 +1,4 @@
-/* LINK STYLES (GENERAL) */
-.link,
-a {
-  text-decoration: none;
-  color: rgb(53, 53, 216);
-}
-.link:hover,
-a:hover {
-  color: rgb(73, 17, 126);
-}
-.link:active,
-a:active {
-  color: rgba(255, 0, 34, 0.842);
-}
-.nav-link {
-  font-size: 1em;
-  font-family: HK Grotesk;
-  font-weight: normal;
-  color: black;
-}
+
 /* NAVBAR POSITIONING */
 #nav-bar {
   display: flex;

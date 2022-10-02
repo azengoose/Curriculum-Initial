@@ -34,3 +34,13 @@ export function TextAddCurriculum() {
     </>
   );
 }
+export function TextCredits() {
+  return (
+    <>
+      <h3 className="theme-h3">Credits for Site</h3>
+      <a href="https://www.flaticon.com/free-icons/info" title="info icons">
+        Info icons created by Miftakhul Rizky - Flaticon
+      </a>
+    </>
+  );
+}

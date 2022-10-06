@@ -1,42 +1,32 @@
 // For easy edit and importing of default buttons
 
 import { Link } from "react-router-dom";
+import "./buttons.css";
 
-export function BtnHome() {
+export function DefaultBtn(link, text) {
   return (
-    <Link className="link" to="/">
-      <button className="theme-btn">Back to Home</button>
+    <Link className="link" to={link}>
+      <button className="theme-btn">{text}</button>
     </Link>
   );
 }
-export function BtnExplore() {
+
+export function ArrowBtn({ link, text }) {
   return (
-    <Link className="link" to="/explore">
-      <button className="theme-btn">Explore Curriculums</button>
-    </Link>
+    <div>
+      <Link className="link arrow-link" to={link}>
+        <button className="arrow-btn">
+          {text}{" "}
+          <img
+            className="arrow-icon"
+            src="https://cdn-icons-png.flaticon.com/512/271/271226.png"
+          />
+        </button>
+      </Link>
+    </div>
   );
 }
-export function BtnAbout() {
-  return (
-    <Link className="link" to="/about">
-      <button className="theme-btn">About</button>
-    </Link>
-  );
-}
-export function BtnAddCurriculum() {
-  return (
-    <Link className="link" to="/add">
-      <button className="theme-btn">Add a Curriculum</button>
-    </Link>
-  );
-}
-export function BtnCreateCurriculum() {
-  return (
-    <Link className="link" to="/create">
-      <button className="theme-btn">Create Curriculum</button>
-    </Link>
-  );
-}
-export function Spacer() {
-  return <div style={{ height: 40 }}></div>;
+
+export function Spacer(height) {
+  return <div style={{ height: height }}></div>;
 }

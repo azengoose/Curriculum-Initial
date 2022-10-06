@@ -40,5 +40,3 @@ TLDR; overall models are very important. We're going to do our best to do this i
 
 One of the immediately practical implementations of this, is that I've noticed that there is a clear bias of online resources catered towards the subjects of Computing, Languages and Business. Therefore, the bias of our resources will be made transparent and accessible, and an attempt at subject equality will be made.
 
-  <!-- // Evaluating curriculums: qualitative-quantitative, trust, futurism
-  // Plans: quotes, futurism -->

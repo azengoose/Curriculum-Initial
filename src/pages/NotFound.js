@@ -1,7 +1,7 @@
 // For 404 or Not Found Pages
 
 import { Link } from "react-router-dom";
-import { BtnHome, BtnExplore } from "../components/Buttons";
+//import { BtnHome, BtnExplore } from "../components/Buttons";
 
 export default function NotFound() {
   return (
@@ -13,8 +13,8 @@ export default function NotFound() {
           Maybe try hitting rewind, or rechecking you've got the right link.
         </p>
         <p>Or instead, check out the homepage, or explore curriculums. </p>
-        <BtnHome />
-        <BtnExplore />
+        {/* <BtnHome />
+        <BtnExplore /> */}
         <p>
           If you want to find out more about the website you're currently on,
           see{" "}

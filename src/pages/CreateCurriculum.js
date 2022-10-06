@@ -2,7 +2,7 @@
 
 //import { useState } from "react";
 // import firebaseApp from "../data/config.js";
-import { BtnHome, BtnExplore, BtnAddCurriculum } from "../components/Buttons";
+// import { BtnHome, BtnExplore, BtnAddCurriculum } from "../components/Buttons";
 import { TextCreateCurriculum } from "./text/Text";
 
 export default function CreateCurriculum() {
@@ -19,9 +19,9 @@ export default function CreateCurriculum() {
 
       <h3 className="theme-h3">Curriculum Examples</h3>
 
-      <BtnHome />
+      {/* <BtnHome />
       <BtnExplore />
-      <BtnAddCurriculum />
+      <BtnAddCurriculum /> */}
     </>
   );
 }

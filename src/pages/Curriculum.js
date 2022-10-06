@@ -26,7 +26,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion/dist/framer-motion";
 
-import { BtnHome, BtnExplore, Spacer } from "../components/Buttons";
+//import { BtnHome, BtnExplore, Spacer } from "../components/Buttons";
 // import { About, Guidelines } from "./text/MarkdownConvert";
 import firebaseApp from "../data/config.js";
 
@@ -219,9 +219,9 @@ export default function Curriculum() {
           );
         })}
 
-        <BtnHome />
+        {/* <BtnHome />
         <BtnExplore />
-        <Spacer />
+        <Spacer /> */}
       </>
     );
   } else {

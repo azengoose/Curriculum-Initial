@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import "./misc.css";
 
 // ScrollToTop.jsx
 // https://www.kindacode.com/article/react-router-dom-scroll-to-top-on-route-change/
@@ -33,3 +34,54 @@ export const subjectList = [
   "History",
   "Biology",
 ];
+
+export const optionList = [
+  { value: "Art", label: "Art" },
+  { value: "Languages", label: "Languages" },
+  { value: "Math", label: "Math" },
+  { value: "Computing", label: "Computing" },
+  { value: "Music", label: "Music" },
+  { value: "Physics", label: "Physics" },
+  // {value: "Chemistry", label: "Chemistry"},
+  { value: "Psychology", label: "Psychology" },
+  { value: "History", label: "History" },
+  { value: "Biology", label: "Biology" },
+];
+
+// Usage:   <Warning text= "hi there friend" />
+export function Warning({ text }) {
+  return (
+    <div className="centered-p warning">
+      <img
+        className="warning-icon"
+        src="https://cdn-icons-png.flaticon.com/512/5932/5932058.png"
+      />
+      {text}
+    </div>
+  );
+}
+
+export function Accordion({ title, panel, panel2 }) {
+  function handleChange(e) {
+    var acc = e.target;
+    acc.classList.toggle("active");
+    var panel = acc.nextElementSibling;
+    panel.classList.toggle("panel-active");
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  }
+  return (
+    <>
+      <button className="accordion" onClick={(e) => handleChange(e)}>
+        {title}
+      </button>
+      <div className="panel">
+        <p>{panel}</p>
+        <p>{panel2}</p>
+      </div>
+    </>
+  );
+}

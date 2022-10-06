@@ -1,7 +1,7 @@
 // Essay page
 // with imported text components from md
 
-import { BtnHome } from "../components/Buttons";
+// import { BtnHome } from "../components/Buttons";
 import ReactMarkdown from "react-markdown";
 import { useEffect, useState } from "react";
 
@@ -18,11 +18,9 @@ export default function Essays() {
 
   return (
     <>
-      <ReactMarkdown className={style.reactMarkDown}>
-          {content}
-      </ReactMarkdown>
+      <ReactMarkdown className={style.reactMarkDown}>{content}</ReactMarkdown>
 
-      <BtnHome />
+      {/* <BtnHome /> */}
     </>
   );
 }

@@ -181,6 +181,7 @@ export default function ExternalCurriculums() {
           ⚙️ Toggle {simple ? "Default" : "Simple"} Display
         </button>
       </div>
+      <div>Total Curriculums: {curriculums.length}</div>
     </>
   );
 }

@@ -1,4 +1,3 @@
-
 /* NAVBAR POSITIONING */
 #nav-bar {
   display: flex;
@@ -13,6 +12,10 @@
 }
 .nav-item {
   margin: 0 5px;
+}
+a#nav-logo {
+  font-weight: bold;
+  font-size: 1.2em;
 }
 .nav-right {
   display: flex;

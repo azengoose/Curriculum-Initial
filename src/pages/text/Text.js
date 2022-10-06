@@ -1,6 +1,9 @@
 // Small Textual Snippets in one file
 // For Larger pieces or essays, check Public .markdown files
 
+// Evaluating curriculums: qualitative-quantitative, trust, futurism
+// Plans: quotes, futurism
+
 export function TextCreateCurriculum() {
   // Background Information: Curriculums can only be submitted for pending. It is judged by the public in an intermediary period and by a rotating committee, before being established into the database proper.
   return (
@@ -40,6 +43,9 @@ export function TextCredits() {
       <h3 className="theme-h3">Credits for Site</h3>
       <a href="https://www.flaticon.com/free-icons/info" title="info icons">
         Info icons created by Miftakhul Rizky - Flaticon
+      </a>
+      <a href="https://www.flaticon.com/free-icons/next" title="next icons">
+        Next icons created by Roundicons - Flaticon
       </a>
     </>
   );

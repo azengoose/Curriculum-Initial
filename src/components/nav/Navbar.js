@@ -12,9 +12,9 @@ export default function Navbar() {
       <div>
         <header id="nav">
           <div id="nav-bar">
-            <div id="nav-title" className="nav-item">
-              <Link className="link nav-link" to="/">
-                Explore
+            <div className="nav-item">
+              <Link id="nav-logo" className="link nav-link" to="/">
+                iter
               </Link>
             </div>
             <div className="nav-right">

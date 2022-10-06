@@ -2,15 +2,15 @@
 
 import HomeCategory from "../components/home/HomeCategory";
 
-import { BtnAddCurriculum, BtnCreateCurriculum } from "../components/Buttons";
+//import { BtnAddCurriculum, BtnCreateCurriculum } from "../components/Buttons";
 
 export default function Home() {
   return (
     <>
       <HomeCategory />
 
-      <BtnCreateCurriculum />
-      <BtnAddCurriculum />
+      {/* <BtnCreateCurriculum />
+      <BtnAddCurriculum /> */}
     </>
   );
 }

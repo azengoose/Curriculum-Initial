@@ -1,11 +1,11 @@
 // Essay page
 // with imported text components from md
 
-// import { BtnHome } from "../components/Buttons";
+import { ArrowBtn } from "../components/Buttons";
 import ReactMarkdown from "react-markdown";
 import { useEffect, useState } from "react";
 
-import style from "./text/markdown-styles.module.css";
+import style from "../text/markdown-styles.module.css";
 
 export default function Essays() {
   const [content, setContent] = useState("");
@@ -20,7 +20,7 @@ export default function Essays() {
     <>
       <ReactMarkdown className={style.reactMarkDown}>{content}</ReactMarkdown>
 
-      {/* <BtnHome /> */}
+      <ArrowBtn link="/explore" text="Explore curriculums" />
     </>
   );
 }

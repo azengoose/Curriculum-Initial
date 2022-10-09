@@ -6,26 +6,14 @@
 //      5. Subtle Link to comprehensive Essays.
 
 import { ArrowBtn } from "../components/Buttons";
-import ReactMarkdown from "react-markdown";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-import style from "./text/markdown-styles.module.css";
+import { TextAbout } from "../text/Text";
 
 export default function About() {
-  const [about, setAbout] = useState("");
-
-  useEffect(() => {
-    fetch("About.md")
-      .then((res) => res.text())
-      .then((text) => setAbout(text));
-  }, []);
-
   return (
     <>
       <h2 className="theme-h2">About</h2>
-
-      <ReactMarkdown className={style.reactMarkDown}>{about}</ReactMarkdown>
+      <TextAbout />
 
       <ArrowBtn link="/" text="Home" />
       <ArrowBtn link="/explore" text="Explore Curriculums" />

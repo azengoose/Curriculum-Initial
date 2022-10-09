@@ -15,7 +15,6 @@
 //    curriculums to add to the existing database.
 
 import {
-  getFirestore,
   collection,
   collectionGroup,
   query,
@@ -28,11 +27,10 @@ import { motion } from "framer-motion/dist/framer-motion";
 
 //import { BtnHome, BtnExplore, Spacer } from "../components/Buttons";
 // import { About, Guidelines } from "./text/MarkdownConvert";
-import firebaseApp from "../data/config.js";
+import db from "../data/config.js";
 
 import NotFound from "./NotFound";
 
-const db = getFirestore(firebaseApp);
 const curriculumRef = collection(db, "internal_curriculums");
 const resourcesRef = collectionGroup(db, "resources");
 const reviewsRef = collectionGroup(db, "reviews");

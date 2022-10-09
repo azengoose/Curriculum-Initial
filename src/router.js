@@ -7,7 +7,7 @@ import Essays from "./pages/Essays.js";
 import Explore from "./pages/Explore";
 import CreateCurriculum from "./pages/CreateCurriculum";
 import AddCurriculum from "./pages/AddCurriculum.js";
-import Accept from "./pages/Accept.js";
+import Accept from "./admin/Accept.js";
 import NotFound from "./pages/NotFound.js";
 
 import Curriculum from "./pages/Curriculum";

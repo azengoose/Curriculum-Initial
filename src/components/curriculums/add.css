@@ -51,6 +51,7 @@ label.form-label {
 }
 .form-select {
   width: fit-content;
+  margin-left: 10px;
 }
 .form-input:focus-visible {
   background-color: rgb(255, 255, 245);
@@ -86,9 +87,11 @@ label.form-label {
 #add-form-tooltip {
   height: 20px;
   border-left: 2px solid purple;
-  margin: 0 10px 20px 10px;
+  margin: 0 10px 25px 10px;
+  font-size: 0.8em;
   transition: 0.5s linear;
   color: purple;
+  padding: 0 5px;
 }
 #add-footer {
   text-align: left;
@@ -106,10 +109,8 @@ label.form-label {
   }
   .form-input {
     margin-top: -9px;
-    transition: none;
   }
   .form-select {
     max-width: 100%;
-    transition: 0.2s linear;
   }
 }

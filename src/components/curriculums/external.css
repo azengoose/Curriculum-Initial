@@ -88,12 +88,15 @@ img.link-favicon {
 }
 .subject-tag-div {
   margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
 }
 .subject-tag {
   background-color: rgb(230, 235, 255);
   width: fit-content;
   padding: 0 10px;
   margin-right: 10px;
+  margin-bottom: 8px;
   border-radius: 3px;
   color: black;
   font-family: HK Grotesk;
@@ -150,6 +153,7 @@ img.link-favicon {
   color: black;
   font-family: HK Grotesk;
   font-weight: bold;
+  overflow-wrap: break-word;
 }
 .ext-cur-summary p,
 .simple-summary p {
@@ -157,6 +161,7 @@ img.link-favicon {
   color: black;
   margin-left: 10px;
   font-size: 0.8em;
+  overflow-wrap: break-word;
 }
 .simple-summary {
   display: flex;

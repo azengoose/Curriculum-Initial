@@ -6,15 +6,9 @@ import { ArrowBtn } from "../components/Buttons";
 import { Accordion } from "../components/Misc";
 
 import { useState, useEffect } from "react";
-import {
-  getFirestore,
-  collection,
-  query,
-  onSnapshot,
-} from "firebase/firestore";
-import firebaseApp from "../data/config.js";
+import { collection, query, onSnapshot } from "firebase/firestore";
+import db from "../data/config.js";
 
-const db = getFirestore(firebaseApp);
 const curriculumRef = collection(db, "submitted_curriculums");
 
 export default function AddCurriculum() {

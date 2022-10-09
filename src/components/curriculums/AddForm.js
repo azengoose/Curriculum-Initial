@@ -1,18 +1,12 @@
 // For submitting externally completed curriculums
 
 import "./add.css";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  serverTimestamp,
-} from "firebase/firestore";
-import firebaseApp from "../../data/config.js";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import db from "../../data/config.js";
 import { useState } from "react";
 import Select from "react-select";
 import { optionList } from "../Misc";
 
-const db = getFirestore(firebaseApp);
 const curriculumRef = collection(db, "submitted_curriculums");
 
 export default function AddForm() {
@@ -20,7 +14,7 @@ export default function AddForm() {
   const [lastUpdate, setLastUpdate] = useState("");
   const [curriculumLink, setCurriculumLink] = useState("");
   const [title, setTitle] = useState("");
-  const [subjects, setSubjects] = useState(["Art"]);
+  const [subjects, setSubjects] = useState();
   // const [curriculumType] = useState("");
 
   var msg = document.getElementById("form-message");
@@ -29,39 +23,61 @@ export default function AddForm() {
     msg.className = "";
   }
 
+  const [validUrl, setValidUrl] = useState(false);
+  function CheckLink(e) {
+    setCurriculumLink(e.target.value);
+    setValidUrl(e.target.checkValidity());
+  }
+
   const submit = (e) => {
     e.preventDefault();
-    if (authorsName && curriculumLink && title && lastUpdate) {
-      addDoc(curriculumRef, {
-        created: serverTimestamp(),
-        Authors: authorsName,
-        LastUpdated: lastUpdate,
-        Link: curriculumLink,
-        Title: title,
-        Subjects: [subjects],
-      });
-      console.log("Curriculum successfully submitted.");
-      msg.classList.add("msg-successful");
-      msg.textContent = "Curriculum successfully submitted.";
-      setTimeout(tempMessage, 5000);
-      setAuthorsName("");
-      setLastUpdate("");
-      setCurriculumLink("");
-      setTitle("");
-      setSubjects(["Art"]);
+    console.log(authorsName, lastUpdate, curriculumLink, title, subjects);
+    if (authorsName && validUrl && title && lastUpdate && subjects) {
+      try {
+        addDoc(curriculumRef, {
+          created: serverTimestamp(),
+          Authors: authorsName,
+          LastUpdated: lastUpdate,
+          Link: curriculumLink,
+          Title: title,
+          Subjects: subjects,
+        });
+        console.log("Curriculum successfully submitted.");
+        msg.classList.add("msg-successful");
+        msg.textContent = "Curriculum successfully submitted.";
+        setTimeout(tempMessage, 5000);
+        setAuthorsName("");
+        setLastUpdate("");
+        setCurriculumLink("");
+        setTitle("");
+        setSubjects("");
+      } catch (error) {
+        console.log(error);
+        msg.classList.add("msg-error");
+        msg.textContent = "There was an error (see console).";
+      }
+    } else if (!validUrl) {
+      msg.classList.add("msg-error");
+      msg.textContent = "Enter a valid URL.";
     } else {
       msg.classList.add("msg-error");
       msg.textContent = "All fields required.";
-      setTimeout(tempMessage, 5000);
     }
+    setTimeout(tempMessage, 5000);
   };
 
   const [selectedOptions, setSelectedOptions] = useState();
   function handleSelect(data) {
     setSelectedOptions(data);
+    if (data.length > 0) {
+      let subs = [];
+      for (var j = 0; j < data.length; j++) {
+        subs.push(data[j].value);
+        setSubjects(subs);
+      }
+    } else setSubjects("");
   }
 
-  //var helper = document.getElementById("add-form-tooltip");
   const [helperText, setHelperText] = useState("Add a curriculum.");
 
   const HelperTextChange = {
@@ -125,11 +141,11 @@ export default function AddForm() {
             <label className="form-label">
               <input
                 id="add-input-link"
-                type="text"
+                type="url"
                 className="form-input"
                 placeholder="https://examplecurriculum.site"
                 value={curriculumLink}
-                onChange={(e) => setCurriculumLink(e.target.value)}
+                onChange={(e) => CheckLink(e)}
                 onMouseOver={(e) => HelperFunction(e.target)}
                 onFocus={(e) => HelperFunction(e.target)}
               />
@@ -150,8 +166,9 @@ export default function AddForm() {
               <input
                 id="add-input-updated"
                 type="text"
+                pattern="[0-9]{4}"
                 className="form-input"
-                placeholder="Month, YYYY"
+                placeholder="YYYY"
                 value={lastUpdate}
                 onChange={(e) => setLastUpdate(e.target.value)}
                 onMouseOver={(e) => HelperFunction(e.target)}

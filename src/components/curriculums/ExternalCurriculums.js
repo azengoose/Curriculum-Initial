@@ -1,20 +1,13 @@
 // Externally completed curriculums for Explore
 
 import { useState, useEffect } from "react";
-import {
-  getFirestore,
-  collection,
-  onSnapshot,
-  query,
-  where,
-} from "firebase/firestore";
-import firebaseApp from "../../data/config.js";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import db from "../../data/config.js";
 
 import "./external.css";
 import { Icon, HostLink } from "./LinkPreview";
 import { Loader, subjectList } from "../Misc";
 
-const db = getFirestore(firebaseApp);
 const curriculumRef = collection(db, "external_curriculums");
 
 export default function ExternalCurriculums() {

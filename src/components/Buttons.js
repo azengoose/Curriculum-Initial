@@ -27,6 +27,6 @@ export function ArrowBtn({ link, text }) {
   );
 }
 
-export function Spacer(height) {
+export function Spacer({ height }) {
   return <div style={{ height: height }}></div>;
-}
+} // Usage: <Spacer height={40} />

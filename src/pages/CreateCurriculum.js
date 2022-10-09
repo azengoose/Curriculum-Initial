@@ -1,9 +1,9 @@
 // For creating internally completed curriculums
 
 //import { useState } from "react";
-// import firebaseApp from "../data/config.js";
+// import db from "../data/config.js";
 // import { BtnHome, BtnExplore, BtnAddCurriculum } from "../components/Buttons";
-import { TextCreateCurriculum } from "./text/Text";
+import { TextCreateCurriculum } from "../text/Text";
 
 export default function CreateCurriculum() {
   return (

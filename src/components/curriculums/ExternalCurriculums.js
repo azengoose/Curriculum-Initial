@@ -1,45 +1,23 @@
 // Externally completed curriculums for Explore
 
-import { useState, useEffect } from "react";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import db from "../../data/config.js";
+import { useState } from "react";
+import { QueryFilterContains } from "../../data/Query";
 
 import "./external.css";
 import { Icon, HostLink } from "./LinkPreview";
-import { Loader, subjectList } from "../Misc";
-
-const curriculumRef = collection(db, "external_curriculums");
+import { subjectList } from "../Misc";
+import { ArrowBtn } from "../Buttons";
 
 export default function ExternalCurriculums() {
-  const [loading, setLoading] = useState(true);
   const [simple, setSimple] = useState(false);
   const [curriculums, setCurriculums] = useState([]);
-
   const [activeFiltersNum, setActiveFiltersNum] = useState(0);
   const [activeSubjects, setActiveSubjects] = useState([]);
 
+  QueryFilterContains(setCurriculums, activeFiltersNum, activeSubjects);
+
   function ToggleSimple() {
     setSimple(!simple);
-  }
-
-  function QueryFilterContains() {
-    var q = query(curriculumRef);
-    if (activeFiltersNum > 0) {
-      q = query(
-        curriculumRef,
-        where("Subjects", "array-contains-any", activeSubjects)
-      );
-    }
-    setLoading(true);
-    onSnapshot(q, (snapshot) => {
-      setCurriculums(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          Data: [doc.data()],
-        }))
-      );
-    });
-    setLoading(false);
   }
 
   function ToggleCheck(e, subject) {
@@ -60,11 +38,6 @@ export default function ExternalCurriculums() {
     }
     setActiveFiltersNum(document.getElementsByClassName("checked").length);
   }
-
-  useEffect(() => {
-    QueryFilterContains();
-    console.log("Use Effect Triggered");
-  }, [activeSubjects]);
 
   return (
     <>
@@ -98,9 +71,13 @@ export default function ExternalCurriculums() {
         ) : (
           ""
         )}
+        {activeFiltersNum > 9 ? (
+          <div id="max-msg">10 Maximum Filters Reached</div>
+        ) : (
+          ""
+        )}
       </div>
 
-      <Loader show={loading} />
       <div className="data-ouput">
         <div
           className={simple ? "simple-wrapper" : `external-curriculums-wrapper`}
@@ -174,7 +151,17 @@ export default function ExternalCurriculums() {
           ⚙️ Toggle {simple ? "Default" : "Simple"} Display
         </button>
       </div>
-      <div>Total Curriculums: {curriculums.length}</div>
+      <div className="two-columns">
+        <div>
+          <div>Total Curriculums Displayed: {curriculums.length}</div>
+          <ArrowBtn link="/all" text="All Curriculums" />
+        </div>
+        <div>
+          <ArrowBtn link="/add" text="Add a Curriculum" />
+          <ArrowBtn link="/essays" text="Categories" />
+          <ArrowBtn link="/about" text="Unasked Questions" />
+        </div>
+      </div>
     </>
   );
 }
@@ -195,44 +182,14 @@ export default function ExternalCurriculums() {
 //     }
 //   }
 // }
-// {subjectList.map((subject, i) => {
-//   return (
-//     <>
-//       {/* <ToggleSwitch className={palette + " toggle"} label={subject} /> */}
-//       <button
-//         key={i}
-//         id={subject}
-//         className={palette + " toggle"}
-//         onClick={(e) => toggleButton(e, subject)}
-//       >
-//         {subject}
-//       </button>
-//     </>
-//   );
-// })}
-
-// Create lists of the selected subject from Firebase
-// const curriculumsList = [];
-// for (var j = 0; j < curriculums.length; j++) {
-//   curriculumsList.push(curriculums[j].Data[0].Subjects[0]);
+// if (activeFiltersNum == 10) {
+//   MaxDisable();
 // }
-// Query for ONE Subject
-// for (var j = 0; j < curriculums.length; j++) {
-//   if (subject === curriculumsList[j]) {
-//     const q = query(
-//       curriculumRef,
-//       where("Subjects", "array-contains", subject)
-//     );
-//     setLoading(true);
-//     onSnapshot(q, (snapshot) => {
-//       setCurriculums(
-//         snapshot.docs.map((doc) => ({
-//           id: doc.id,
-//           Data: [doc.data()],
-//         }))
-//       );
-//     });
-//     setLoading(false);
-//     break;
+// function MaxDisable() {
+//   const maxed_filters = document.getElementsByClassName("checked");
+//   for (let i = 0; i < maxed_filters.length; i++) {
+//     console.log("", maxed_filters[i]);
+//     maxed_filters[i].nextSibling.classList.toggle("maxed");
 //   }
-//}
+// }
+//console.log("", document.getElementsByClassName("checked"));

@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Essays from "./pages/Essays.js";
 import Explore from "./pages/Explore";
+import All from "./pages/All";
 import CreateCurriculum from "./pages/CreateCurriculum";
 import AddCurriculum from "./pages/AddCurriculum.js";
 import Accept from "./admin/Accept.js";
@@ -25,6 +26,7 @@ export default function Paths() {
         <Routes>
           <Route path="/curriculum/:id" element={<Curriculum />} />
           <Route path="/explore" element={<Explore />} />
+          <Route path="/all" element={<All />} />
           <Route element={<Layout />}>
             <Route index path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

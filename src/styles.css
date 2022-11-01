@@ -182,4 +182,7 @@ a:active {
   .two-columns-2nd {
     margin: 0;
   }
+  .two-columns-child {
+    margin: auto;
+  }
 }

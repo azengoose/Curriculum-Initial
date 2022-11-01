@@ -14,7 +14,7 @@
 // -> Easy implement with button style toggle
 // 3. VISUAL EXPERIMENTATION IS SEPARATE PROJECT
 
-import { ArrowBtn } from "../components/Buttons";
+//import { ArrowBtn } from "../components/Buttons";
 import ExternalCurriculums from "../components/curriculums/ExternalCurriculums.js";
 
 export default function Explore() {
@@ -25,16 +25,6 @@ export default function Explore() {
 
         <h3 className="theme-h3">External Curriculums</h3>
         <ExternalCurriculums />
-      </div>
-      <div className="two-columns">
-        <div></div>
-        <div>
-          <ArrowBtn link="/add" text="Add a Curriculum" />
-
-          <ArrowBtn link="/essays" text="Categories" />
-
-          <ArrowBtn link="/about" text="Unasked Questions" />
-        </div>
       </div>
     </>
   );

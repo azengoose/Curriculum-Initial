@@ -99,7 +99,40 @@ label.form-label {
   margin-bottom: 15px;
   font-family: HK Grotesk;
 }
-
+.disappear {
+  display: none;
+}
+.thank-form {
+  margin: 10px;
+  background-color: white;
+  padding: 10px 15px 10px 10px;
+  border-radius: 5px;
+  box-shadow: 0 3px 3px 0 rgb(188 0 226 / 25%);
+}
+#thank-columns {
+  margin: -15px 0 0;
+  padding: 0 10px;
+}
+.outline-btn {
+  padding: 6px 12px;
+  font-family: HK Grotesk;
+  font-size: 1.35em;
+  font-weight: bold;
+  border: 0.7px solid #982095;
+  border-radius: 8px;
+  background-color: white;
+  transition: 0.3s linear;
+}
+.outline-btn:hover {
+  cursor: pointer;
+  background-color: lightpink;
+}
+.thanks-text {
+  font-size: 0.85em;
+  color: var(--theme);
+  padding: 0 5px;
+  text-align: left;
+}
 /* Tablet */
 @media only screen and (min-width: 480px) {
   .add-form {
@@ -112,5 +145,14 @@ label.form-label {
   }
   .form-select {
     max-width: 100%;
+  }
+  .thank-form {
+    padding: 20px 60px 20px 40px;
+    max-width: 650px;
+    margin: 1px auto;
+  }
+  #thank-columns {
+    margin: 0;
+    padding: 0;
   }
 }

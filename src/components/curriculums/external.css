@@ -23,6 +23,17 @@
   background-color: paleturquoise;
   opacity: 0.5;
 }
+div#max-msg {
+  margin: 20px auto 0px;
+  background-color: mediumslateblue;
+  color: white;
+  font-size: 1.4em;
+  font-family: HK Grotesk;
+  font-weight: bold;
+  width: fit-content;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
 .selected-div {
   margin-top: 20px;
 }
@@ -124,6 +135,8 @@ img.link-favicon {
 }
 .simple-wrapper {
   background: white;
+  max-width: 1480px;
+  margin: auto;
 }
 .simple-each {
   border-top: 1px solid;
@@ -132,7 +145,7 @@ img.link-favicon {
   border: 0.5px solid darkgrey;
   border-radius: 5px;
   border-bottom: 2px solid black;
-  padding: 18px 10px 10px 10px;
+  padding: 12px 8px 2px 8px;
   background-color: rgb(255, 255, 255);
   display: inline-block;
   width: 95%;
@@ -170,7 +183,7 @@ img.link-favicon {
 @media only screen and (min-width: 560px) {
   .external-curriculums-wrapper {
     column-count: 2;
-    column-gap: 18px;
+    column-gap: 10px;
     padding: 0 20px;
   }
   .simple-each {

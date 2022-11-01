@@ -1,4 +1,9 @@
-import { collection, doc, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 import { useEffect } from "react";
 import db from "./config.js";
 
@@ -17,7 +22,7 @@ export function CollectionRef(collect, setState) {
 
 export function DocumentRef(collect, id, setState) {
   const docRef = doc(db, collect, id);
-  console.log("", docRef);
+  // console.log("", docRef);
   setState(docRef);
 }
 
@@ -30,6 +35,13 @@ export function AuditLog(title, link, action) {
     Time: serverTimestamp(),
   });
 }
+
+// Try again later with updated count
+// export function TotalAcceptedCurriculumsNumber() {
+//   const collectionRef = collection(db, "external_curriculums");
+//   // const snapshot = getCountFromServer(collectionRef);
+//   // const num = snapshot.data().count;
+// }
 
 export function Example() {
   const ref = doc(db, "submitted_curriculums", " CKkrzgxx528eUgV9qPWP");

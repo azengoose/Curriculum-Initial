@@ -6,6 +6,7 @@ import db from "../../data/config.js";
 import { useState } from "react";
 import Select from "react-select";
 import { optionList } from "../Misc";
+import { Icon, HostLink } from "./LinkPreview";
 
 const curriculumRef = collection(db, "submitted_curriculums");
 
@@ -15,7 +16,24 @@ export default function AddForm() {
   const [curriculumLink, setCurriculumLink] = useState("");
   const [title, setTitle] = useState("");
   const [subjects, setSubjects] = useState();
+  const [confirmSubmit, setConfirmSubmit] = useState(false);
   // const [curriculumType] = useState("");
+
+  // Submission Panel
+  // const [confirmSubmit, setConfirmSubmit] = useState(false)
+  // default is confirmSubmit is false, display the form
+  // when press add another, set confirmSubmit to false and display the form
+  //    and reset all values to null
+  function ToggleSubmit() {
+    setConfirmSubmit(!confirmSubmit);
+    if (confirmSubmit) {
+      setAuthorsName("");
+      setLastUpdate("");
+      setCurriculumLink("");
+      setTitle("");
+      setSubjects("");
+    }
+  }
 
   var msg = document.getElementById("form-message");
   function tempMessage() {
@@ -43,14 +61,10 @@ export default function AddForm() {
           Subjects: subjects,
         });
         console.log("Curriculum successfully submitted.");
-        msg.classList.add("msg-successful");
-        msg.textContent = "Curriculum successfully submitted.";
-        setTimeout(tempMessage, 5000);
-        setAuthorsName("");
-        setLastUpdate("");
-        setCurriculumLink("");
-        setTitle("");
-        setSubjects("");
+        // msg.classList.add("msg-successful");
+        // msg.textContent = "Curriculum successfully submitted.";
+        // setTimeout(tempMessage, 5000);
+        ToggleSubmit();
       } catch (error) {
         console.log(error);
         msg.classList.add("msg-error");
@@ -106,82 +120,160 @@ export default function AddForm() {
   return (
     <>
       <div className="form-div">
-        <form className="add-form" onSubmit={submit}>
-          <span id="form-message"></span>
-          <div id="add-form-tooltip">{helperText}</div>
-          <div className="form-small-input-div">
-            <label className="form-label">
-              <input
-                id="add-input-title"
-                style={{ fontWeight: "bold", fontSize: "1.2em" }}
-                type="text"
-                className="form-input"
-                placeholder="Curriculum Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                onMouseOver={(e) => HelperFunction(e.target)}
-                onFocus={(e) => HelperFunction(e.target)}
-              />
-            </label>
-            <div
-              id="add-input-subjects"
-              onMouseEnter={(e) => HelperFunction(e.target)}
-            >
+        <form
+          className={!confirmSubmit ? "add-form" : "disappear"}
+          onSubmit={submit}
+        >
+          <div>
+            <span id="form-message"></span>
+            <div id="add-form-tooltip">{helperText}</div>
+            <div className="form-small-input-div">
               <label className="form-label">
-                <Select
-                  className="form-select"
-                  options={optionList}
-                  placeholder="Select subjects"
-                  value={selectedOptions}
-                  onChange={handleSelect}
-                  isMulti
+                <input
+                  id="add-input-title"
+                  style={{ fontWeight: "bold", fontSize: "1.2em" }}
+                  type="text"
+                  className="form-input"
+                  placeholder="Curriculum Title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  onMouseOver={(e) => HelperFunction(e.target)}
+                  onFocus={(e) => HelperFunction(e.target)}
+                />
+              </label>
+              <div
+                id="add-input-subjects"
+                onMouseEnter={(e) => HelperFunction(e.target)}
+              >
+                <label className="form-label">
+                  <Select
+                    className="form-select"
+                    options={optionList}
+                    placeholder="Select subjects"
+                    value={selectedOptions}
+                    onChange={handleSelect}
+                    isMulti
+                  />
+                </label>
+              </div>
+              <label className="form-label">
+                <input
+                  id="add-input-link"
+                  type="url"
+                  className="form-input"
+                  placeholder="https://examplecurriculum.site"
+                  value={curriculumLink}
+                  onChange={(e) => CheckLink(e)}
+                  onMouseOver={(e) => HelperFunction(e.target)}
+                  onFocus={(e) => HelperFunction(e.target)}
+                />
+              </label>
+              <label className="form-label">
+                <input
+                  id="add-input-authors"
+                  type="text"
+                  className="form-input"
+                  placeholder="Enter Authors"
+                  value={authorsName}
+                  onChange={(e) => setAuthorsName(e.target.value)}
+                  onMouseOver={(e) => HelperFunction(e.target)}
+                  onFocus={(e) => HelperFunction(e.target)}
+                />
+              </label>
+              <label className="form-label">
+                <input
+                  id="add-input-updated"
+                  type="text"
+                  pattern="[0-9]{4}"
+                  className="form-input"
+                  placeholder="YYYY"
+                  value={lastUpdate}
+                  onChange={(e) => setLastUpdate(e.target.value)}
+                  onMouseOver={(e) => HelperFunction(e.target)}
+                  onFocus={(e) => HelperFunction(e.target)}
                 />
               </label>
             </div>
-            <label className="form-label">
-              <input
-                id="add-input-link"
-                type="url"
-                className="form-input"
-                placeholder="https://examplecurriculum.site"
-                value={curriculumLink}
-                onChange={(e) => CheckLink(e)}
-                onMouseOver={(e) => HelperFunction(e.target)}
-                onFocus={(e) => HelperFunction(e.target)}
-              />
-            </label>
-            <label className="form-label">
-              <input
-                id="add-input-authors"
-                type="text"
-                className="form-input"
-                placeholder="Enter Authors"
-                value={authorsName}
-                onChange={(e) => setAuthorsName(e.target.value)}
-                onMouseOver={(e) => HelperFunction(e.target)}
-                onFocus={(e) => HelperFunction(e.target)}
-              />
-            </label>
-            <label className="form-label">
-              <input
-                id="add-input-updated"
-                type="text"
-                pattern="[0-9]{4}"
-                className="form-input"
-                placeholder="YYYY"
-                value={lastUpdate}
-                onChange={(e) => setLastUpdate(e.target.value)}
-                onMouseOver={(e) => HelperFunction(e.target)}
-                onFocus={(e) => HelperFunction(e.target)}
-              />
-            </label>
+            <input className="form-submit-btn" type="submit" value="Submit" />
+            <img
+              className="arrow-icon"
+              src="https://cdn-icons-png.flaticon.com/512/271/271226.png"
+            />
           </div>
-          <input className="form-submit-btn" type="submit" value="Submit" />
-          <img
-            className="arrow-icon"
-            src="https://cdn-icons-png.flaticon.com/512/271/271226.png"
-          />
         </form>
+        {!confirmSubmit ? (
+          ""
+        ) : (
+          <div>
+            <div className="thank-form">
+              <div className="two-columns" id="thank-columns">
+                <div>
+                  <h3 className="theme-h3">Submission Successful!</h3>
+                  <p>
+                    If you have any enquiries, reach out at main@iterxue.com.
+                  </p>
+                  <button className="outline-btn" onClick={ToggleSubmit}>
+                    + Add Another Curriculum
+                  </button>
+                </div>
+                <div>
+                  <div id="add-submitted-div">
+                    <p>Details of submission:</p>
+                    {authorsName &&
+                    validUrl &&
+                    title &&
+                    lastUpdate &&
+                    subjects ? (
+                      <a
+                        href={curriculumLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <div className="each-ext-cur-div">
+                          <p className="ext-cur-title">{title}</p>
+                          <div className="ext-cur-summary">
+                            <p>
+                              <span>
+                                {lastUpdate} | {HostLink(curriculumLink)}
+                                {Icon(curriculumLink)}
+                              </span>
+                            </p>
+                            <p>{authorsName}</p>
+                          </div>
+                          <div className="subject-tag-div">
+                            {subjects.map((e, i) => {
+                              return (
+                                <span className={`${e} subject-tag`} key={i}>
+                                  {e}
+                                </span>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </a>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="thank-form">
+              <p className="thanks-text">
+                Thanks, ありがとう, Gracias, 感谢, Gratias tibi ago, 감사합니다,
+                شكرًا , Obrigado, Спасибо, Merci, धन्यवाद for contributing to
+                this communal resource. I (the writer of this message) do not
+                intend to use any of these external resources for any commercial
+                benefit; see more in About.
+              </p>
+              <p className="thanks-text">
+                All curriculums are reviewed by humans before being added into
+                the database. You should be able to see the submission within
+                1-3 days.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

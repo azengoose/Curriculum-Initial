@@ -8,15 +8,15 @@ import { useState } from "react";
 import { addDoc, deleteDoc } from "firebase/firestore";
 
 import { Icon, HostLink } from "../components/curriculums/LinkPreview";
-import DatabaseQuery from "../data/Query";
+import { QueryAllByTime } from "../data/Query";
 import { CollectionRef, DocumentRef, AuditLog } from "../data/ref";
 
 export default function ExternalSubmissions() {
   const [curriculums, setCurriculums] = useState([]);
   const [curriculumRef, setCurriculumRef] = useState();
 
-  DatabaseQuery("submitted_curriculums", setCurriculums, curriculums);
-  CollectionRef("curriculums", setCurriculumRef);
+  QueryAllByTime("submitted_curriculums", setCurriculums, curriculums);
+  CollectionRef("external_curriculums", setCurriculumRef);
 
   var msg = document.getElementById("form-message");
   function tempMessage() {
@@ -61,7 +61,9 @@ export default function ExternalSubmissions() {
         Subjects: dataref.Subjects,
       });
       acceptSuccess(dataref.Title);
-      // Deletes corresponding doc
+      AuditLog(dataref.Title, dataref.Link, "Accepted");
+      DocumentRef("submitted_curriculums", curriculums[index].id, setDocRef);
+      deleteDoc(docRef);
     } catch (error) {
       acceptError(error);
     }

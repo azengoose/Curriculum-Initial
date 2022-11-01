@@ -16,7 +16,7 @@
 .home-category-wrapper {
   margin: auto;
   width: 640px;
-  margin-top: 15vh;
+  margin-top: 10vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +28,7 @@
   padding: 0px 1.2em;
   min-width: 50px;
   z-index: 2;
-  margin: 10px;
+  margin: 10px 7px;
   border-radius: 2em;
   font-family: HK Grotesk;
   font-weight: bold;

@@ -27,6 +27,24 @@ export function QueryAllByTime(collect, setState, changeState) {
   }, [changeState]);
 }
 
+export function QueryAllBySubject(collect, setState, changeState) {
+  const curriculumRef = collection(db, collect);
+  function DatabaseQuery() {
+    var q = query(curriculumRef, orderBy("Subjects", "asc"));
+    onSnapshot(q, (snapshot) => {
+      setState(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          Data: [doc.data()],
+        }))
+      );
+    });
+  }
+  useEffect(() => {
+    DatabaseQuery();
+  }, [changeState]);
+}
+
 export function QueryFilterContains(setState, FiltersNum, activeSubjects) {
   const curriculumRef = collection(db, "external_curriculums");
   function DatabaseQuery() {
@@ -34,7 +52,8 @@ export function QueryFilterContains(setState, FiltersNum, activeSubjects) {
     if (FiltersNum > 0) {
       var q = query(
         curriculumRef,
-        where("Subjects", "array-contains-any", activeSubjects)
+        where("Subjects", "array-contains-any", activeSubjects),
+        orderBy("Subjects", "asc")
       );
     }
     onSnapshot(q, (snapshot) => {

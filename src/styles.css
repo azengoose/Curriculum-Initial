@@ -1,11 +1,12 @@
 :root {
   --theme: #850595;
   --theme-dark: #690477;
-  --bg-grad: radial-gradient(
+  --bg-grad: white;
+  /* --bg-grad: radial-gradient(
     circle,
     rgb(248, 255, 255) 0%,
     rgb(253, 250, 255) 100%
-  );
+  ); */
 }
 @font-face {
   font-family: HK Grotesk;
@@ -51,15 +52,29 @@ h3 {
   content: "";
   margin: auto;
   height: 20px;
-  max-width: 9em;
+  max-width: 10em;
   margin-top: -44px;
   top: 44px;
   display: block;
   position: relative;
   z-index: -1;
-  background-color: paleturquoise;
-  opacity: 0.5;
 }
+.theme-h2#explore-h2::before {
+  background-color: rgba(251, 253, 0, 0.4);
+}
+.theme-h2#about-h2::before {
+  background-color: #efccff;
+}
+.theme-h2#add-h2::before {
+  background-color: #ffccdb;
+}
+.theme-h2#all-h2::before {
+  background-color: rgba(226, 226, 226, 1);
+}
+.theme-h2#info-h2::before {
+  background-color: rgba(209, 225, 255, 1);
+}
+
 .theme-h3 {
   font-size: 1.47em;
 }
@@ -95,7 +110,6 @@ h3 {
   }
   .theme-h2::before {
     height: 40px;
-    width: 9em;
     margin-top: -40px;
     top: 74px;
   }
@@ -172,17 +186,27 @@ a:active {
 .two-columns-2nd {
   margin: 20px 0;
 }
-@media only screen and (min-width: 480px) {
+.three-columns {
+  margin: 20px 0 20px 0;
+}
+@media only screen and (min-width: 540px) {
   .two-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 15px;
-    margin: 70px 40px 150px 40px;
+    margin: 70px 40px 120px 40px;
   }
   .two-columns-2nd {
     margin: 0;
   }
-  .two-columns-child {
-    margin: auto;
+  .three-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 15px;
+    margin: 70px 40px 90px 40px;
+    text-align: left;
   }
+}
+.marauto {
+  margin: auto;
 }

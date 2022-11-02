@@ -158,6 +158,7 @@ export default function AddForm() {
               </div>
               <label className="form-label">
                 <input
+                  style={{ color: "dodgerblue" }}
                   id="add-input-link"
                   type="url"
                   className="form-input"
@@ -194,11 +195,13 @@ export default function AddForm() {
                 />
               </label>
             </div>
-            <input className="form-submit-btn" type="submit" value="Submit" />
-            <img
-              className="arrow-icon"
-              src="https://cdn-icons-png.flaticon.com/512/271/271226.png"
-            />
+            <div className="form-submit-btn-div">
+              <input className="form-submit-btn" type="submit" value="Submit" />
+              <img
+                className="arrow-icon"
+                src="https://cdn-icons-png.flaticon.com/512/271/271226.png"
+              />
+            </div>
           </div>
         </form>
         {!confirmSubmit ? (

@@ -12,7 +12,9 @@ import { TextAbout } from "../text/Text";
 export default function About() {
   return (
     <>
-      <h2 className="theme-h2">About</h2>
+      <h2 className="theme-h2" id="about-h2">
+        About
+      </h2>
       <TextAbout />
 
       <ArrowBtn link="/" text="Home" />

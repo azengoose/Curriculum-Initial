@@ -21,9 +21,11 @@ export default function Explore() {
   return (
     <>
       <div className="explore-curriculum">
-        <h2 className="theme-h2">Explore Curriculums</h2>
+        <h2 className="theme-h2" id="explore-h2">
+          Explore Curriculums
+        </h2>
 
-        <h3 className="theme-h3">External Curriculums</h3>
+        {/* <h3 className="theme-h3">External Curriculums</h3> */}
         <ExternalCurriculums />
       </div>
     </>

@@ -1,3 +1,6 @@
+.data-output {
+  min-height: 200px;
+}
 /* TOGGLE FILTER */
 .filter-title {
   color: black;
@@ -20,8 +23,7 @@
   position: relative;
   top: 74px;
   z-index: -1;
-  background-color: paleturquoise;
-  opacity: 0.5;
+  background-color: #eeefff;
 }
 div#max-msg {
   margin: 20px auto 0px;
@@ -126,6 +128,11 @@ img.link-favicon {
 /* Toggle Simple Button */
 .toggle-simple {
   visibility: hidden;
+  transition: 0.3s linear;
+}
+.toggle-simple:hover {
+  cursor: pointer;
+  background-color: aliceblue;
 }
 
 /* EXTERNAL CURRICULUM BLOCKS */
@@ -212,12 +219,11 @@ img.link-favicon {
   /* Toggle Simple Button */
   .toggle-simple {
     visibility: visible;
-    margin: 50px;
     background: white;
     padding: 10px 20px;
     font-size: medium;
     font-family: system-ui;
-    border: 1px solid #aaa;
+    border: none;
   }
 }
 /* Large Desktop */

@@ -18,6 +18,9 @@ export default function Essays() {
 
   return (
     <>
+      <h2 className="theme-h2" id="info-h2">
+        Info
+      </h2>
       <ReactMarkdown className={style.reactMarkDown}>{content}</ReactMarkdown>
 
       <ArrowBtn link="/explore" text="Explore curriculums" />

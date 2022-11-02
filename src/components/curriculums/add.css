@@ -60,23 +60,23 @@ label.form-label {
   border-radius: 5px;
   transition: 0.2s ease-in-out;
 }
+.form-submit-btn-div {
+  border-left: 3px solid #982095;
+  width: fit-content;
+  margin: 10px auto 5px;
+  padding-right: 10px;
+}
 .form-submit-btn {
   font-family: HK Grotesk;
   font-size: 1.3em;
   font-weight: bold;
   padding: 5px 10px;
-  margin: 10px 0 5px 0;
   border: none;
-  border-left: 3px solid #982095;
-  background-color: white;
+  background: transparent;
   transition: 0.3s linear;
 }
-.form-submit-btn:hover {
-  background: linear-gradient(
-    89.65deg,
-    rgba(224, 173, 255, 0.5) -59.13%,
-    rgba(255, 239, 254, 0) 81.06%
-  );
+.form-submit-btn-div:hover {
+  background: #ffccdb;
 }
 .arrow-icon {
   width: 15px;
@@ -154,5 +154,8 @@ label.form-label {
   #thank-columns {
     margin: 0;
     padding: 0;
+  }
+  #add-footer {
+    margin-left: 50px;
   }
 }

@@ -59,7 +59,7 @@ export const optionList = [
   { value: "Society", label: "Society" },
   { value: "Economics", label: "Economics" },
   { value: "Politics", label: "Politics" },
-  { value: "People", label: "People" },
+  // { value: "People", label: "People" },
   { value: "Self", label: "Self" },
   { value: "Geography", label: "Geography" },
   { value: "Earth Sciences", label: "Earth Sciences" },
@@ -96,8 +96,8 @@ export function Accordion({ title, panel, panel2 }) {
         {title}
       </button>
       <div className="panel">
-        <p>{panel}</p>
-        <p>{panel2}</p>
+        {panel}
+        {panel2}
       </div>
     </>
   );

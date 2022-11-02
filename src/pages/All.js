@@ -5,18 +5,23 @@
 
 import { useState } from "react";
 import { Icon, HostLink } from "../components/curriculums/LinkPreview";
-import { QueryAllByTime } from "../data/Query";
+import { QueryAllBySubject } from "../data/Query";
 import { ArrowBtn } from "../components/Buttons";
 
 export default function All() {
   const [curriculums, setCurriculums] = useState([]);
 
-  QueryAllByTime("external_curriculums", setCurriculums, curriculums);
+  QueryAllBySubject("external_curriculums", setCurriculums, curriculums);
 
   return (
     <>
       <div className="explore-curriculum">
-        <h2 className="theme-h2">All Curriculums</h2>
+        <h2 className="theme-h2" id="all-h2">
+          All Curriculums
+        </h2>
+        <div style={{ marginTop: -30, marginBottom: 30 }}>
+          Total Curriculums: {curriculums.length}
+        </div>
 
         <div className="data-ouput">
           <div className="external-curriculums-wrapper">
@@ -63,16 +68,16 @@ export default function All() {
             })}
           </div>
         </div>
-
         <div className="two-columns">
-          <div className="two-columns-child">
-            <div>Total Curriculums Displayed: {curriculums.length}</div>
+          <div className="marauto">
             <ArrowBtn link="/explore" text="Explore Filtered Curriculums" />
+            <div style={{ marginLeft: 10, marginTop: 10 }}>
+              Total Curriculums: {curriculums.length}
+            </div>
           </div>
-          <div className="two-columns-child">
+          <div className="marauto">
             <ArrowBtn link="/add" text="Add a Curriculum" />
-            <ArrowBtn link="/essays" text="Categories" />
-            <ArrowBtn link="/about" text="Unasked Questions" />
+            <ArrowBtn link="/essays" text="Info on Curriculums" />
           </div>
         </div>
       </div>

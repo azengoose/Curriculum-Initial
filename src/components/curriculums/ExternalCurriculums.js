@@ -67,10 +67,14 @@ export default function ExternalCurriculums() {
                 </span>
               );
             })}
+            <div style={{ margin: "10px 0 -10px" }}>
+              Total Curriculums Displayed: {curriculums.length}
+            </div>
           </div>
         ) : (
           ""
         )}
+        {activeFiltersNum == 0 ? <div id="max-msg">Select a Subject.</div> : ""}
         {activeFiltersNum > 9 ? (
           <div id="max-msg">10 Maximum Filters Reached</div>
         ) : (
@@ -78,7 +82,7 @@ export default function ExternalCurriculums() {
         )}
       </div>
 
-      <div className="data-ouput">
+      <div className="data-ouput" style={{ minHeight: 200 }}>
         <div
           className={simple ? "simple-wrapper" : `external-curriculums-wrapper`}
         >
@@ -146,20 +150,21 @@ export default function ExternalCurriculums() {
           })}
         </div>
       </div>
-      <div>
-        <button className="toggle-simple" onClick={ToggleSimple}>
-          ⚙️ Toggle {simple ? "Default" : "Simple"} Display
-        </button>
-      </div>
-      <div className="two-columns">
-        <div>
-          <div>Total Curriculums Displayed: {curriculums.length}</div>
+      <div className="three-columns">
+        <div className="marauto">
           <ArrowBtn link="/all" text="All Curriculums" />
+          <div style={{ marginLeft: 10, marginTop: 10 }}>
+            Total Curriculums: 30+
+          </div>
         </div>
-        <div>
+        <div className="marauto">
+          <button className="toggle-simple" onClick={ToggleSimple}>
+            ▶ Toggle {simple ? "Default Display  ⚙️" : "Simple Display  ⚪"}
+          </button>
+        </div>
+        <div className="marauto">
           <ArrowBtn link="/add" text="Add a Curriculum" />
-          <ArrowBtn link="/essays" text="Categories" />
-          <ArrowBtn link="/about" text="Unasked Questions" />
+          <ArrowBtn link="/essays" text="Info on Curriculums" />
         </div>
       </div>
     </>

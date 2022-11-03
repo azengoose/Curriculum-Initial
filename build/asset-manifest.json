@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/curriculum-initial/static/css/main.ebf0a5a8.chunk.css",
+    "main.js": "/curriculum-initial/static/js/main.1ec4b67a.chunk.js",
+    "main.js.map": "/curriculum-initial/static/js/main.1ec4b67a.chunk.js.map",
+    "runtime-main.js": "/curriculum-initial/static/js/runtime-main.4add2fb0.js",
+    "runtime-main.js.map": "/curriculum-initial/static/js/runtime-main.4add2fb0.js.map",
+    "static/js/2.96344e7e.chunk.js": "/curriculum-initial/static/js/2.96344e7e.chunk.js",
+    "static/js/2.96344e7e.chunk.js.map": "/curriculum-initial/static/js/2.96344e7e.chunk.js.map",
+    "index.html": "/curriculum-initial/index.html",
+    "static/css/main.ebf0a5a8.chunk.css.map": "/curriculum-initial/static/css/main.ebf0a5a8.chunk.css.map",
+    "static/js/2.96344e7e.chunk.js.LICENSE.txt": "/curriculum-initial/static/js/2.96344e7e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4add2fb0.js",
+    "static/js/2.96344e7e.chunk.js",
+    "static/css/main.ebf0a5a8.chunk.css",
+    "static/js/main.1ec4b67a.chunk.js"
+  ]
+}

@@ -95,12 +95,12 @@ export default function AddForm() {
   const [helperText, setHelperText] = useState("Add a curriculum.");
 
   const HelperTextChange = {
-    Title: "Catchy, informative, summative, not-too-clickbait title",
+    Title: "The catchy, informative, summative, not-too-clickbait title",
     Subjects: "The closest matching subjects the curriculum is part of",
     Link: "Wherever is easiest or best to share; website, video, diagram, public drive/folder, etc.",
     Authors:
-      "Can be one or more authors, e.g. Saitama, Richard Feynman, anonymous",
-    Updated: "Just the year, e.g. 2023 or 1995",
+      "Can be one or more authors, e.g. Saitama, Richard Feynman, anonymous; including an organisation may also be helpful, e.g. Tony Stark, Avengers",
+    Updated: "Year last updated, e.g. 2027 or 1995",
   };
   function HelperFunction(e) {
     if (e.id === "add-input-title") {

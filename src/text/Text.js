@@ -56,6 +56,7 @@ export function TextAbout() {
     <>
       <p className="centered-p">
         <p>This site is a crossroads sign. From here, I hope you'll have a clearer sense of what life has in store, and so that the maps crafted painstakingly by others can be better known and realised so you have a route to travel, with your own compass.
+      </p>
 
 <p>Iteration: Try many pathways in this one, long journey of a lifetime.</p>
 
@@ -64,6 +65,6 @@ export function TextAbout() {
 <p>iter: journey, trip, route, course, path, road, passage; (latin) </p>
 
 <p>Explore curriculums on this site, or more context and information in detail:</p>
-      
+      </p>
 </>
   )}

@@ -53,7 +53,16 @@ export function TextCredits() {
 
 export function TextAbout() {
     return(
-    <><p>This site is a crossroads sign. From here, it is expected that you'll have a clearer sense of what the world has to offer and where it is you would like to explore.</p>
-    <p>
-This project is currently in early stages. If you have any interest at all in being involved in the project, know it is appreciated.</p>
+    <>
+      <p className="centered-p">
+        <p>This site is a crossroads sign. From here, I hope you'll have a clearer sense of what life has in store, and so that the maps crafted painstakingly by others can be better known and realised so you have a route to travel, with your own compass.
+
+<p>Iteration: Try many pathways in this one, long journey of a lifetime.</p>
+
+<p>Itinerary: Move society in the direction of clarity that is better able to craft, discover and share learning pathways.</p>
+
+<p>iter: journey, trip, route, course, path, road, passage; (latin) </p>
+
+<p>Explore curriculums on this site, or more context and information in detail:</p>
+      </p>
 </>)}

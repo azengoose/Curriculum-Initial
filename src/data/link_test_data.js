@@ -26,7 +26,7 @@ export const example_external_curriculums = [
   {
     Title: "So You Want to Learn Physics…",
     Authors: "Susan Rigetti",
-    LastUpdated: "April 20th, 2021",
+    LastUpdated: "2021",
     Link: "https://www.susanrigetti.com/physics",
     Subjects: ["Physics"],
   },

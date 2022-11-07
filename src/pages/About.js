@@ -6,7 +6,6 @@
 //      5. Subtle Link to comprehensive Essays.
 
 import { ArrowBtn } from "../components/Buttons";
-import { Link } from "react-router-dom";
 import { TextAbout } from "../text/Text";
 import ExternalExamples from "../data/ExternalExamples";
 

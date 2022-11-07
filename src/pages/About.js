@@ -17,7 +17,6 @@ export default function About() {
       </h2>
       <TextAbout />
 
-      <ArrowBtn link="/" text="Home" />
       <ArrowBtn link="/explore" text="Explore Curriculums" />
 
       <h3 className="theme-h3">Curriculum Examples</h3>

@@ -8,6 +8,7 @@
 import { ArrowBtn } from "../components/Buttons";
 import { Link } from "react-router-dom";
 import { TextAbout } from "../text/Text";
+import ExternalExamples from "../data/ExternalExamples";
 
 export default function About() {
   return (
@@ -20,15 +21,16 @@ export default function About() {
       <ArrowBtn link="/" text="Home" />
       <ArrowBtn link="/explore" text="Explore Curriculums" />
 
+      <h3 className="theme-h3">Curriculum Examples</h3>
+      <ExternalExamples/>
+
       <p className="centered-p">
-        P.S. There is a lot more to think about underneath the surface when it
-        comes to curriculums, creating and curating pathways of education and
-        learning. If you're interested, please indulge in our{" "}
-        <Link className="link" to="/essays">
-          essays
-        </Link>
-        .
+          <p>Iters.to is in early stages; a result of experimentation made mostly for ease of 
+          personal use since I regularly read, compare and do my best undertaking curriculums. </p>
+          <p>Personal and collective challenges and creating good curriculums in more detail:</p>
       </p>
+      <ArrowBtn link="/essays" text="More Info" />
+
     </>
   );
 }

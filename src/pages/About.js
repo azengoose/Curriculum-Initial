@@ -15,7 +15,7 @@ export default function About() {
       <h2 className="theme-h2" id="about-h2">
         About
       </h2>
-      <p>Edit test</p>
+      
       <TextAbout />
 
       <ArrowBtn link="/" text="Home" />

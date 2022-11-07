@@ -64,5 +64,6 @@ export function TextAbout() {
 <p>iter: journey, trip, route, course, path, road, passage; (latin) </p>
 
 <p>Explore curriculums on this site, or more context and information in detail:</p>
-      </p>
-</>)}
+      
+</>
+  )}

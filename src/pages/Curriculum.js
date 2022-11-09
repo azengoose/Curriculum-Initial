@@ -23,7 +23,7 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { motion } from "framer-motion/dist/framer-motion";
+import { motion } from "framer-motion";
 
 //import { BtnHome, BtnExplore, Spacer } from "../components/Buttons";
 // import { About, Guidelines } from "./text/MarkdownConvert";

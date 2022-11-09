@@ -14,7 +14,7 @@ export default function Navbar() {
           <div id="nav-bar">
             <div className="nav-item">
               <Link id="nav-logo" className="link nav-link" to="/">
-                iter
+                iters
               </Link>
             </div>
             <div className="nav-right">
@@ -24,8 +24,8 @@ export default function Navbar() {
                 </Link>
               </div>
               <div className="nav-item">
-                <Link className="link nav-link" to="/essays">
-                  Essays
+                <Link className="link nav-link" to="/explore">
+                  Curriculums
                 </Link>
               </div>
             </div>

@@ -19,8 +19,8 @@ export default function Essays() {
 <p><span>At some point I realised that for me, this was never going to stop. In the back of my mind, I had already conceptualised lifelong learning, but only after attacking the problem of breadth head-on, did it crystallise in my heart. This will not end.</span></p>
 <p><span>From one of a kaleidoscopic many of curious, learning nuts, to another, here are a selection of quality curriculums from the internet.</span></p>
 <p><span>- Not AI, Nov 2022</span></p></p>
-<h3 className="theme-h3">What Makes Good Curriculums</h3>
-<p className="p-h3"><p><span>The main unique points I wish to bring to attention when it comes to curriculums presented in an accessibly online format:</span></p>
+<h3 className="p-h3">What Makes Good Curriculums</h3>
+<p className="centered-p"><p><span>The main unique points I wish to bring to attention when it comes to curriculums presented in an accessibly online format:</span></p>
 <ol>
 <li><span><strong>Scope</strong>: Not containing small or detailed steps. Completing the curriculum should have a timeframe of mostly weeks, months, or several years. Minimum of 3 steps, recommended 5-9 and maximum 16 (rough guidelines).</span></li>
 <li><strong>Testing</strong>: Ideally, the curriculum has been trialled before. With a selection process of some resources over many others or rationales, justifications. Not just, this was something I tried and it is therefore the best resource.</li>

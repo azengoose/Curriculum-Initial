@@ -2,9 +2,14 @@
 // with imported text components from md
 
 import { ArrowBtn, Spacer } from "../components/Buttons";
-export default function Essays() {
+import { Helmet } from "react-helmet";
+
+export default function Info() {
   return (
     <>
+     <Helmet>
+        <title>Iters | Info</title>
+      </Helmet>
       <h2 className="theme-h2" id="info-h2">
         Info
       </h2>

@@ -2,7 +2,7 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import { ScrollToTop } from "./components/Misc.js";
 
 import About from "./pages/About";
-import Essays from "./pages/Essays.js";
+import Info from "./pages/Info.js";
 import Explore from "./pages/Explore";
 import All from "./pages/All";
 import CreateCurriculum from "./pages/CreateCurriculum";
@@ -29,7 +29,7 @@ export default function Paths() {
           <Route path="/all" element={<All />} />
           <Route element={<Layout />}>
             <Route path="/about" element={<About />} />
-            <Route path="/essays" element={<Essays />} />
+            <Route path="/info" element={<Info />} />
             <Route path="/create" element={<CreateCurriculum />} />
             <Route path="/add" element={<AddCurriculum />} />
             <Route path="/admin/accept" element={<Accept />} />

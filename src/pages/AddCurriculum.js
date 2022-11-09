@@ -5,6 +5,8 @@ import ExternalExamples from "../data/ExternalExamples";
 import { ArrowBtn } from "../components/Buttons";
 import { Accordion } from "../components/Misc";
 
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { collection, query, onSnapshot } from "firebase/firestore";
 import db from "../data/config.js";
@@ -27,6 +29,9 @@ export default function AddCurriculum() {
 
   return (
     <>
+      <Helmet>
+        <title>Iters | Add Curriculum</title>
+      </Helmet>
       <h2 className="theme-h2" id="add-h2">
         Add a Curriculum
       </h2>
@@ -39,18 +44,13 @@ export default function AddCurriculum() {
       <div className="two-columns">
         <div>
           <ArrowBtn link="/explore" text="Explore other Curriculums" />
-          <ArrowBtn link="/essays" text="Curriculum Information" />
+          <ArrowBtn link="/info" text="Curriculum Information" />
         </div>
         <div className="two-columns-2nd">
           <Accordion
             title="What Makes Good Curriculums"
             panel={
               <div>
-                <p>
-                  The main points I wish to bring to attention when it comes to
-                  curriculums presented in an accessibly online format:
-                </p>
-
                 <p>
                   <b>Scope:</b> Timeframe completion should take mostly weeks,
                   months, or years.
@@ -63,6 +63,10 @@ export default function AddCurriculum() {
                 <p>
                   <b>Diversity:</b> Includes a minimum of 2-3 platforms or 3+
                   authors in the resources.
+                </p>
+                <p>
+                  More points to consider in detail in{" "}
+                  <Link to="/info">more information</Link>
                 </p>
               </div>
             }

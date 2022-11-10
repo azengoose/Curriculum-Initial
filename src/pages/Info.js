@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
 export default function Info() {
   return (
     <>
-     <Helmet>
+      <Helmet>
         <title>Iters | Info</title>
       </Helmet>
       <h2 className="theme-h2" id="info-h2">
@@ -22,8 +22,10 @@ export default function Info() {
           bravely adapted to navigate a new world, I was beginning to struggle
           with the issue I now find most compelling.
         </p>
+        <p>I want to learn everything.</p>
         <p>
-          <span>I want to learn everything.</span>
+          Or, what are the ways to best understand and live in the full
+          complexity of the world?
         </p>
         <p>
           Yeah, you can say it&rsquo;s selfish. But that&rsquo;s not the end

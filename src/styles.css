@@ -34,9 +34,6 @@ h3 {
   color: black;
   font-family: HK Grotesk;
 }
-h3 {
-  color: var(--theme);
-}
 ol > li {
   padding: 3px 0;
 }
@@ -55,6 +52,9 @@ tr {
 td {
   border: 1px solid lightgrey;
   padding: 7px;
+}
+td:first-child {
+  font-weight: bold;
 }
 .wrapper {
   margin: auto;
@@ -78,11 +78,22 @@ td {
   position: relative;
   z-index: -1;
 }
+.theme-h2-short::before {
+  content: "";
+  margin: auto;
+  height: 20px;
+  max-width: 5em;
+  margin-top: -44px;
+  top: 44px;
+  display: block;
+  position: relative;
+  z-index: -1;
+}
 .theme-h2#explore-h2::before {
   background-color: rgba(251, 253, 0, 0.4);
 }
-.theme-h2#about-h2::before {
-  background-color: #efccff;
+#about-h2::before {
+  background-color: rgb(228, 183, 255);
 }
 .theme-h2#add-h2::before {
   background-color: #ffccdb;
@@ -90,12 +101,15 @@ td {
 .theme-h2#all-h2::before {
   background-color: rgba(226, 226, 226, 1);
 }
-.theme-h2#info-h2::before {
+#info-h2::before {
   background-color: rgba(209, 225, 255, 1);
 }
-
+.theme-h2#curriculuminfo-h2::before {
+  background-color: rgb(246, 191, 255);
+}
 .theme-h3 {
   font-size: 1.47em;
+  color: var(--theme);
 }
 .theme-btn {
   margin: 15px 10px 15px 10px;
@@ -224,7 +238,7 @@ a:active {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 15px;
-    margin: 70px 40px 120px 40px;
+    margin: 70px 40px 100px 40px;
   }
   .two-columns-2nd {
     margin: 0;

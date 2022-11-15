@@ -1,9 +1,4 @@
-// About page with imported text components from md
-//      1. Nice Title
-//      2. Short Sentence
-//      3. 2-3 Meaty, concise Paragraphs.
-//      4. Nice Links back to Explore.
-//      5. Subtle Link to comprehensive Essays.
+// About page with imported text components from md...
 import { Helmet } from "react-helmet";
 
 import { ArrowBtn, Spacer } from "../components/Buttons";
@@ -15,11 +10,11 @@ export default function About() {
       <Helmet>
         <title>Iters | About</title>
       </Helmet>
-      <h2 className="theme-h2" id="about-h2">
+      <h2 className="theme-h2 theme-h2-short" id="about-h2">
         About
       </h2>
 
-      <h3 className="p-h3">Iterations and Itineraries</h3>
+      <h3 className="theme-h3 p-h3">Iterations and Itineraries</h3>
       <p className="centered-p">
         <p>
           This site is a crossroads sign. Paths lay before you; maps crafted
@@ -28,8 +23,8 @@ export default function About() {
         </p>
         <p>
           <b>Iterations</b>: To adapt and be a positive force in our own
-          environment, I think it is necessary to change and recreate ourselves
-          many times over our lifetimes.
+          environment, we have to change and recreate ourselves many times over
+          our lifetimes.
         </p>
         <p>
           <b>Itineraries</b>: Having a route or outline of a journey to learn is
@@ -42,7 +37,6 @@ export default function About() {
           </b>
           (latin): journey, trip, route, course, path, road, passage.
         </p>
-        <p>Explore curriculums made by others:</p>
       </p>
       <ArrowBtn link="/explore" text="Explore Curriculums" />
 
@@ -55,10 +49,6 @@ export default function About() {
           Iters.to is in early stages; a result of experimentation made mostly
           for ease of personal use since I regularly read, compare and do my
           best undertaking curriculums.{" "}
-        </p>
-        <p>
-          A personal story, collective challenges and creating good curriculums
-          in more detail:
         </p>
       </p>
       <ArrowBtn link="/info" text="More Info" />

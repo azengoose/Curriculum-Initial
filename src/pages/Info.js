@@ -10,109 +10,78 @@ export default function Info() {
       <Helmet>
         <title>Iters | Info</title>
       </Helmet>
-      <h2 className="theme-h2" id="info-h2">
+      <h2 className="theme-h2 theme-h2-short" id="info-h2">
         Info
       </h2>
-      <h3 className="p-h3">Personal Problems</h3>
+      <h3 className="theme-h3 p-h3">
+        Collective Challenges & Personal Problems
+      </h3>
       <p className="centered-p">
         <p>
-          The year is 2020. As the sounds of life retreated into homes and
-          silence began occupying streets, my peers and I quietly completed our
-          final years of formal education. While students, teachers, parents
-          bravely adapted to navigate a new world, I was beginning to struggle
-          with the issue I now find most compelling.
-        </p>
-        <p>I want to learn everything.</p>
-        <p>
-          Or, what are the ways to best understand and live in the full
-          complexity of the world?
+          <b>
+            What are good ways that we can live, learn and flourish while facing
+            the full complexity of the world?
+          </b>
         </p>
         <p>
-          Yeah, you can say it&rsquo;s selfish. But that&rsquo;s not the end
-          point. It&rsquo;s been said before. It has been said to be too
-          ambitious, too wide, too general, a meaningless goal that will leave
-          you aimless and without a job.
+          In variations, this is a question that relentlessly haunts me in my
+          personal journey of self-directed learning, in the search for
+          resources, advice and curriculums. Part of this task, involves
+          creating many of my own curriculums, adapting, evaluating and
+          reviewing as I progress through them.
         </p>
         <p>
-          I had internet access. So I began researching for online and offline
-          resources, advice and curriculums and furiously learning with a focus
-          on breadth, rather than specialisation. I made plenty of my own
-          curriculums, adapted them as I went, completed them. Needless to say,
-          they were mine. They spurred me to do what no university or college
-          will ask of you.
+          Learning, and growth of all kinds, is barely confined in the walls of
+          schools. Institutions, whether schools, universities, colleges, online
+          platforms, when they don’t adapt to changing norms, decay. Despite
+          this, there is a considerable difficulty to find and undertake
+          learning paths that are not based in institutions. Heading into
+          unknown territory without a map is...many things – inefficient,
+          unmotivating, perhaps exciting, sure.
         </p>
         <p>
-          Life is long, and lifelong learning is the end of a short life rich
-          with empathy, excellence and experience.
+          Unmistakably, the internet is the limitless, bottomless well of
+          knowledge and information that humans once only dreamed of. In this
+          chaos, lies the opportunity for order. While part of my plan is to pry
+          at the floodgates and broaden the landscape for what it means to
+          undergo a learning path in society, my hope is that this also
+          contributes to a renewed sense of clarity in a newly disorienting, yet
+          blooming world.
         </p>
         <p>
-          At multiple points during these trials, I realised that I was often
-          heading into territory without a map. You can do it. It&rsquo;s
-          possible. But the prevalence of plans, curriculums, stories and guides
-          to lean on in times of uncertainty, made life more bearable and more
-          enjoyable for me. Imagine mentors, imagine teachers, imagine any role
-          model you look up to, with a lifestyle that you want to emulate,
-          sharing and laying out their plans. You look over their shoulder. This
-          is gold.
+          Whoever, wherever, whenever and however you are, I hope that you will
+          find a place and time for the pursuit of a learning path. Life is
+          long, and lifelong learning is the end of a short life rich with
+          empathy, excellence and experience.
         </p>
-        <p>
-          At some point I realised that for me, this was never going to stop. In
-          the back of my mind, I had already conceptualised lifelong learning,
-          but only after attacking the problem of breadth head-on, did it
-          crystallise in my heart. This will not end.
-        </p>
-        <p>
-          From one of a kaleidoscopic many of curious, learning nuts, to
-          another, here are a selection of quality curriculums from the
-          internet.
-        </p>
-        <p>- Not AI, Nov 2022</p>
+        <p>Written by Nottei Ai :)</p>
       </p>
-      <h3 className="p-h3">What Makes Good Curriculums</h3>
+      <ArrowBtn link="/explore" text="Explore curriculums" />
+      <h3 className="theme-h3 p-h3">What Makes Good Curriculums</h3>
       <p className="centered-p">
         <p>
-          The main unique points I wish to bring to attention when it comes to
-          curriculums presented in an accessibly online format:
+          3 main points to bring to attention when it comes to curriculums
+          presented in an accessibly online format:
         </p>
         <ol>
           <li>
-            <strong>Scope</strong>: Not containing small or detailed steps.
-            Completing the curriculum should have a timeframe of mostly weeks,
-            months, or several years. Minimum of 3 steps, recommended 5-9 and
-            maximum 16 (rough guidelines).
+            <strong>Scope</strong>: The timeframe should be mostly weeks,
+            months, or several years. Not a small achievement containing small
+            or detailed steps (this is not Wikihow).
           </li>
           <li>
             <strong>Testing</strong>: Ideally, the curriculum has been trialled
-            before. With a selection process of some resources over many others
-            or rationales, justifications. Not just, this was something I tried
-            and it is therefore the best resource.
+            before or at least compared with others with similar goals,
+            therefore undergoing a justified or reasoned selection process of
+            resources over others available.
           </li>
           <li>
-            <strong>Diversity</strong>: Include a minimum of 2-3 platforms or 3+
-            authors in the resources.
+            <strong>Diversity</strong>: Includes at least a few platforms or
+            resources from multiple sources/people.
           </li>
         </ol>
-        <p>Problems and principles in more detail:</p>
       </p>
       <ArrowBtn link="/curriculuminfo" text="Curriculums, More Detail" />
-      <h3 className="p-h3">Collective Challenges</h3>
-      <p className="centered-p">
-        <p>
-          The internet of the first quarter of the 21st century is a rampant
-          mess of content and resources. Iterxue is one such attempt to help
-          reconcile and curate this hole in the web towards a more integrative
-          model of technologically assisted education and lifelong learning.
-        </p>
-        <p>
-          There is little to no consensus or well-formed method of vessel for
-          integrating the premise of traditional education as it has existed for
-          the past 100 hundred years ago since the conception of the modern
-          'school' originated from the economic model of factory work, which is
-          becoming increasingly redundant, and especially as the core modus
-          operandi of education.
-        </p>
-      </p>
-      <ArrowBtn link="/explore" text="Explore curriculums" />
       <Spacer height={60} />
     </>
   );

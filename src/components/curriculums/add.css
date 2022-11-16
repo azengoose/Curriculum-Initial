@@ -65,6 +65,7 @@ label.form-label {
   width: fit-content;
   margin: 10px auto 5px;
   padding-right: 10px;
+  transition: 0.3s linear;
 }
 .form-submit-btn {
   font-family: HK Grotesk;
@@ -73,7 +74,6 @@ label.form-label {
   padding: 5px 10px;
   border: none;
   background: transparent;
-  transition: 0.3s linear;
 }
 .form-submit-btn-div:hover {
   background: #ffccdb;

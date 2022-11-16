@@ -16,10 +16,14 @@
 
 //import { ArrowBtn } from "../components/Buttons";
 import ExternalCurriculums from "../components/curriculums/ExternalCurriculums.js";
+import { Helmet } from "react-helmet";
 
 export default function Explore() {
   return (
     <>
+      <Helmet>
+        <title>Iters | Explore</title>
+      </Helmet>
       <div className="explore-curriculum">
         <h2 className="theme-h2" id="explore-h2">
           Explore Curriculums

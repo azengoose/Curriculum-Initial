@@ -164,7 +164,7 @@ export default function ExternalCurriculums() {
         </div>
         <div className="marauto">
           <ArrowBtn link="/add" text="Add a Curriculum" />
-          <ArrowBtn link="/essays" text="Info on Curriculums" />
+          <ArrowBtn link="/curriculuminfo" text="Info on Curriculums" />
         </div>
       </div>
     </>

@@ -8,6 +8,7 @@ import { useState } from "react";
 import ExternalSubmissions from "./ExternalSubmissions";
 import { ArrowBtn, Spacer } from "../components/Buttons";
 import { QueryRecent, QueryRecentRejected } from "../data/Query";
+import { Helmet } from "react-helmet";
 
 export default function Accept() {
   const [recentAccepts, setRecentAccepts] = useState([]);
@@ -18,6 +19,9 @@ export default function Accept() {
 
   return (
     <>
+      <Helmet>
+        <title>Iters | Admin </title>
+      </Helmet>
       <h2 className="theme-h2">Accept Submissions</h2>
 
       <div id="recent-admin-div">

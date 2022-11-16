@@ -2,9 +2,11 @@
 
 import AddForm from "../components/curriculums/AddForm";
 import ExternalExamples from "../data/ExternalExamples";
-import { ArrowBtn } from "../components/Buttons";
+import { ArrowBtn, Spacer } from "../components/Buttons";
 import { Accordion } from "../components/Misc";
 
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { collection, query, onSnapshot } from "firebase/firestore";
 import db from "../data/config.js";
@@ -27,6 +29,9 @@ export default function AddCurriculum() {
 
   return (
     <>
+      <Helmet>
+        <title>Iters | Add Curriculum</title>
+      </Helmet>
       <h2 className="theme-h2" id="add-h2">
         Add a Curriculum
       </h2>
@@ -39,7 +44,9 @@ export default function AddCurriculum() {
       <div className="two-columns">
         <div>
           <ArrowBtn link="/explore" text="Explore other Curriculums" />
-          <ArrowBtn link="/essays" text="Curriculum Information" />
+          <Spacer height={10} />
+
+          <ArrowBtn link="/info" text="Curriculum Information" />
         </div>
         <div className="two-columns-2nd">
           <Accordion
@@ -47,22 +54,25 @@ export default function AddCurriculum() {
             panel={
               <div>
                 <p>
-                  The main points I wish to bring to attention when it comes to
-                  curriculums presented in an accessibly online format:
-                </p>
-
-                <p>
-                  <b>Scope:</b> Timeframe completion should take mostly weeks,
-                  months, or years.
+                  <b>Scope:</b> The timeframe should be mostly weeks, months, or
+                  several years. Not a small achievement containing small or
+                  detailed steps (this is not Wikihow).
                 </p>
                 <p>
                   <b>Testing:</b> Ideally, the curriculum has been trialled
-                  before. With a selection process/rationale of some resources
-                  over many others.
+                  before or at least compared with others with similar goals,
+                  therefore undergoing a reasoned selection process of resources
+                  over others available.
                 </p>
                 <p>
-                  <b>Diversity:</b> Includes a minimum of 2-3 platforms or 3+
-                  authors in the resources.
+                  <b>Diversity:</b> Includes at least a few platforms or
+                  resources from multiple sources or people.
+                </p>
+                <p>
+                  More points to consider at{" "}
+                  <b>
+                    <Link to="/curriculuminfo">Curriculum Information.</Link>
+                  </b>{" "}
                 </p>
               </div>
             }

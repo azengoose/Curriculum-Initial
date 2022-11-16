@@ -4,6 +4,8 @@
 //  the the external_curriculums database collection.
 
 import { useState } from "react";
+import { Helmet } from "react-helmet";
+
 import { Icon, HostLink } from "../components/curriculums/LinkPreview";
 import { QueryAllBySubject } from "../data/Query";
 import { ArrowBtn } from "../components/Buttons";
@@ -15,6 +17,9 @@ export default function All() {
 
   return (
     <>
+      <Helmet>
+        <title>Iters | All</title>
+      </Helmet>
       <div className="explore-curriculum">
         <h2 className="theme-h2" id="all-h2">
           All Curriculums
@@ -77,7 +82,7 @@ export default function All() {
           </div>
           <div className="marauto">
             <ArrowBtn link="/add" text="Add a Curriculum" />
-            <ArrowBtn link="/essays" text="Info on Curriculums" />
+            <ArrowBtn link="/info" text="Info on Curriculums" />
           </div>
         </div>
       </div>

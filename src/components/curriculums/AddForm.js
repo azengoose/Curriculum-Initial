@@ -61,9 +61,6 @@ export default function AddForm() {
           Subjects: subjects,
         });
         console.log("Curriculum successfully submitted.");
-        // msg.classList.add("msg-successful");
-        // msg.textContent = "Curriculum successfully submitted.";
-        // setTimeout(tempMessage, 5000);
         ToggleSubmit();
       } catch (error) {
         console.log(error);
@@ -212,9 +209,7 @@ export default function AddForm() {
               <div className="two-columns" id="thank-columns">
                 <div>
                   <h3 className="theme-h3">Submission Successful!</h3>
-                  <p>
-                    If you have any enquiries, reach out at main@iterxue.com.
-                  </p>
+                  <p>If you have any enquiries, reach out at main@iters.com.</p>
                   <button className="outline-btn" onClick={ToggleSubmit}>
                     + Add Another Curriculum
                   </button>
@@ -265,9 +260,8 @@ export default function AddForm() {
               <p className="thanks-text">
                 Thanks, ありがとう, Gracias, 感谢, Gratias tibi ago, 감사합니다,
                 شكرًا , Obrigado, Спасибо, Merci, धन्यवाद for contributing to
-                this communal resource. I (the writer of this message) do not
-                intend to use any of these external resources for any commercial
-                benefit; see more in About.
+                this communal resource. You can find out more about this site in
+                About.
               </p>
               <p className="thanks-text">
                 All curriculums are reviewed by humans before being added into

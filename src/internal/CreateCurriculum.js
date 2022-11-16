@@ -2,7 +2,7 @@
 
 //import { useState } from "react";
 // import db from "../data/config.js";
-// import { BtnHome, BtnExplore, BtnAddCurriculum } from "../components/Buttons";
+// import { ArrowBtn } from "../components/Buttons";
 import { TextCreateCurriculum } from "../text/Text";
 
 export default function CreateCurriculum() {
@@ -18,10 +18,6 @@ export default function CreateCurriculum() {
       </div>
 
       <h3 className="theme-h3">Curriculum Examples</h3>
-
-      {/* <BtnHome />
-      <BtnExplore />
-      <BtnAddCurriculum /> */}
     </>
   );
 }

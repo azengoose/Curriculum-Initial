@@ -25,11 +25,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 
-//import { BtnHome, BtnExplore, Spacer } from "../components/Buttons";
-// import { About, Guidelines } from "./text/MarkdownConvert";
 import db from "../data/config.js";
 
-import NotFound from "./NotFound";
+import NotFound from "../pages/NotFound";
 
 const curriculumRef = collection(db, "internal_curriculums");
 const resourcesRef = collectionGroup(db, "resources");

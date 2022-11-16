@@ -27,7 +27,7 @@ export default function Navbar() {
                 <Link className="link nav-link" to="/explore">
                   Curriculums
                 </Link>
-              </div>
+              </div> 
             </div>
           </div>
         </header>

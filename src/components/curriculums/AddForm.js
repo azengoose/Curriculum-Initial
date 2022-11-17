@@ -96,7 +96,7 @@ export default function AddForm() {
     Subjects: "The closest matching subjects the curriculum is part of",
     Link: "Wherever is easiest or best to share; website, video, diagram, public drive/folder, etc.",
     Authors:
-      "Can be one or more authors, e.g. Saitama, Richard Feynman, anonymous; including an organisation may also be helpful, e.g. Tony Stark, Avengers",
+      "Can be one or more authors, e.g. Saitama, Richard Feynman. Including an organisation may also be helpful, e.g. Tony Stark, Avengers",
     Updated: "Year last updated, e.g. 2027 or 1995",
   };
   function HelperFunction(e) {
@@ -209,7 +209,7 @@ export default function AddForm() {
               <div className="two-columns" id="thank-columns">
                 <div>
                   <h3 className="theme-h3">Submission Successful!</h3>
-                  <p>If you have any enquiries, reach out at main@iters.com.</p>
+                  <p>If you have any enquiries, reach out at iters.to@gmail.com</p>
                   <button className="outline-btn" onClick={ToggleSubmit}>
                     + Add Another Curriculum
                   </button>

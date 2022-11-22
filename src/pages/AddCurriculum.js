@@ -46,7 +46,7 @@ export default function AddCurriculum() {
           <ArrowBtn link="/explore" text="Explore other Curriculums" />
           <Spacer height={10} />
 
-          <ArrowBtn link="/info" text="Curriculum Information" />
+          <ArrowBtn link="/curriculuminfo" text="Curriculum Information" />
         </div>
         <div className="two-columns-2nd">
           <Accordion

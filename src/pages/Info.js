@@ -16,7 +16,7 @@ export default function Info() {
       <h3 className="theme-h3 p-h3">
         Collective Challenges & Personal Problems
       </h3>
-      <p className="centered-p">
+      <div className="centered-p">
         <p>
           <b>
             What are good ways that we can live, learn and flourish while facing
@@ -55,10 +55,10 @@ export default function Info() {
           empathy, excellence and experience.
         </p>
         <p>Written by Nottei Ai :)</p>
-      </p>
+      </div>
       <ArrowBtn link="/explore" text="Explore curriculums" />
       <h3 className="theme-h3 p-h3">What Makes Good Curriculums</h3>
-      <p className="centered-p">
+      <div className="centered-p">
         <p>
           3 main points to bring to attention when it comes to curriculums
           presented in an accessibly online format:
@@ -80,7 +80,7 @@ export default function Info() {
             resources from multiple sources/people.
           </li>
         </ol>
-      </p>
+      </div>
       <ArrowBtn link="/curriculuminfo" text="Curriculums, More Detail" />
       <Spacer height={60} />
     </>

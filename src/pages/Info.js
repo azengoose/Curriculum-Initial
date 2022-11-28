@@ -42,9 +42,8 @@ export default function Info() {
         <p>
           Unmistakably, the internet is the limitless, bottomless well of
           knowledge and information that humans once only dreamed of. In this
-          chaos, lies the opportunity for order. While part of my plan is to pry
-          at the floodgates and broaden the landscape for what it means to
-          undergo a learning path in society, my hope is that this also
+          chaos, lies the opportunity for order. My hope is that this broadens the landscape for what it means to
+          undergo a learning path in society, and also 
           contributes to a renewed sense of clarity in a newly disorienting, yet
           blooming world.
         </p>
@@ -54,7 +53,7 @@ export default function Info() {
           long, and lifelong learning is the end of a short life rich with
           empathy, excellence and experience.
         </p>
-        <p>Written by Nottei Ai :)</p>
+        <p>Angus</p>
       </div>
       <ArrowBtn link="/explore" text="Explore curriculums" />
       <h3 className="theme-h3 p-h3">What Makes Good Curriculums</h3>

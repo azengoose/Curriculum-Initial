@@ -1,8 +1,8 @@
 // About page with imported text components from md...
 import { Helmet } from "react-helmet";
 
-import { ArrowBtn, Spacer } from "../components/Buttons";
-import ExternalExamples from "../data/ExternalExamples";
+import { ArrowBtn, Spacer } from "../../components/buttons/Buttons";
+import ExternalExamples from "../../data/examples/ExternalExamples";
 
 export default function About() {
   return (

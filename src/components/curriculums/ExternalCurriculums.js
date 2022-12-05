@@ -6,7 +6,7 @@ import { QueryFilterContains } from "../../data/Query";
 import "./external.css";
 import { Icon, HostLink } from "./LinkPreview";
 import { subjectList } from "../Misc";
-import { ArrowBtn } from "../Buttons";
+import { ArrowBtn } from "../buttons/Buttons";
 
 export default function ExternalCurriculums() {
   const [simple, setSimple] = useState(false);

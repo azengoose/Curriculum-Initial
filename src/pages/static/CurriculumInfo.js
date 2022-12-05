@@ -1,7 +1,7 @@
 // Essay page
 // with imported text components from md
 
-import { ArrowBtn, Spacer } from "../components/Buttons";
+import { ArrowBtn, Spacer } from "../../components/buttons/Buttons";
 import { Helmet } from "react-helmet";
 
 export default function CurriculumInfo() {

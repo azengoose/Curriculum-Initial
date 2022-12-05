@@ -1,7 +1,7 @@
 // Essay page
 // with imported text components from md
 
-import { ArrowBtn, Spacer } from "../components/Buttons";
+import { ArrowBtn, Spacer } from "../../components/buttons/Buttons";
 import { Helmet } from "react-helmet";
 
 export default function Info() {
@@ -85,6 +85,20 @@ export default function Info() {
     </>
   );
 }
+
+// export function TextCredits() {
+//   return (
+//     <>
+//       <h3 className="theme-h3">Credits for Site</h3>
+//       <a href="https://www.flaticon.com/free-icons/info" title="info icons">
+//         Info icons created by Miftakhul Rizky - Flaticon
+//       </a>
+//       <a href="https://www.flaticon.com/free-icons/next" title="next icons">
+//         Next icons created by Roundicons - Flaticon
+//       </a>
+//     </>
+//   );
+// }
 
 // const [content, setContent] = useState("");
 

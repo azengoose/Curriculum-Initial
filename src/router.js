@@ -1,17 +1,18 @@
 import { Routes, Route, Outlet } from "react-router-dom";
 import { ScrollToTop } from "./components/Misc.js";
 
-import About from "./pages/About";
-import Info from "./pages/Info.js";
-import CurriculumInfo from "./pages/CurriculumInfo";
+import About from "./pages/static/About";
+import Info from "./pages/static/Info.js";
+import CurriculumInfo from "./pages/static/CurriculumInfo";
+import AddCurriculum from "./pages/static/AddCurriculum.js";
+import NotFound from "./pages/static/NotFound.js";
+import Accept from "./pages/admin/Accept.js";
+
+import CreateCurriculum from "./pages/internals/CreateCurriculum";
+import Curriculum from "./pages/internals/Curriculum";
+
 import Explore from "./pages/Explore";
 import All from "./pages/All";
-import CreateCurriculum from "./pages/CreateCurriculum";
-import AddCurriculum from "./pages/AddCurriculum.js";
-import Accept from "./admin/Accept.js";
-import NotFound from "./pages/NotFound.js";
-
-import Curriculum from "./pages/Curriculum";
 
 const Layout = () => (
   <div className="wrapper">

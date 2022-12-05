@@ -1,7 +1,7 @@
 import "./externalexamples.css";
 import { example_external_curriculums } from "./link_test_data";
 
-import { Icon, HostLink } from "../components/curriculums/LinkPreview";
+import { Icon, HostLink } from "../../components/curriculums/LinkPreview";
 
 export default function ExternalExamples() {
   return (

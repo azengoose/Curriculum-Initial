@@ -8,7 +8,7 @@ import { Helmet } from "react-helmet";
 
 import { Icon, HostLink } from "../components/curriculums/LinkPreview";
 import { QueryAllBySubject } from "../data/Query";
-import { ArrowBtn } from "../components/Buttons";
+import { ArrowBtn } from "../components/buttons/Buttons";
 
 export default function All() {
   const [curriculums, setCurriculums] = useState([]);

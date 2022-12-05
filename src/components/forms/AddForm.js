@@ -6,7 +6,7 @@ import db from "../../data/config.js";
 import { useState } from "react";
 import Select from "react-select";
 import { optionList } from "../Misc";
-import { Icon, HostLink } from "./LinkPreview";
+import { Icon, HostLink } from "../curriculums/LinkPreview";
 
 const curriculumRef = collection(db, "submitted_curriculums");
 

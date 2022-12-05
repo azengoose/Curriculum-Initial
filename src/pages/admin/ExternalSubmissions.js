@@ -7,9 +7,9 @@
 import { useState } from "react";
 import { addDoc, deleteDoc } from "firebase/firestore";
 
-import { Icon, HostLink } from "../components/curriculums/LinkPreview";
-import { QueryAllByTime } from "../data/Query";
-import { CollectionRef, DocumentRef, AuditLog } from "../data/ref";
+import { Icon, HostLink } from "../../components/curriculums/LinkPreview";
+import { QueryAllByTime } from "../../data/Query";
+import { CollectionRef, DocumentRef, AuditLog } from "../../data/Ref";
 
 export default function ExternalSubmissions() {
   const [curriculums, setCurriculums] = useState([]);

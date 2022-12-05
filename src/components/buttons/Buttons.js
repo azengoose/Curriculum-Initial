@@ -30,3 +30,28 @@ export function ArrowBtn({ link, text }) {
 export function Spacer({ height }) {
   return <div style={{ height: height }}></div>;
 } // Usage: <Spacer height={40} />
+
+export function Accordion({ title, panel, panel2 }) {
+  function handleChange(e) {
+    var acc = e.target;
+    acc.classList.toggle("active");
+    var panel = acc.nextElementSibling;
+    panel.classList.toggle("panel-active");
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  }
+  return (
+    <>
+      <button className="accordion" onClick={(e) => handleChange(e)}>
+        {title}
+      </button>
+      <div className="panel">
+        {panel}
+        {panel2}
+      </div>
+    </>
+  );
+}

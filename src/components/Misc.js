@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import "./misc.css";
 
 // ScrollToTop.jsx
 // https://www.kindacode.com/article/react-router-dom-scroll-to-top-on-route-change/
@@ -78,27 +77,29 @@ export function Warning({ text }) {
   );
 }
 
-export function Accordion({ title, panel, panel2 }) {
-  function handleChange(e) {
-    var acc = e.target;
-    acc.classList.toggle("active");
-    var panel = acc.nextElementSibling;
-    panel.classList.toggle("panel-active");
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    }
-  }
-  return (
-    <>
-      <button className="accordion" onClick={(e) => handleChange(e)}>
-        {title}
-      </button>
-      <div className="panel">
-        {panel}
-        {panel2}
-      </div>
-    </>
-  );
-}
+// For time related exports
+// serverTimeStamp() is a Firebase function
+
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];
+
+const d = new Date();
+
+var date = d.getDate();
+var month = months[d.getMonth()];
+var year = d.getFullYear();
+
+export const dateMonthYear = date + " " + month + " " + year;
+export const monthYear = month + " " + year;

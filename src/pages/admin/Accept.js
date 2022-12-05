@@ -6,8 +6,8 @@
 import "./admin.css";
 import { useState } from "react";
 import ExternalSubmissions from "./ExternalSubmissions";
-import { ArrowBtn, Spacer } from "../components/Buttons";
-import { QueryRecent, QueryRecentRejected } from "../data/Query";
+import { ArrowBtn, Spacer } from "../../components/buttons/Buttons";
+import { QueryRecent, QueryRecentRejected } from "../../data/Query";
 import { Helmet } from "react-helmet";
 
 export default function Accept() {

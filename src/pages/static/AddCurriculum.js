@@ -1,15 +1,15 @@
 // For submitting externally completed curriculums
 
-import AddForm from "../components/curriculums/AddForm";
-import ExternalExamples from "../data/ExternalExamples";
-import { ArrowBtn, Spacer } from "../components/Buttons";
-import { Accordion } from "../components/Misc";
+import AddForm from "../../components/forms/AddForm";
+import ExternalExamples from "../../data/examples/ExternalExamples";
+import { ArrowBtn, Spacer } from "../../components/buttons/Buttons";
+import { Accordion } from "../../components/buttons/Buttons";
 
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { collection, query, onSnapshot } from "firebase/firestore";
-import db from "../data/config.js";
+import db from "../../data/config.js";
 
 const curriculumRef = collection(db, "submitted_curriculums");
 

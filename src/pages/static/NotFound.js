@@ -1,7 +1,7 @@
 // For 404 or Not Found Pages
 
 import { Helmet } from "react-helmet";
-import { ArrowBtn } from "../components/Buttons";
+import { ArrowBtn } from "../../components/buttons/Buttons";
 
 export default function NotFound() {
   return (

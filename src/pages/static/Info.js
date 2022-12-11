@@ -89,6 +89,7 @@ export default function Info() {
 // export function TextCredits() {
 //   return (
 //     <>
+//<div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>
 //       <h3 className="theme-h3">Credits for Site</h3>
 //       <a href="https://www.flaticon.com/free-icons/info" title="info icons">
 //         Info icons created by Miftakhul Rizky - Flaticon
@@ -96,6 +97,7 @@ export default function Info() {
 //       <a href="https://www.flaticon.com/free-icons/next" title="next icons">
 //         Next icons created by Roundicons - Flaticon
 //       </a>
+//       <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>
 //     </>
 //   );
 // }

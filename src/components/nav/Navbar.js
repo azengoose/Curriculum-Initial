@@ -3,6 +3,9 @@
 
 import "./navbar.css";
 import "../../data/config.js";
+import { SubNav } from "../buttons/Buttons";
+import SignOutIcon from "../../data/images/sign-out.svg";
+
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
@@ -21,7 +24,6 @@ export default function Navbar() {
 
   const auth = getAuth();
   const [user, setUser] = useState(null);
-  // https://firebase.google.com/docs/reference/js/firebase.User
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -46,9 +48,12 @@ export default function Navbar() {
     signOut(getAuth());
     ToggleLogIn();
   }
+
   function getUserName() {
     if (getAuth().currentUser) {
-      return getAuth().currentUser.displayName;
+      var displayName = getAuth().currentUser.displayName;
+      var nbspName = displayName.replace(/\s/g, ""); 
+      return nbspName;
     }
   }
 
@@ -73,20 +78,37 @@ export default function Navbar() {
                   Curriculums
                 </Link>
               </div>
+
               <div id="user-container" className="nav-item">
                 {!user ? (
                   <button id="sign-in" className="sign-btn" onClick={signIn}>
                     <i className="material-icons">account_circle</i>
                   </button>
                 ) : (
-                  <button
-                    id="sign-out"
-                    className="sign-btn"
-                    onClick={signOutUser}
-                  >
-                    <div id="user-name">{getUserName()}</div>
-                    Sign Out
-                  </button>
+
+                  <div>
+                    <SubNav
+                      mainLink={`/agent/${getUserName()}`}
+                      fLink={`/agent/${getUserName()}/progress`}
+                      sLink={`/agent/${getUserName()}/completed`}
+                      tLink={`/agent/${getUserName()}/profile`}
+                      outpanel={
+                        <button
+                          id="sub-nav-sign-out"
+                          className="sign-btn"
+                          onClick={signOutUser}
+                        >
+                          Sign Out
+                          <img
+                            style={{ height: 12, paddingLeft: 5 }}
+                            src={SignOutIcon}
+                            alt="sign out icon"
+                          />
+                        </button>
+                      }
+                    />
+                  </div>
+
                 )}
               </div>
             </div>

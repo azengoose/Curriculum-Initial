@@ -22,6 +22,7 @@ export const example_external_curriculums = [
     LastUpdated: "2022",
     Link: "https://www.mezzoguild.com/how-to-start-learning-arabic/",
     Subjects: ["Languages"],
+    id: "L3NWrwQUUTdATQCsXa6a"
   },
   {
     Title: "So You Want to Learn Physics…",
@@ -29,5 +30,29 @@ export const example_external_curriculums = [
     LastUpdated: "2021",
     Link: "https://www.susanrigetti.com/physics",
     Subjects: ["Physics"],
+    id: "bKfHEBE3vWEYMkWE1gYU" 
   },
 ];
+
+// Profile Data Structure
+//
+// >> users (collection)
+//     > user A (document ID)
+//         Name: ...
+//         Email: ...
+//         Bio: ...
+
+//         Current Paths: [path A, ...]
+//            > Path A: {
+//              - Title: ... 
+//              - Start Date: ...
+//              }
+//            > Path ...
+
+//         CompletedPaths: ...
+//            > Path C: {
+//              - Title: ...
+//              - Start Date: ...
+//              - End Date: ...
+//              - Entry: ...
+//              }

@@ -1,17 +1,18 @@
-import {
-  collection,
-  doc,
-  addDoc,
-  serverTimestamp,
-} from "firebase/firestore";
-import { useEffect } from "react";
-import db from "./config.js";
-
 // Usage: For exporting collection reference eg.
 //  import { CollectionRef } from "./ref"
 //
 //  const [curriculumRef, setCurriculumRef] = useState()
 //  CollectionRef(collect, setCurriculumRef)
+
+import {
+  collection,
+  doc,
+  addDoc,
+  getDoc,
+  serverTimestamp,
+} from "firebase/firestore";
+import { useEffect } from "react";
+import db from "./config.js";
 
 export function CollectionRef(collect, setState) {
   const collectionRef = collection(db, collect);
@@ -22,8 +23,12 @@ export function CollectionRef(collect, setState) {
 
 export function DocumentRef(collect, id, setState) {
   const docRef = doc(db, collect, id);
-  // console.log("", docRef);
-  setState(docRef);
+  useEffect(() => {
+    getDoc(docRef).then((doc) => {
+        setState(doc.data());
+    });
+  }, []);
+
 }
 
 export function AuditLog(title, link, action) {
@@ -45,5 +50,6 @@ export function AuditLog(title, link, action) {
 
 export function Example() {
   const ref = doc(db, "submitted_curriculums", " CKkrzgxx528eUgV9qPWP");
-  console.log("", ref);
+  const docSnap = getDoc(ref);
+  console.log("", ref, docSnap);
 }

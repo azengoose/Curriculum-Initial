@@ -1,9 +1,11 @@
 // Externally completed curriculums for Explore
 
 import { useState } from "react";
+import { Link as ReactLink } from "react-router-dom";
 import { QueryFilterContains } from "../../data/Query";
 
 import "./external.css";
+import ExternalIcon from "../../data/images/external-link.svg";
 import { Icon, HostLink } from "./LinkPreview";
 import { subjectList } from "../Misc";
 import { ArrowBtn } from "../buttons/Buttons";
@@ -86,25 +88,43 @@ export default function ExternalCurriculums() {
         <div
           className={simple ? "simple-wrapper" : `external-curriculums-wrapper`}
         >
-          {curriculums.map(({ Data }, index) => {
+          {curriculums.map(({ Data, id }, index) => {
             return (
               <div key={index}>
                 {Data.map(
                   ({ Title, Link, LastUpdated, Authors, Subjects }, i) => {
+                    var titleURL = Title.replace(/\s/g, "-");
+                    // Current Solution is simply inserting hyphens in between spaces 
+                    // 1 Can convert present hyphens into a specific thing like %-%
+                    // Then to deconvert, change hyphen to nbsp and %-% to hyphen 
+                    // 2 Or remove all spaces and save the new form into the database
                     return (
-                      <a
-                        href={Link}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <ReactLink
+                        to={`/iters/${titleURL}`}
                         key={i}
+                        state={{ id: id }}
                       >
                         <div
                           className={
                             simple ? "simple-each" : `each-ext-cur-div`
                           }
                         >
-                          <p className="ext-cur-title">{Title}</p>
-
+                          <div className="ext-cur-title">
+                            {/* The link in a link does not work */}
+                            <a
+                              className="ext-cur-title-link"
+                              href={Link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {Title} &nbsp;
+                              <img
+                                style={{ height: 10 }}
+                                src={ExternalIcon}
+                                alt="external link"
+                              />
+                            </a>
+                          </div>
                           <div
                             className={
                               simple ? "simple-summary" : "ext-cur-summary"
@@ -141,7 +161,7 @@ export default function ExternalCurriculums() {
                               : ""}
                           </div>
                         </div>
-                      </a>
+                      </ReactLink>
                     );
                   }
                 )}
@@ -150,6 +170,7 @@ export default function ExternalCurriculums() {
           })}
         </div>
       </div>
+
       <div className="three-columns">
         <div className="marauto">
           <ArrowBtn link="/all" text="All Curriculums" />
@@ -187,14 +208,3 @@ export default function ExternalCurriculums() {
 //     }
 //   }
 // }
-// if (activeFiltersNum == 10) {
-//   MaxDisable();
-// }
-// function MaxDisable() {
-//   const maxed_filters = document.getElementsByClassName("checked");
-//   for (let i = 0; i < maxed_filters.length; i++) {
-//     console.log("", maxed_filters[i]);
-//     maxed_filters[i].nextSibling.classList.toggle("maxed");
-//   }
-// }
-//console.log("", document.getElementsByClassName("checked"));

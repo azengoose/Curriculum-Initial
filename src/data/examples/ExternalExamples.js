@@ -1,5 +1,7 @@
 import "./externalexamples.css";
+import { Link } from "react-router-dom";
 import { example_external_curriculums } from "./link_test_data";
+import ExternalIcon from "../../data/images/external-link.svg";
 
 import { Icon, HostLink } from "../../components/curriculums/LinkPreview";
 
@@ -7,10 +9,24 @@ export default function ExternalExamples() {
   return (
     <div id="external-examples-div">
       {example_external_curriculums.map((e, i) => {
+        var titleURL = e.Title.replace(/\s/g, "-");
         return (
-          <a href={e.Link} target="_blank" rel="noopener noreferrer" key={i}>
+          <Link 
+            to={`/iters/${titleURL}`}
+            key={i}
+            state={{id: e.id}}
+            > 
             <div className="each-ext-cur-div">
-              <p className="ext-cur-title">{e.Title}</p>
+              <div className="ext-cur-title">
+              <a 
+                className="ext-cur-title-link"
+                href={e.Link} 
+                target="_blank"
+                rel="noopener noreferrer" 
+              >{e.Title} &nbsp; &nbsp;
+              <img style={{height: 10}} src={ExternalIcon} alt="external link" />
+              </a>
+              </div>
               <div className="ext-cur-summary">
                 <p>
                   <span>
@@ -31,7 +47,7 @@ export default function ExternalExamples() {
                   : ""}
               </div>
             </div>
-          </a>
+          </Link>
         );
       })}
     </div>

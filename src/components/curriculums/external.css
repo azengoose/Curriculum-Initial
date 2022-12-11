@@ -152,7 +152,7 @@ img.link-favicon {
   border: 0.5px solid darkgrey;
   border-radius: 5px;
   border-bottom: 2px solid black;
-  padding: 12px 8px 2px 8px;
+  padding: 4px 4px 2px 4px;
   background-color: rgb(255, 255, 255);
   display: inline-block;
   width: 95%;
@@ -169,11 +169,15 @@ img.link-favicon {
 .ext-cur-title {
   font-size: 1.04em;
   margin: 0 0 5px 0;
-  padding: 5px 10px;
-  color: black;
+  padding: 12px 10px;
   font-family: HK Grotesk;
   font-weight: bold;
   overflow-wrap: break-word;
+}
+.ext-cur-title-link {
+  color: black;
+  display: block;
+  transition: 0.3s ease-in-out;
 }
 .ext-cur-summary p,
 .simple-summary p {
@@ -199,6 +203,7 @@ img.link-favicon {
     align-items: center;
     justify-items: start;
     text-align: left;
+    margin: -6px;
   }
   .simple-subject {
     padding: 0 10px;
@@ -207,6 +212,13 @@ img.link-favicon {
     margin: 0;
     border-radius: 0px;
     color: black;
+  }
+  .ext-cur-title:hover {
+    background: radial-gradient(76.28% 34713.84% at 63.52% 32.93%, #F4EFFF 0%, rgba(255, 195, 253, 0) 100%);
+    border-radius: 3px;
+  }
+  .ext-cur-title-link:hover {
+    color: blue;
   }
 }
 /* Desktop */

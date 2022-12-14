@@ -1,19 +1,18 @@
-// Admin page that displays all pending curriculums like the explore page
-//  but also includes an accept button for each curriculum that
-//  copies the data from the submitted_curriculums and pastes it onto
-//  the the external_curriculums database collection.
-
 import { useState } from "react";
 import { Helmet } from "react-helmet";
+import { Link as ReactLink } from "react-router-dom";
 
+import ExternalIcon from "../data/images/external-link.svg";
 import { Icon, HostLink } from "../components/curriculums/LinkPreview";
 import { QueryAllBySubject } from "../data/Query";
 import { ArrowBtn } from "../components/buttons/Buttons";
+//import CurriculumOutput from "../components/curriculums/CurriculumOutput";
 
 export default function All() {
   const [curriculums, setCurriculums] = useState([]);
 
-  QueryAllBySubject("external_curriculums", setCurriculums, curriculums);
+  QueryAllBySubject("external_curriculums", setCurriculums, curriculums)
+  // console.log("curriculums: ", curriculums)
 
   return (
     <>
@@ -28,22 +27,38 @@ export default function All() {
           Total Curriculums: {curriculums.length}
         </div>
 
+        {/* <CurriculumOutput curriculums={curriculums}/> */}
+
         <div className="data-ouput">
           <div className="external-curriculums-wrapper">
-            {curriculums.map(({ Data }, index) => {
+            {curriculums.map(({ Data, id }, index) => {
               return (
                 <div key={index}>
                   {Data.map(
-                    ({ Title, Link, LastUpdated, Authors, Subjects }, i) => {
+                    ({ Title, Link, LastUpdated, Authors, Subjects, sortTitle }, i) => {
                       return (
-                        <a
-                          href={Link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          key={i}
-                        >
+                        <ReactLink
+                        to={`/iters/${sortTitle}`}
+                        key={i}
+                        state={{ id: id }}
+                      >
                           <div className="each-ext-cur-div">
-                            <p className="ext-cur-title">{Title}</p>
+                          <div className="ext-cur-title">
+                            {/* The link in a link does not work */}
+                            <a
+                              className="ext-cur-title-link"
+                              href={Link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {Title} &nbsp;
+                              <img
+                                style={{ height: 10 }}
+                                src={ExternalIcon}
+                                alt="external link"
+                              />
+                            </a>
+                          </div>
                             <div className="ext-cur-summary">
                               <p>
                                 <span>
@@ -64,7 +79,7 @@ export default function All() {
                                 : ""}
                             </div>
                           </div>
-                        </a>
+                        </ReactLink>
                       );
                     }
                   )}

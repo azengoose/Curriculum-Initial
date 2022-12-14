@@ -32,15 +32,27 @@ export default function UserProfile() {
   }
   function signOutUser() {
     signOut(getAuth());
+    window.location.reload();
     //ToggleLogIn();
   }
 
+  // const monitorAuthState = async () => {
+  //   onAuthStateChanged(auth, user => {
+  //     if (user) {
+  //       loggedIntrue
+  //     }
+  //     else {
+
+  //     }
+  //   })
+  // }
+
   function CheckExists() {
     try {
-      if (user === null) {
+      if (user === null || user.length === 0) {
         setUserExists(false);
         console.log("User does not exist");
-      } else if (user !== null) {
+      } else {
         setUserExists(true);
         CheckLoggedIn();
         console.log("User exists");

@@ -14,7 +14,9 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
+  getAdditionalUserInfo
 } from "firebase/auth";
+import { AddAgentToFirestore } from "../../data/Ref";
 
 export default function Navbar() {
   const [logInState, setLogInState] = useState(true);
@@ -35,10 +37,22 @@ export default function Navbar() {
     });
   }, [logInState]);
 
+
   function signIn() {
     try {
       var provider = new GoogleAuthProvider();
-      signInWithPopup(getAuth(), provider);
+      signInWithPopup(getAuth(), provider).then(
+        (result) => {
+          var isNew = getAdditionalUserInfo(result).isNewUser;
+          console.log("isNew: " + isNew)
+          if (isNew) {
+            AddAgentToFirestore(result.user.uid, result.user.displayName)
+          }
+          else {
+            console.log("old agent has been logged in")
+          }
+        }
+      )
       ToggleLogIn();
     } catch (error) {
       console.log(error);
@@ -47,12 +61,13 @@ export default function Navbar() {
   function signOutUser() {
     signOut(getAuth());
     ToggleLogIn();
+    window.location.reload();
   }
 
   function getUserName() {
     if (getAuth().currentUser) {
       var displayName = getAuth().currentUser.displayName;
-      var nbspName = displayName.replace(/\s/g, ""); 
+      var nbspName = displayName.replace(/\s/g, "");
       return nbspName;
     }
   }
@@ -85,7 +100,6 @@ export default function Navbar() {
                     <i className="material-icons">account_circle</i>
                   </button>
                 ) : (
-
                   <div>
                     <SubNav
                       mainLink={`/agent/${getUserName()}`}
@@ -108,7 +122,6 @@ export default function Navbar() {
                       }
                     />
                   </div>
-
                 )}
               </div>
             </div>

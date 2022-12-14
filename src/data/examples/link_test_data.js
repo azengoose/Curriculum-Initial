@@ -22,7 +22,8 @@ export const example_external_curriculums = [
     LastUpdated: "2022",
     Link: "https://www.mezzoguild.com/how-to-start-learning-arabic/",
     Subjects: ["Languages"],
-    id: "L3NWrwQUUTdATQCsXa6a"
+    id: "L3NWrwQUUTdATQCsXa6a",
+    sortTitle: "arabic-again-how-i'd-do-it"
   },
   {
     Title: "So You Want to Learn Physics…",
@@ -30,7 +31,8 @@ export const example_external_curriculums = [
     LastUpdated: "2021",
     Link: "https://www.susanrigetti.com/physics",
     Subjects: ["Physics"],
-    id: "bKfHEBE3vWEYMkWE1gYU" 
+    id: "bKfHEBE3vWEYMkWE1gYU",
+    sortTitle: "so-you-want-to-learn-physics"
   },
 ];
 

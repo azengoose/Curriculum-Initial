@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   collection,
   onSnapshot,
@@ -115,7 +115,7 @@ export function QueryRecentRejected(num, setState, changeState) {
 export function QueryMatchingTitle(matchingTitle, setState) {
   const curriculumRef = collection(db, "external_curriculums");
   function DatabaseQuery() {
-    var q = query(curriculumRef, where("Title", "==", matchingTitle));
+    var q = query(curriculumRef, where("sortTitle", "==", matchingTitle));
     onSnapshot(q, (snapshot) => {
       setState(
         snapshot.docs.map((doc) => ({
@@ -168,22 +168,40 @@ export function QueryMatchingEntries(matchingID, setState) {
 }
 
 export function QueryMatchingUserProgress(matchingUserName, setState) {
-  const ref = collection(db, "users");
+  const userRef = collection(db, "users");
+  const [id, setid] = useState();
+  function NameQuery() {
+    var qu = query(userRef, where("sortName", "==", matchingUserName));
+    onSnapshot(qu, (snapshot) => {
+      setid(snapshot.docs.map((doc) => (doc.data().id)));
+    });
+    console.log("", id)
+  } 
   function DatabaseQuery() {
-    var q = query(ref, where("Name", "==", matchingUserName));
+    const progressRef = collection(db, `users/${id}/Progress`);
+    var q = query(progressRef)
     onSnapshot(q, (snapshot) => {
       setState(
-        snapshot.docs.map((doc) => ({
-          userid: doc.id,
-          Data: doc.data().Progress,
-        }))
+        snapshot.docs.map((doc) => (doc.data()))
       );
     });
+
   }
   useEffect(() => {
+    NameQuery();
     DatabaseQuery();
   }, []);
 }
+  //   export function DocumentRef(collect, id, setState) {
+  //    for each element in the progress array:
+  //     const docRef = doc(db, collect, id);
+  //     useEffect(() => {
+  //       getDoc(docRef).then((doc) => {
+  //           setState(doc.data());
+  //       });
+  //     }, []);
+  //   }
+  // 
 
 export function QueryMatchingUserCompleted(matchingUserName, setState) {
   const ref = collection(db, "users");

@@ -92,15 +92,10 @@ export default function ExternalCurriculums() {
             return (
               <div key={index}>
                 {Data.map(
-                  ({ Title, Link, LastUpdated, Authors, Subjects }, i) => {
-                    var titleURL = Title.replace(/\s/g, "-");
-                    // Current Solution is simply inserting hyphens in between spaces 
-                    // 1 Can convert present hyphens into a specific thing like %-%
-                    // Then to deconvert, change hyphen to nbsp and %-% to hyphen 
-                    // 2 Or remove all spaces and save the new form into the database
+                  ({ Title, Link, LastUpdated, Authors, Subjects, sortTitle }, i) => {
                     return (
                       <ReactLink
-                        to={`/iters/${titleURL}`}
+                        to={`/iters/${sortTitle}`}
                         key={i}
                         state={{ id: id }}
                       >

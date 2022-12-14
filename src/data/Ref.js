@@ -9,6 +9,7 @@ import {
   doc,
   addDoc,
   getDoc,
+  setDoc,
   serverTimestamp,
 } from "firebase/firestore";
 import { useEffect } from "react";
@@ -28,7 +29,6 @@ export function DocumentRef(collect, id, setState) {
         setState(doc.data());
     });
   }, []);
-
 }
 
 export function AuditLog(title, link, action) {
@@ -52,4 +52,17 @@ export function Example() {
   const ref = doc(db, "submitted_curriculums", " CKkrzgxx528eUgV9qPWP");
   const docSnap = getDoc(ref);
   console.log("", ref, docSnap);
+}
+
+export function AddAgentToFirestore(userid, displayName) {
+  var sortName = displayName.replace(/\s/g, "").toLowerCase();
+  setDoc(doc(db, "users", userid), {
+    Name: displayName,
+    sortName: sortName,
+    Progress: [],
+    Completed: [],
+    dateJoined: serverTimestamp(),
+  }).then(() => {
+    console.log("new agent has been created")
+  });
 }

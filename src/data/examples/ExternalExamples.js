@@ -9,10 +9,9 @@ export default function ExternalExamples() {
   return (
     <div id="external-examples-div">
       {example_external_curriculums.map((e, i) => {
-        var titleURL = e.Title.replace(/\s/g, "-");
         return (
           <Link 
-            to={`/iters/${titleURL}`}
+            to={`/iters/${e.sortTitle}`}
             key={i}
             state={{id: e.id}}
             > 

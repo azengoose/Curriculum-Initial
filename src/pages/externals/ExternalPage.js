@@ -13,7 +13,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { ArrowBtn, Spacer } from "../../components/buttons/Buttons";
 import { Icon, HostLink } from "../../components/curriculums/LinkPreview";
 
-import { QueryMatchingEntries } from "../../data/Query";
+import { QueryMatchingTitle, QueryMatchingEntries } from "../../data/Query";
 import { DocumentRef } from "../../data/Ref";
 import ExternalIcon from "../../data/images/external-link.svg";
 
@@ -28,10 +28,7 @@ export default function Curriculum() {
   if (id !== undefined) {
     DocumentRef("external_curriculums", id, setCurriculum);
   }
-  else { 
-    // Have to Query instead by matching title to id
-    // OR changing URL to id instead of title
-  }
+  else { QueryMatchingTitle(sortTitle, setCurriculum);}
 
   QueryMatchingEntries(id, setEntries);
 
@@ -163,8 +160,3 @@ export default function Curriculum() {
     </>
   );
 }
-
-// Parameter usage for Query
-// const { title } = useParams();
-// var RemadeTitle = title.replace(/-/g, " ");
-//QueryMatchingTitle(RemadeTitle, setCurriculum);

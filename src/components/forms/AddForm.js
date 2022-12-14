@@ -92,7 +92,7 @@ export default function AddForm() {
   const [helperText, setHelperText] = useState("Add a curriculum.");
 
   const HelperTextChange = {
-    Title: "The catchy, informative, summative, not-too-clickbait title",
+    Title: "Enter the informative, summative and not-too-clickbait title",
     Subjects: "The closest matching subjects the curriculum is part of",
     Link: "Wherever is easiest or best to share; website, video, diagram, public drive/folder, etc.",
     Authors:

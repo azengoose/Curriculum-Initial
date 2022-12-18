@@ -10,12 +10,9 @@
   "dependencies": {
     "eslint-plugin-react": "^7.31.8",
     "firebase": "^9.13.0",
-    "framer-motion": "7.3.2",
-    "material-icons": "1.11.8",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-helmet": "^6.1.0",
-    "react-markdown": "8.0.3",
     "react-router-dom": "6.2.1",
     "react-scripts": "^5.0.1",
     "react-select": "^5.4.0"
@@ -30,7 +27,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "build": "react-scripts --max-old-space-size=512 build",
+    "build": "react-scripts build --max_old_space_size=2048 --no-optional",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

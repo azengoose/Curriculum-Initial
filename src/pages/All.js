@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link as ReactLink } from "react-router-dom";
 
@@ -6,18 +6,27 @@ import ExternalIcon from "../data/images/external-link.svg";
 import { Icon, HostLink } from "../components/curriculums/LinkPreview";
 import { QueryAllBySubject } from "../data/Query";
 import { ArrowBtn } from "../components/buttons/Buttons";
-//import CurriculumOutput from "../components/curriculums/CurriculumOutput";
+import CurriculumOutput from "../components/curriculums/CurriculumOutput";
 
 export default function All() {
   const [curriculums, setCurriculums] = useState([]);
 
-  QueryAllBySubject("external_curriculums", setCurriculums, curriculums)
-  // console.log("curriculums: ", curriculums)
+  QueryAllBySubject("external_curriculums", setCurriculums, curriculums);
+  
+  const [curricOut, setCurricOut] = useState("");
+  async function OUT() {    
+    setCurricOut(CurriculumOutput([curriculums]));
+  }
+  useEffect(() => {
+    OUT();
+  }, [curriculums]);
 
   return (
     <>
       <Helmet>
         <title>Iters | All</title>
+        <meta name="All" content={"All the curriculums in one place."} />
+        {/* https://www.freecodecamp.org/news/react-helmet-examples/ */}
       </Helmet>
       <div className="explore-curriculum">
         <h2 className="theme-h2" id="all-h2">
@@ -27,7 +36,7 @@ export default function All() {
           Total Curriculums: {curriculums.length}
         </div>
 
-        {/* <CurriculumOutput curriculums={curriculums}/> */}
+        {curricOut}
 
         <div className="data-ouput">
           <div className="external-curriculums-wrapper">
@@ -35,30 +44,40 @@ export default function All() {
               return (
                 <div key={index}>
                   {Data.map(
-                    ({ Title, Link, LastUpdated, Authors, Subjects, sortTitle }, i) => {
+                    (
+                      {
+                        Title,
+                        Link,
+                        LastUpdated,
+                        Authors,
+                        Subjects,
+                        sortTitle,
+                      },
+                      i
+                    ) => {
                       return (
                         <ReactLink
-                        to={`/iters/${sortTitle}`}
-                        key={i}
-                        state={{ id: id }}
-                      >
+                          to={`/iters/${sortTitle}`}
+                          key={i}
+                          state={{ id: id }}
+                        >
                           <div className="each-ext-cur-div">
-                          <div className="ext-cur-title">
-                            {/* The link in a link does not work */}
-                            <a
-                              className="ext-cur-title-link"
-                              href={Link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {Title} &nbsp;
-                              <img
-                                style={{ height: 10 }}
-                                src={ExternalIcon}
-                                alt="external link"
-                              />
-                            </a>
-                          </div>
+                            <div className="ext-cur-title">
+                              {/* The link in a link does not work */}
+                              <a
+                                className="ext-cur-title-link"
+                                href={Link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {Title} &nbsp;
+                                <img
+                                  style={{ height: 10 }}
+                                  src={ExternalIcon}
+                                  alt="external link"
+                                />
+                              </a>
+                            </div>
                             <div className="ext-cur-summary">
                               <p>
                                 <span>

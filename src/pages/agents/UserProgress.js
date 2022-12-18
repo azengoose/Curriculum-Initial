@@ -1,69 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { QueryMatchingUserProgress } from "../../data/Query";
-//import ExternalExamples from "../../data/examples/ExternalExamples";
+
+import { QueryUserIters, QueryMatchingUserState } from "../../data/UserQuery";
+import CurriculumOutput from "../../components/curriculums/CurriculumOutput";
 
 export default function UserProfileProgress() {
-  const [user, setUser] = useState(null);
+  const [progress, setProgress] = useState(null);
+  const [curriculums, setCurriculums] = useState([]);
   const { name } = useParams();
   const sortName = name.toLowerCase();
 
-  QueryMatchingUserProgress(sortName, setUser);
-  console.log("user iters in progress: ", user)
+  QueryMatchingUserState("Progress", sortName, setProgress);
+  QueryUserIters(progress, setCurriculums);
 
-  // const [Progress, setProgress] = useState([]);
-
-  // function setItersProgress() {
-  //   if (user !== null) { 
-  //     for (let i = 0; i < user[0].length; i++) {
-  //       let u = user[0]
-  //       const next_array = [...Progress, u[i].iterid]
-  //       setProgress(next_array);
-  //     }
-  //     console.log("Iters in Progress: ", Progress)
-  //   }
-  // }
-  // setItersProgress()
-
-  // const [inProgress, setInProgress] = useState();
-  //  Query for matching user and setInProgress([Progress ids])
-  //    i.e [sfioij234W, oweirjoh342W, FBhsdu2hd9]
-  // const [curriculum, setCurriculum] = useState();
-  //  Query for curriculum data for each Progress id and setProgress
-  //    i.e. [sfioij234W...] => [{Title, Link...}, {...}]  
-
-  // OR progress is a separate collection with name, iterid, %
-  //  Query for (matching user), then (iterid)
-
-  // OR progress is a subcollection of users 
-  //  Query for pathway (users/:id/progress) and map ids
-
-  // OR use location state to pass data from UserProfile.js
-  //  in terms of Progress data
+  const [curricOut, setCurricOut] = useState("");
+  async function outCurriculum() {
+    const x = CurriculumOutput(curriculums);
+    setCurricOut(x);
+  }
+  useEffect(() => {
+    outCurriculum();
+  }, [curriculums]);
 
   return (
     <>
       <h3 className="theme-h3">Progress</h3>
-      {/* <ExternalExamples/> */}
-      {user !== null ? (
-        <div>
-          {/* {user.map((e, index) => {
-            return (
-              <div key={index}>
-                {e.Data.map((e, i) => {
-                    return(
-                    <div key={i}>
-                        {e.iterid}
-                        {e.sortTitle}
-                    </div>
-                    )
-                })}
-              </div>
-            );
-          })} */}
+      {curriculums.length !== 0 || null ? (
+        <div className="data-ouput">
+          <div className="external-curriculums-wrapper">{curricOut}</div>
         </div>
       ) : (
-        "No iters currently in progress"
+        "Loading Iters or No iters currently in progress"
       )}
     </>
   );

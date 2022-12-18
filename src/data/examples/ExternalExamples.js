@@ -1,5 +1,5 @@
 import "./externalexamples.css";
-import { Link } from "react-router-dom";
+import { Link as ReactLink } from "react-router-dom";
 import { example_external_curriculums } from "./link_test_data";
 import ExternalIcon from "../../data/images/external-link.svg";
 
@@ -10,22 +10,24 @@ export default function ExternalExamples() {
     <div id="external-examples-div">
       {example_external_curriculums.map((e, i) => {
         return (
-          <Link 
-            to={`/iters/${e.sortTitle}`}
-            key={i}
-            state={{id: e.id}}
-            > 
-            <div className="each-ext-cur-div">
-              <div className="ext-cur-title">
-              <a 
-                className="ext-cur-title-link"
-                href={e.Link} 
-                target="_blank"
-                rel="noopener noreferrer" 
-              >{e.Title} &nbsp; &nbsp;
-              <img style={{height: 10}} src={ExternalIcon} alt="external link" />
-              </a>
-              </div>
+          <div className="each-ext-cur-div" key={i}>
+            <a
+              className="ext-cur-title-link ext-cur-title"
+              href={e.Link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {e.Title} &nbsp;
+              <img
+                style={{ height: 10 }}
+                src={ExternalIcon}
+                alt="external link"
+              />
+            </a>
+            <ReactLink
+              to={`/iters/${e.sortTitle}`}
+              state={{ id: e.id }}
+            >
               <div className="ext-cur-summary">
                 <p>
                   <span>
@@ -38,15 +40,15 @@ export default function ExternalExamples() {
                 {e.Subjects
                   ? e.Subjects.map((e, i) => {
                       return (
-                        <span className={`${e} subject-tag`} key={i}>
+                        <span className="subject-tag" key={i}>
                           {e}
                         </span>
                       );
                     })
                   : ""}
               </div>
-            </div>
-          </Link>
+            </ReactLink>
+          </div>
         );
       })}
     </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import {
   collection,
   onSnapshot,
@@ -48,7 +48,6 @@ export function QueryAllBySubject(collect, setState, changeState) {
 export function QueryFilterContains(setState, FiltersNum, activeSubjects) {
   const curriculumRef = collection(db, "external_curriculums");
   function DatabaseQuery() {
-    // var q = query(curriculumRef);
     if (FiltersNum > 0) {
       var q = query(
         curriculumRef,
@@ -130,16 +129,13 @@ export function QueryMatchingTitle(matchingTitle, setState) {
   }, []);
 }
 
-export function QueryMatchingUserName(matchingUserName, setState) {
-  const userRef = collection(db, "users");
+export function QueryIterIDfromSortTitle(sortTitle, setID) {
+  const curriculumRef = collection(db, "external_curriculums");
   function DatabaseQuery() {
-    var q = query(userRef, where("sortName", "==", matchingUserName));
+    var q = query(curriculumRef, where("sortTitle", "==", sortTitle));
     onSnapshot(q, (snapshot) => {
-      setState(
-        snapshot.docs.map((doc) => ({
-          userid: doc.id,
-          Data: [doc.data()],
-        }))
+      setID(
+        snapshot.docs.map((doc) => (doc.id))
       );
     });
   }
@@ -158,60 +154,6 @@ export function QueryMatchingEntries(matchingID, setState) {
           Name: doc.data().Name,
           Rating: doc.data().Rating,
           Text: doc.data().Text,
-        }))
-      );
-    });
-  }
-  useEffect(() => {
-    DatabaseQuery();
-  }, []);
-}
-
-export function QueryMatchingUserProgress(matchingUserName, setState) {
-  const userRef = collection(db, "users");
-  const [id, setid] = useState();
-  function NameQuery() {
-    var qu = query(userRef, where("sortName", "==", matchingUserName));
-    onSnapshot(qu, (snapshot) => {
-      setid(snapshot.docs.map((doc) => (doc.data().id)));
-    });
-    console.log("", id)
-  } 
-  function DatabaseQuery() {
-    const progressRef = collection(db, `users/${id}/Progress`);
-    var q = query(progressRef)
-    onSnapshot(q, (snapshot) => {
-      setState(
-        snapshot.docs.map((doc) => (doc.data()))
-      );
-    });
-
-  }
-  useEffect(() => {
-    NameQuery();
-    DatabaseQuery();
-  }, []);
-}
-  //   export function DocumentRef(collect, id, setState) {
-  //    for each element in the progress array:
-  //     const docRef = doc(db, collect, id);
-  //     useEffect(() => {
-  //       getDoc(docRef).then((doc) => {
-  //           setState(doc.data());
-  //       });
-  //     }, []);
-  //   }
-  // 
-
-export function QueryMatchingUserCompleted(matchingUserName, setState) {
-  const ref = collection(db, "users");
-  function DatabaseQuery() {
-    var q = query(ref, where("Name", "==", matchingUserName));
-    onSnapshot(q, (snapshot) => {
-      setState(
-        snapshot.docs.map((doc) => ({
-          userid: doc.id,
-          Data: doc.data().Completed,
         }))
       );
     });

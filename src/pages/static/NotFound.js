@@ -2,7 +2,7 @@
 
 import { Helmet } from "react-helmet";
 import { ArrowBtn } from "../../components/buttons/Buttons";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 
 export default function NotFound() {
   return (
@@ -10,7 +10,7 @@ export default function NotFound() {
       <Helmet>
         <title>Yeah sorry, mate.</title>
       </Helmet>
-      <motion.div
+      {/* <motion.div
           initial={{ opacity: 0, x: -12 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{
@@ -18,7 +18,7 @@ export default function NotFound() {
             ease: "easeInOut",
             time: [0, 1, 1.05, 1.2, 1.8],
           }}
-        >
+        > */}
       <div className="wrapper">
         <h2 className="theme-h2">Sorry for your loss. </h2>
         <h2>This page link doesn't exist. It happens.</h2>
@@ -36,7 +36,7 @@ export default function NotFound() {
         </p>
         <ArrowBtn link="/about" text="About Us" />
       </div>
-      </motion.div>
+      {/* </motion.div> */}
     </>
   );
 }

@@ -9,28 +9,44 @@
 import "./externalpage.css";
 
 import { useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ArrowBtn, Spacer } from "../../components/buttons/Buttons";
+import ExternalIcon from "../../data/images/external-link.svg";
 import { Icon, HostLink } from "../../components/curriculums/LinkPreview";
 
-import { QueryMatchingTitle, QueryMatchingEntries } from "../../data/Query";
+import { QueryMatchingEntries, QueryMatchingTitle } from "../../data/Query";
 import { DocumentRef } from "../../data/Ref";
-import ExternalIcon from "../../data/images/external-link.svg";
 
 export default function Curriculum() {
   const [curriculum, setCurriculum] = useState([]);
   const [currentIter, setCurrentIter] = useState(false);
   const [entries, setEntries] = useState([]);
+  const [paramID, setParamID] = useState(null);
 
-  const location = useLocation();
-  const { id } = location.state;  
+  //const location = useLocation();
   const { sortTitle } = useParams();
-  if (id !== undefined) {
-    DocumentRef("external_curriculums", id, setCurriculum);
-  }
-  else { QueryMatchingTitle(sortTitle, setCurriculum);}
 
-  QueryMatchingEntries(id, setEntries);
+  // function setExternalPage() {
+  //   if (location.state !== null) {
+  //     const { id } = location.state;
+  //     DocumentRef("external_curriculums", id, setCurriculum);
+  //     QueryMatchingEntries(id, setEntries);
+  //   }
+  // else {
+  console.log(
+    "curriculum",
+    sortTitle,
+    paramID,
+    curriculum.Link
+  );
+
+  QueryMatchingTitle(sortTitle, setParamID);
+  console.log("curriculum", paramID);
+
+  DocumentRef("external_curriculums", paramID, setCurriculum);
+  QueryMatchingEntries(paramID, setEntries);
+  //   }
+  // }
 
   // function CurrentIterCheck() {
   //     // Check if user is currently on this path
@@ -42,10 +58,10 @@ export default function Curriculum() {
     setCurrentIter(true);
   }
 
-//   function CurrentItersCount() {
-//     // Count the number of people on the path
-//      // Also count number of people completed
-//   }
+  //   function CurrentItersCount() {
+  //     // Count the number of people on the path
+  //      // Also count number of people completed
+  //   }
   const currentPathersCount = 0;
   const currentCompletedCount = 0;
 
@@ -53,51 +69,53 @@ export default function Curriculum() {
     // Show a modal to give feedback on the path
   }
 
-
   return (
     <>
       <div className="data-ouput" style={{ minHeight: 200 }}>
         <div className="external-page-hero">
-          {curriculum.length !== 0 && (
-            <div className="each-ext-cur-div">
-              <div className="ext-cur-title">
-                <a
-                  className="ext-cur-title-link"
-                  href={curriculum.Link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {curriculum.Title} &nbsp;
-                  <img
-                    style={{ height: 10 }}
-                    src={ExternalIcon}
-                    alt="external link"
-                  />
-                </a>
-              </div>
-              <div className="ext-cur-summary">
-                <p>
-                  <span>
-                    {curriculum.LastUpdated} | {HostLink(curriculum.Link)}{" "}
-                    {Icon(curriculum.Link)}
-                  </span>
-                </p>
+          {curriculum !== null ||
+            (curriculum.length !== 0 && (
+              <>
+                <div className="each-ext-cur-div">
+                  <div className="ext-cur-title">
+                    <a
+                      className="ext-cur-title-link"
+                      href={curriculum.Link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {curriculum.Title} &nbsp;
+                      <img
+                        style={{ height: 10 }}
+                        src={ExternalIcon}
+                        alt="external link"
+                      />
+                    </a>
+                  </div>
+                  <div className="ext-cur-summary">
+                    <p>
+                      <span>
+                        {curriculum.LastUpdated} | {HostLink(curriculum.Link)}{" "}
+                        {Icon(curriculum.Link)}
+                      </span>
+                    </p>
 
-                <p>{curriculum.Authors}</p>
-              </div>
-              <div className="subject-tag-div">
-                {curriculum.Subjects
-                  ? curriculum.Subjects.map((e, i) => {
-                      return (
-                        <span className={`${e} subject-tag`} key={i}>
-                          {e}
-                        </span>
-                      );
-                    })
-                  : ""}
-              </div>
-            </div>
-          )}
+                    <p>{curriculum.Authors}</p>
+                  </div>
+                  <div className="subject-tag-div">
+                    {curriculum.Subjects
+                      ? curriculum.Subjects.map((e, i) => {
+                          return (
+                            <span className={`${e} subject-tag`} key={i}>
+                              {e}
+                            </span>
+                          );
+                        })
+                      : ""}
+                  </div>
+                </div>{" "}
+              </>
+            ))}
 
           <div id="external-page-right-hero">
             <div>

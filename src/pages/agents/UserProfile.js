@@ -11,8 +11,8 @@ import SignOutIcon from "../../data/images/sign-out.svg";
 import { getAuth, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useParams, Link, Outlet } from "react-router-dom";
-import { QueryMatchingUserName } from "../../data/Query";
-
+import { QueryMatchingUserName } from "../../data/UserQuery";
+ 
 export default function UserProfile() {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);

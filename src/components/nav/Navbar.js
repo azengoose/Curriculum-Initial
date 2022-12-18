@@ -5,6 +5,7 @@ import "./navbar.css";
 import "../../data/config.js";
 import { SubNav } from "../buttons/Buttons";
 import SignOutIcon from "../../data/images/sign-out.svg";
+import ProfileIcon from "../../data/images/profile-icon.svg";
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -14,7 +15,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
-  getAdditionalUserInfo
+  getAdditionalUserInfo,
 } from "firebase/auth";
 import { AddAgentToFirestore } from "../../data/Ref";
 
@@ -37,22 +38,18 @@ export default function Navbar() {
     });
   }, [logInState]);
 
-
   function signIn() {
     try {
       var provider = new GoogleAuthProvider();
-      signInWithPopup(getAuth(), provider).then(
-        (result) => {
-          var isNew = getAdditionalUserInfo(result).isNewUser;
-          console.log("isNew: " + isNew)
-          if (isNew) {
-            AddAgentToFirestore(result.user.uid, result.user.displayName)
-          }
-          else {
-            console.log("old agent has been logged in")
-          }
+      signInWithPopup(getAuth(), provider).then((result) => {
+        var isNew = getAdditionalUserInfo(result).isNewUser;
+        console.log("isNew: " + isNew);
+        if (isNew) {
+          AddAgentToFirestore(result.user.uid, result.user.displayName);
+        } else {
+          console.log("old agent has been logged in");
         }
-      )
+      });
       ToggleLogIn();
     } catch (error) {
       console.log(error);
@@ -97,7 +94,11 @@ export default function Navbar() {
               <div id="user-container" className="nav-item">
                 {!user ? (
                   <button id="sign-in" className="sign-btn" onClick={signIn}>
-                    <i className="material-icons">account_circle</i>
+                    <img
+                      className="profile-nav-img"
+                      src={ProfileIcon}
+                      alt="profile icon"
+                    />{" "}
                   </button>
                 ) : (
                   <div>

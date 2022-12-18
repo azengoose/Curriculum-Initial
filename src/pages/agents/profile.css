@@ -61,3 +61,16 @@
 #sign-out:hover {
     background-color: #ffe2e8;
 }
+.profile-details-change-btn {
+    background-color: white;
+    border-radius: 7px;
+    border: 2px solid rgba(162, 35, 157, 1);
+    font-family: 'HK GROTESK';
+    font-size: 1.2em;
+    padding: 8px 15px;
+    margin: 20px;
+    font-weight: bold;
+}
+.profile-details-change-btn:hover {
+    background-color: #F8E3FF;
+}

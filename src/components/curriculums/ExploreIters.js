@@ -10,7 +10,7 @@ import { Icon, HostLink } from "./LinkPreview";
 import { subjectList } from "../Misc";
 import { ArrowBtn } from "../buttons/Buttons";
 
-export default function ExternalCurriculums() {
+export default function ExploreIters() {
   const [simple, setSimple] = useState(false);
   const [curriculums, setCurriculums] = useState([]);
   const [activeFiltersNum, setActiveFiltersNum] = useState(0);
@@ -92,34 +92,35 @@ export default function ExternalCurriculums() {
             return (
               <div key={index}>
                 {Data.map(
-                  ({ Title, Link, LastUpdated, Authors, Subjects, sortTitle }, i) => {
+                  (
+                    { Title, Link, LastUpdated, Authors, Subjects, sortTitle },
+                    i
+                  ) => {
                     return (
-                      <ReactLink
-                        to={`/iters/${sortTitle}`}
+                      <div
                         key={i}
-                        state={{ id: id }}
+                        className={simple ? "simple-each" : `each-ext-cur-div`}
                       >
-                        <div
-                          className={
-                            simple ? "simple-each" : `each-ext-cur-div`
-                          }
+                        <div className="ext-cur-title">
+                          {/* The link in a link does not work */}
+                          <a
+                            className="ext-cur-title-link"
+                            href={Link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {Title} &nbsp;
+                            <img
+                              style={{ height: 10 }}
+                              src={ExternalIcon}
+                              alt="external link"
+                            />
+                          </a>
+                        </div>
+                        <ReactLink
+                          to={`/iters/${sortTitle}`}
+                          state={{ id: id }}
                         >
-                          <div className="ext-cur-title">
-                            {/* The link in a link does not work */}
-                            <a
-                              className="ext-cur-title-link"
-                              href={Link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {Title} &nbsp;
-                              <img
-                                style={{ height: 10 }}
-                                src={ExternalIcon}
-                                alt="external link"
-                              />
-                            </a>
-                          </div>
                           <div
                             className={
                               simple ? "simple-summary" : "ext-cur-summary"
@@ -155,8 +156,8 @@ export default function ExternalCurriculums() {
                                 })
                               : ""}
                           </div>
-                        </div>
-                      </ReactLink>
+                        </ReactLink>
+                      </div>
                     );
                   }
                 )}

@@ -1,8 +1,4 @@
-// Usage: For exporting collection reference eg.
-//  import { CollectionRef } from "./ref"
-//
-//  const [curriculumRef, setCurriculumRef] = useState()
-//  CollectionRef(collect, setCurriculumRef)
+// For Firebase functions and Single Document Queries
 
 import {
   collection,
@@ -13,6 +9,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { useEffect } from "react";
+import { isTypePredicateNode } from "typescript";
 import db from "./config.js";
 
 export function CollectionRef(collect, setState) {
@@ -22,13 +19,20 @@ export function CollectionRef(collect, setState) {
   }, []);
 }
 
+// export function DocumentRef(collect, id, setState) {
+//   const docRef = doc(db, collect, id);
+//   useEffect(() => {
+//     getDoc(docRef).then((doc) => {
+//       setState(doc.data());
+//     });
+//   }, []);
+// }
+
 export function DocumentRef(collect, id, setState) {
   const docRef = doc(db, collect, id);
-  useEffect(() => {
-    getDoc(docRef).then((doc) => {
-        setState(doc.data());
-    });
-  }, []);
+  getDoc(docRef).then((doc) => {
+    setState(doc.data());
+  });
 }
 
 export function AuditLog(title, link, action) {
@@ -63,6 +67,17 @@ export function AddAgentToFirestore(userid, displayName) {
     Completed: [],
     dateJoined: serverTimestamp(),
   }).then(() => {
-    console.log("new agent has been created")
+    console.log("new agent has been created");
+  });
+}
+
+export function AddEntrytoFirestore(iterid, name, text ) {
+  addDoc(doc(db, "entries"), {
+    Iter: iterid,
+    Name: name,
+    Text: text,
+    dateCreated: serverTimestamp(),
+  }).then(() => {
+    console.log("new entry has been created: ", text);
   });
 }

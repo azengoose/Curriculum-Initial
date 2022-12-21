@@ -26,8 +26,8 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build --max_old_space_size=2048 --no-optional",
+    "start": "CHOKIDAR_USEPOLLING=true FAST_REFRESH=false react-scripts start",
+    "build": "react-scripts --max-old-space-size=512 build --no-optional",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

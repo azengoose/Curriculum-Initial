@@ -112,6 +112,8 @@ export function QueryRecentRejected(num, setState, changeState) {
 }
 
 export function QueryMatchingTitle(matchingTitle, setState) {
+  //remove spaces from matchingTitle
+  matchingTitle = matchingTitle.replace(/\s/g, "");
   const curriculumRef = collection(db, "external_curriculums");
   function DatabaseQuery() {
     var q = query(curriculumRef, where("sortTitle", "==", matchingTitle));
@@ -121,21 +123,6 @@ export function QueryMatchingTitle(matchingTitle, setState) {
           id: doc.id,
           Data: [doc.data()],
         }))
-      );
-    });
-  }
-  useEffect(() => {
-    DatabaseQuery();
-  }, []);
-}
-
-export function QueryIterIDfromSortTitle(sortTitle, setID) {
-  const curriculumRef = collection(db, "external_curriculums");
-  function DatabaseQuery() {
-    var q = query(curriculumRef, where("sortTitle", "==", sortTitle));
-    onSnapshot(q, (snapshot) => {
-      setID(
-        snapshot.docs.map((doc) => (doc.id))
       );
     });
   }

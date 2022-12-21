@@ -1,63 +1,60 @@
 // Each external curriculum has its own page, with data
 //  retrieved based on the path parameters (see router)
 
-// ONE: Dataset of curriculums: https://docs.google.com/spreadsheets/d/1JAigdVgaPPemnhZMICklelZeGgh_h_bemh0zKEUq-6w/edit#gid=0
-// TWO: Import curriculums to start, ensure transparent bias.
-// THREE: Allow users to add and share curriculums from their
-//  profile, and add entries.
-
 import "./externalpage.css";
 
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
+import { getAuth } from "firebase/auth";
 import { ArrowBtn, Spacer } from "../../components/buttons/Buttons";
 import ExternalIcon from "../../data/images/external-link.svg";
 import { Icon, HostLink } from "../../components/curriculums/LinkPreview";
 
 import { QueryMatchingEntries, QueryMatchingTitle } from "../../data/Query";
-import { DocumentRef } from "../../data/Ref";
+import { AddEntrytoFirestore, DocumentRef } from "../../data/Ref";
 
-export default function Curriculum() {
+export default function ExternalPage() {
   const [curriculum, setCurriculum] = useState([]);
   const [currentIter, setCurrentIter] = useState(false);
   const [entries, setEntries] = useState([]);
-  const [paramID, setParamID] = useState(null);
+  const [paramID, setParamID] = useState("");
 
-  //const location = useLocation();
+  const [addEntry, setAddEntry] = useState(false);
+  const [EntryField, setEntryField] = useState("");
+
+  const auth = getAuth();
+  const location = useLocation();
   const { sortTitle } = useParams();
 
-  // function setExternalPage() {
-  //   if (location.state !== null) {
-  //     const { id } = location.state;
-  //     DocumentRef("external_curriculums", id, setCurriculum);
-  //     QueryMatchingEntries(id, setEntries);
-  //   }
-  // else {
-  console.log(
-    "curriculum",
-    sortTitle,
-    paramID,
-    curriculum.Link
-  );
-
-  QueryMatchingTitle(sortTitle, setParamID);
-  console.log("curriculum", paramID);
-
-  DocumentRef("external_curriculums", paramID, setCurriculum);
-  QueryMatchingEntries(paramID, setEntries);
-  //   }
-  // }
+  function setExternalPage() {
+    if (location.state !== null) {
+      const { id } = location.state;
+      DocumentRef("external_curriculums", id, setCurriculum);
+      QueryMatchingEntries(id, setEntries);
+    } else {
+      QueryMatchingTitle(sortTitle, setParamID);
+      if (typeof paramID == "object")
+        try {
+          DocumentRef("external_curriculums", paramID[0].iterid, setCurriculum);
+          QueryMatchingEntries(paramID, setEntries);
+        } catch (e) {
+          //console.log("error:", e);
+        }
+    }
+  }
+  setExternalPage();
 
   // function CurrentIterCheck() {
   //     // Check if user is currently on this path
-  //     // If so, set currentIter to true or false
+  //     // Check if user has completed the iter=> Allow editing
   // }
-
   function JoinPath() {
-    // Add user to the path
-    setCurrentIter(true);
+    if (auth) {
+      setCurrentIter(true);}
+    else {
+      alert("Please log in to save joining this path");
+    }
   }
-
   //   function CurrentItersCount() {
   //     // Count the number of people on the path
   //      // Also count number of people completed
@@ -69,55 +66,66 @@ export default function Curriculum() {
     // Show a modal to give feedback on the path
   }
 
+  function AddEntry() {
+    setAddEntry(true);
+  }
+  console.log("curriculum:", curriculum);
+  function SubmitEntry() {
+    if (EntryField !== "") {
+      AddEntrytoFirestore(curriculum.id)
+      setAddEntry(false);
+      setEntryField("");
+    } else {
+      alert("Please enter a valid entry");
+    }
+  }
+
   return (
     <>
       <div className="data-ouput" style={{ minHeight: 200 }}>
         <div className="external-page-hero">
-          {curriculum !== null ||
-            (curriculum.length !== 0 && (
-              <>
-                <div className="each-ext-cur-div">
-                  <div className="ext-cur-title">
-                    <a
-                      className="ext-cur-title-link"
-                      href={curriculum.Link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {curriculum.Title} &nbsp;
-                      <img
-                        style={{ height: 10 }}
-                        src={ExternalIcon}
-                        alt="external link"
-                      />
-                    </a>
-                  </div>
-                  <div className="ext-cur-summary">
-                    <p>
-                      <span>
-                        {curriculum.LastUpdated} | {HostLink(curriculum.Link)}{" "}
-                        {Icon(curriculum.Link)}
-                      </span>
-                    </p>
+          {curriculum.length !== 0 && (
+            <>
+              <div className="each-ext-cur-div">
+                <div className="ext-cur-title">
+                  <a
+                    className="ext-cur-title-link"
+                    href={curriculum.Link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {curriculum.Title} &nbsp;
+                    <img
+                      style={{ height: 10 }}
+                      src={ExternalIcon}
+                      alt="external link"
+                    />
+                  </a>
+                </div>
+                <div className="ext-cur-summary">
+                  <p>
+                    <span>
+                      {curriculum.LastUpdated} | {HostLink(curriculum.Link)}{" "}
+                      {Icon(curriculum.Link)}
+                    </span>
+                  </p>
+                  <p>{curriculum.Authors}</p>
+                </div>
+                <div className="subject-tag-div">
+                  {curriculum.Subjects && curriculum.Subjects.map((e, i) => {
+                        return (
+                          <span className={`${e} subject-tag`} key={i}>
+                            {e}
+                          </span>
+                        );
+                      })}
+                </div>
+              </div>
+            </>
+          )}
 
-                    <p>{curriculum.Authors}</p>
-                  </div>
-                  <div className="subject-tag-div">
-                    {curriculum.Subjects
-                      ? curriculum.Subjects.map((e, i) => {
-                          return (
-                            <span className={`${e} subject-tag`} key={i}>
-                              {e}
-                            </span>
-                          );
-                        })
-                      : ""}
-                  </div>
-                </div>{" "}
-              </>
-            ))}
-
-          <div id="external-page-right-hero">
+          <div id="external-page-right-hero"> 
+          {/* Can separate as component */}
             <div>
               {currentIter ? (
                 "Currently in Progress"
@@ -133,21 +141,18 @@ export default function Curriculum() {
                 </div>
               </div>
             </div>
-
             <Spacer height={10} />
-
             <div className="current-completed-div">
               <div className="current-completed-title">People Completed</div>
               <div className="current-completed-count">
                 {currentCompletedCount}
               </div>
             </div>
-
             <button
               className="suggest-feedback-btn"
               onClick={(e) => FeedbackModal(e)}
             >
-              Suggest an Edit &gt;{" "}
+              Suggest an Edit &gt;
             </button>
           </div>
         </div>
@@ -168,9 +173,27 @@ export default function Curriculum() {
             })}
           </div>
         ) : (
-          "No entries yet"
+          <div className="no-entries-div">No entries yet.</div>
         )}
-        {currentIter ? <button>+ Create an Entry</button> : ""}
+        {currentIter && !addEntry ? <button onClick={()=>AddEntry()}>+ Create an Entry</button> : ""}
+        {addEntry && (
+          <div className="create-entry-div">
+              <div>
+                Entry
+                <input
+                  type="text"
+                  onChange={(e) => setEntryField(e.target.value)}
+                  value={EntryField}
+                />
+              </div>
+              <button
+                className="submit-entry-btn"
+                onClick={(e) => SubmitEntry(e)}
+              >
+                Create Entry
+              </button>
+            </div>
+          )}
       </div>
 
       <ArrowBtn link="/explore" text="Explore other Curriculums" />

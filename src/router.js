@@ -38,8 +38,7 @@ export default function Paths() {
               <Route path="completed" element={<UserProfileCompleted />} />
               <Route path="profile" element={<UserProfileDetails />} />
             </Route>
-            <Route path="/iters/:sortTitle" element={<ExternalPage />} />{" "}
-            {/* Externals */}
+            <Route path="/iters/:sortTitle" element={<ExternalPage />} />
             <Route path="/about" element={<About />} />
             <Route path="/info" element={<Info />} />
             <Route path="/curriculuminfo" element={<CurriculumInfo />} />

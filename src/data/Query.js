@@ -54,15 +54,17 @@ export function QueryFilterContains(setState, FiltersNum, activeSubjects) {
         where("Subjects", "array-contains-any", activeSubjects),
         orderBy("Subjects", "asc")
       );
+      onSnapshot(q, (snapshot) => {
+        setState(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            Data: [doc.data()],
+          }))
+        );
+      });
+    } else {
+      setState([]);
     }
-    onSnapshot(q, (snapshot) => {
-      setState(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          Data: [doc.data()],
-        }))
-      );
-    });
   }
   useEffect(() => {
     try {
@@ -70,7 +72,6 @@ export function QueryFilterContains(setState, FiltersNum, activeSubjects) {
     } catch (e) {
       console.log("", e);
     }
-    console.log("Use Effect Triggered");
   }, [activeSubjects]);
 }
 
@@ -112,15 +113,13 @@ export function QueryRecentRejected(num, setState, changeState) {
 }
 
 export function QueryMatchingTitle(matchingTitle, setState) {
-  //remove spaces from matchingTitle
-  matchingTitle = matchingTitle.replace(/\s/g, "");
-  const curriculumRef = collection(db, "external_curriculums");
+  const iterRef = collection(db, "external_curriculums");
   function DatabaseQuery() {
-    var q = query(curriculumRef, where("sortTitle", "==", matchingTitle));
+    var q = query(iterRef, where("sortTitle", "==", matchingTitle));
     onSnapshot(q, (snapshot) => {
       setState(
         snapshot.docs.map((doc) => ({
-          id: doc.id,
+          iterid: doc.id,
           Data: [doc.data()],
         }))
       );

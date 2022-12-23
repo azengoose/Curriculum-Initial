@@ -56,6 +56,11 @@ export function Icon(fetchlink) {
 }
 
 export function HostLink(fetchlink) {
-  var url = new URL(fetchlink);
-  return url.hostname;
+    try{
+      var url = new URL(fetchlink);
+      return url.hostname;
+    }
+    catch (e) {
+        //
+    }
 }

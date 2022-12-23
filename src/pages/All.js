@@ -56,14 +56,8 @@ export default function All() {
                       i
                     ) => {
                       return (
-                        <ReactLink
-                          to={`/iters/${sortTitle}`}
-                          key={i}
-                          state={{ id: id }}
-                        >
-                          <div className="each-ext-cur-div">
+                          <div className="each-ext-cur-div" key={i}>
                             <div className="ext-cur-title">
-                              {/* The link in a link does not work */}
                               <a
                                 className="ext-cur-title-link"
                                 href={Link}
@@ -78,27 +72,31 @@ export default function All() {
                                 />
                               </a>
                             </div>
-                            <div className="ext-cur-summary">
-                              <p>
-                                <span>
-                                  {LastUpdated} | {HostLink(Link)} {Icon(Link)}
-                                </span>
-                              </p>
-                              <p>{Authors}</p>
-                            </div>
-                            <div className="subject-tag-div">
-                              {Subjects
-                                ? Subjects.map((e, i) => {
-                                    return (
-                                      <span className="subject-tag" key={i}>
-                                        {e}
-                                      </span>
-                                    );
-                                  })
-                                : ""}
-                            </div>
+                            <ReactLink
+                                to={`/iters/${sortTitle}`}
+                                 state={{ id: id }}
+                            > 
+                                <div className="ext-cur-summary">
+                                <p>
+                                    <span>
+                                    {LastUpdated} | {HostLink(Link)} {Icon(Link)}
+                                    </span>
+                                </p>
+                                <p>{Authors}</p>
+                                </div>
+                                <div className="subject-tag-div">
+                                {Subjects
+                                    ? Subjects.map((e, i) => {
+                                        return (
+                                        <span className="subject-tag" key={i}>
+                                            {e}
+                                        </span>
+                                        );
+                                    })
+                                    : ""}
+                                </div>
+                            </ReactLink>
                           </div>
-                        </ReactLink>
                       );
                     }
                   )}

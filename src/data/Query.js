@@ -114,37 +114,27 @@ export function QueryRecentRejected(num, setState, changeState) {
 
 export function QueryMatchingTitle(matchingTitle, setState) {
   const iterRef = collection(db, "external_curriculums");
-  function DatabaseQuery() {
-    var q = query(iterRef, where("sortTitle", "==", matchingTitle));
-    onSnapshot(q, (snapshot) => {
-      setState(
-        snapshot.docs.map((doc) => ({
-          iterid: doc.id,
-          Data: [doc.data()],
-        }))
-      );
-    });
-  }
-  useEffect(() => {
-    DatabaseQuery();
-  }, []);
+  var q = query(iterRef, where("sortTitle", "==", matchingTitle));
+  onSnapshot(q, (snapshot) => {
+    setState(
+      snapshot.docs.map((doc) => ({
+        iterid: doc.id,
+        Data: [doc.data()],
+      }))
+    );
+  });
 }
 
 export function QueryMatchingEntries(matchingID, setState) {
   const entriesRef = collection(db, "entries");
-  function DatabaseQuery() {
-    var q = query(entriesRef, where("Iter", "==", matchingID));
-    onSnapshot(q, (snapshot) => {
-      setState(
-        snapshot.docs.map((doc) => ({
-          Name: doc.data().Name,
-          Rating: doc.data().Rating,
-          Text: doc.data().Text,
-        }))
-      );
-    });
-  }
-  useEffect(() => {
-    DatabaseQuery();
-  }, []);
+  var q = query(entriesRef, where("Iter", "==", matchingID));
+  onSnapshot(q, (snapshot) => {
+    setState(
+      snapshot.docs.map((doc) => ({
+        Name: doc.data().Name,
+        Rating: doc.data().Rating,
+        Text: doc.data().Text,
+      }))
+    );
+  });
 }

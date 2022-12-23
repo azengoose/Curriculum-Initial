@@ -9,7 +9,6 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { useEffect } from "react";
-import { isTypePredicateNode } from "typescript";
 import db from "./config.js";
 
 export function CollectionRef(collect, setState) {
@@ -71,8 +70,9 @@ export function AddAgentToFirestore(userid, displayName) {
   });
 }
 
-export function AddEntrytoFirestore(iterid, name, text ) {
-  addDoc(doc(db, "entries"), {
+export function AddEntrytoFirestore(iterid, name, text) {
+  const entryRef = collection(db, "entries");
+  addDoc(entryRef, {
     Iter: iterid,
     Name: name,
     Text: text,

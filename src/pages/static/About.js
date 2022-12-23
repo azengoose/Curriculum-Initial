@@ -15,7 +15,7 @@ export default function About() {
       </h2>
 
       <h3 className="theme-h3 p-h3">Iterations and Itineraries</h3>
-      <p className="centered-p">
+      <div className="centered-p">
         <p>
           This site is a crossroads sign. Paths lay before you; maps crafted
           painstakingly by others so that you have a clearer route to travel,
@@ -37,20 +37,20 @@ export default function About() {
           </b>
           (latin): journey, trip, route, course, path, road, passage.
         </p>
-      </p>
+      </div>
       <ArrowBtn link="/explore" text="Explore Curriculums" />
 
       <h3 className="theme-h3">Curriculum Examples</h3>
       <ExternalExamples />
       <Spacer height={20} />
 
-      <p className="centered-p">
+      <div className="centered-p">
         <p>
           Iters.to is in early stages; a result of experimentation made mostly
           for ease of personal use since I regularly read, compare and do my
           best undertaking curriculums.{" "}
         </p>
-      </p>
+      </div>
       <ArrowBtn link="/info" text="More Info" />
       <Spacer height={60} />
     </>

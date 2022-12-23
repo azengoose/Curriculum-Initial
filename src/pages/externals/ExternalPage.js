@@ -3,7 +3,7 @@
 
 import "./externalpage.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { ArrowBtn, Spacer } from "../../components/buttons/Buttons";
@@ -31,6 +31,7 @@ export default function ExternalPage() {
       const { id } = location.state;
       DocumentRef("external_curriculums", id, setCurriculum);
       QueryMatchingEntries(id, setEntries);
+      setParamID(id);
     } else {
       QueryMatchingTitle(sortTitle, setParamID);
       if (typeof paramID == "object")
@@ -42,7 +43,9 @@ export default function ExternalPage() {
         }
     }
   }
-  setExternalPage();
+  useEffect(() => {
+    setExternalPage();
+  }, [location.state, paramID]);
 
   // function CurrentIterCheck() {
   //     // Check if user is currently on this path
@@ -50,7 +53,8 @@ export default function ExternalPage() {
   // }
   function JoinPath() {
     if (auth) {
-      setCurrentIter(true);}
+      setCurrentIter(true);
+    }
     else {
       alert("Please log in to save joining this path");
     }
@@ -69,10 +73,10 @@ export default function ExternalPage() {
   function AddEntry() {
     setAddEntry(true);
   }
-  console.log("curriculum:", curriculum);
+
   function SubmitEntry() {
     if (EntryField !== "") {
-      AddEntrytoFirestore(curriculum.id)
+      AddEntrytoFirestore(paramID, auth.currentUser.displayName, EntryField)
       setAddEntry(false);
       setEntryField("");
     } else {
@@ -113,19 +117,19 @@ export default function ExternalPage() {
                 </div>
                 <div className="subject-tag-div">
                   {curriculum.Subjects && curriculum.Subjects.map((e, i) => {
-                        return (
-                          <span className={`${e} subject-tag`} key={i}>
-                            {e}
-                          </span>
-                        );
-                      })}
+                    return (
+                      <span className={`${e} subject-tag`} key={i}>
+                        {e}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             </>
           )}
 
-          <div id="external-page-right-hero"> 
-          {/* Can separate as component */}
+          <div id="external-page-right-hero">
+            {/* Can separate as component */}
             <div>
               {currentIter ? (
                 "Currently in Progress"
@@ -175,25 +179,25 @@ export default function ExternalPage() {
         ) : (
           <div className="no-entries-div">No entries yet.</div>
         )}
-        {currentIter && !addEntry ? <button onClick={()=>AddEntry()}>+ Create an Entry</button> : ""}
+        {currentIter && !addEntry ? <button onClick={() => AddEntry()}>+ Create an Entry</button> : ""}
         {addEntry && (
           <div className="create-entry-div">
-              <div>
-                Entry
-                <input
-                  type="text"
-                  onChange={(e) => setEntryField(e.target.value)}
-                  value={EntryField}
-                />
-              </div>
-              <button
-                className="submit-entry-btn"
-                onClick={(e) => SubmitEntry(e)}
-              >
-                Create Entry
-              </button>
+            <div>
+              Entry
+              <input
+                type="text"
+                onChange={(e) => setEntryField(e.target.value)}
+                value={EntryField}
+              />
             </div>
-          )}
+            <button
+              className="submit-entry-btn"
+              onClick={(e) => SubmitEntry(e)}
+            >
+              Create Entry
+            </button>
+          </div>
+        )}
       </div>
 
       <ArrowBtn link="/explore" text="Explore other Curriculums" />

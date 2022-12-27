@@ -54,23 +54,49 @@ export function QueryMatchingUserName(matchingUserName, setState) {
 export function QueryMatchingUserState(userState, matchingUserName, setState) {
   const [user, setUser] = useState();
   function DatabaseQuery() {
-    const progressRef = collection(db, `users/${user[0].userid}/${userState}`);
-    var q = query(progressRef)
-    onSnapshot(q, (snapshot) => {
-      setState(
-        snapshot.docs.map((doc) => (doc.id))
-      );
-    }); 
+    if (userState === "Saved") {
+      const ref = collection(db, `users/${user[0].userid}/Saved`);
+      var qu = query(ref, where("savedBoolean", "==", true));
+      onSnapshot(qu, (snapshot) => {
+        setState(
+          snapshot.docs.map((doc) => (doc.id))
+        );
+      });
+    }
+    else {
+      const ref = collection(db, `users/${user[0].userid}/${userState}`);
+      var q = query(ref);
+      onSnapshot(q, (snapshot) => {
+        setState(
+          snapshot.docs.map((doc) => (doc.id))
+        );
+      });
+    }
   }
   QueryMatchingUserName(matchingUserName, setUser);
   useEffect(() => {
     try {
-        console.log("User", matchingUserName, user, user[0].userid)
-        DatabaseQuery();
-      } catch (e) {
-        console.log("", e);
-      }
+      //console.log("User", matchingUserName, user, user[0].userid, qu)
+      DatabaseQuery();
+    } catch (e) { //console.log("", e);
+    }
   }, [user]);
+}
+
+export function QueryIfSavedIter(userid, iterid, setSaved) {
+  try {
+    const saveRef = doc(db, `users/${userid}/Saved/`, iterid);
+    getDoc(saveRef).then((doc) => {
+      if (doc.data().savedBoolean) {
+        setSaved(doc.data().savedBoolean);
+      }
+      else { setSaved(false) }
+    });
+  }
+  catch (error) {
+    console.log("Error getting saved status: ", error);
+    setSaved(false)
+  }
 }
 
 export function SaveUpdatedDetails(userid, updatedDetails) {

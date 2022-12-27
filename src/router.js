@@ -8,7 +8,7 @@ import NotFound from "./pages/static/NotFound.js";
 import Accept from "./pages/admin/Accept.js";
 
 import UserProfile from "./pages/agents/UserProfile.js";
-import UserProfileProgress from "./pages/agents/UserProgress.js";
+import UserProfileSaved from "./pages/agents/UserSaved";
 import UserProfileCompleted from "./pages/agents/UserCompleted.js";
 import UserProfileDetails from "./pages/agents/UserDetails.js";
 
@@ -34,7 +34,7 @@ export default function Paths() {
           <Route path="/all" element={<All />} />
           <Route element={<Layout />}>
             <Route path="/agent/:name" element={<UserProfile />}>
-              <Route path="progress" element={<UserProfileProgress />} />
+              <Route path="saved" element={<UserProfileSaved />} />
               <Route path="completed" element={<UserProfileCompleted />} />
               <Route path="profile" element={<UserProfileDetails />} />
             </Route>

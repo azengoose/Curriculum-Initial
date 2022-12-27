@@ -112,7 +112,7 @@ export function SubNav({ mainLink, fLink, sLink, tLink, outpanel }) {
               src={ProgressIcon}
               alt="progress icon"
             />
-            Progress
+            Saved
           </Link>
         </div>
         <div>
@@ -127,11 +127,11 @@ export function SubNav({ mainLink, fLink, sLink, tLink, outpanel }) {
         </div>
         <div>
           <Link className="sub-nav-menu-div" to={tLink}>
-          <img
-            className="profile-nav-img"
-            src={ProfileIcon}
-            alt="profile icon"
-          />
+            <img
+              className="profile-nav-img"
+              src={ProfileIcon}
+              alt="profile icon"
+            />
             Profile Details
           </Link>
         </div>

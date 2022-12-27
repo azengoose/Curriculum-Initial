@@ -6,23 +6,26 @@ import "./externalpage.css";
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { getAuth } from "firebase/auth";
-import { ArrowBtn, Spacer } from "../../components/buttons/Buttons";
+import { ArrowBtn } from "../../components/buttons/Buttons";
 import ExternalIcon from "../../data/images/external-link.svg";
 import { Icon, HostLink } from "../../components/curriculums/LinkPreview";
 
+import { QueryIfSavedIter } from "../../data/UserQuery";
 import { QueryMatchingEntries, QueryMatchingTitle } from "../../data/Query";
-import { AddEntrytoFirestore, DocumentRef } from "../../data/Ref";
+import { AddEntrytoFirestore, DocumentRef, SaveItertoFirestore } from "../../data/Ref";
 
 export default function ExternalPage() {
   const [curriculum, setCurriculum] = useState([]);
-  const [currentIter, setCurrentIter] = useState(false);
+  const [saved, setSaved] = useState(false);
   const [entries, setEntries] = useState([]);
   const [paramID, setParamID] = useState("");
 
   const [addEntry, setAddEntry] = useState(false);
   const [EntryField, setEntryField] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const auth = getAuth();
+  const u = auth.currentUser;
   const location = useLocation();
   const { sortTitle } = useParams();
 
@@ -31,52 +34,50 @@ export default function ExternalPage() {
       const { id } = location.state;
       DocumentRef("external_curriculums", id, setCurriculum);
       QueryMatchingEntries(id, setEntries);
-      setParamID(id);
+      setParamID([{ iterid: id }]);
     } else {
       QueryMatchingTitle(sortTitle, setParamID);
       if (typeof paramID == "object")
         try {
           DocumentRef("external_curriculums", paramID[0].iterid, setCurriculum);
+          QueryIfSavedIter(u.uid, paramID[0].iterid, setSaved);
           QueryMatchingEntries(paramID, setEntries);
+          setLoading(false)
         } catch (e) {
-          //console.log("error:", e);
+          console.log("error:", e);
         }
     }
   }
   useEffect(() => {
-    setExternalPage();
-  }, [location.state, paramID]);
+    if (loading) setExternalPage();
+  }, [paramID]);
 
-  // function CurrentIterCheck() {
-  //     // Check if user is currently on this path
-  //     // Check if user has completed the iter=> Allow editing
-  // }
-  function JoinPath() {
+  function SaveIter() {
     if (auth) {
-      setCurrentIter(true);
+      //console.log("Attempting to save:", paramID[0].iterid, u.uid, curriculum.sortTitle, !saved)
+      SaveItertoFirestore(paramID[0].iterid, u.uid, curriculum.sortTitle, !saved);
+      setSaved(!saved);
     }
     else {
-      alert("Please log in to save joining this path");
+      alert("Please log in to save iters and write entries.");
     }
   }
   //   function CurrentItersCount() {
   //     // Count the number of people on the path
   //      // Also count number of people completed
   //   }
-  const currentPathersCount = 0;
-  const currentCompletedCount = 0;
 
   function FeedbackModal() {
     // Show a modal to give feedback on the path
   }
 
   function AddEntry() {
-    setAddEntry(true);
+    setAddEntry(!addEntry);
   }
 
   function SubmitEntry() {
     if (EntryField !== "") {
-      AddEntrytoFirestore(paramID, auth.currentUser.displayName, EntryField)
+      AddEntrytoFirestore(paramID, u.displayName, EntryField)
       setAddEntry(false);
       setEntryField("");
     } else {
@@ -129,49 +130,42 @@ export default function ExternalPage() {
           )}
 
           <div id="external-page-right-hero">
-            {/* Can separate as component */}
-            <div>
-              {currentIter ? (
-                "Currently in Progress"
+            <p id="ext-pg-right-title">{curriculum.Title}</p>
+            <div className="ext-pg-btns-div">
+              {saved ? (
+                <button className="ext-pg-btns page-join-btn" onClick={() => SaveIter()}>
+                  - Saved
+                </button>
               ) : (
-                <button className="page-join-btn" onClick={(e) => JoinPath(e)}>
-                  + Join the Path
+                <button className="ext-pg-btns page-join-btn" onClick={() => SaveIter()}>
+                  + Save
                 </button>
               )}
-              <div className="current-pathers-div">
-                <div className="current-pathers-title">Current Pathers</div>
-                <div className="current-pathers-count">
-                  {currentPathersCount}
-                </div>
-              </div>
+              <button
+                className="ext-pg-btns suggest-feedback-btn"
+                onClick={(e) => FeedbackModal(e)}
+              >
+                Suggest an Edit <img className="arrow-icon" src="https://cdn-icons-png.flaticon.com/512/271/271226.png" />
+              </button>
             </div>
-            <Spacer height={10} />
-            <div className="current-completed-div">
-              <div className="current-completed-title">People Completed</div>
-              <div className="current-completed-count">
-                {currentCompletedCount}
-              </div>
-            </div>
-            <button
-              className="suggest-feedback-btn"
-              onClick={(e) => FeedbackModal(e)}
-            >
-              Suggest an Edit &gt;
-            </button>
           </div>
         </div>
       </div>
 
-      <div>
+      <div className="leftalign-entries-div">
+        <h3 className="theme-h3">Entries</h3>
+
         {entries.length !== 0 ? (
-          <div>
-            <h3 className="theme-h3">Entries</h3>
-            {entries.map(({ Name, Rating, Text }, i) => {
+          <div className="entries-div">
+            {entries.map(({ Name, Rating, Text, EntryType }, i) => {
               return (
-                <div key={i}>
-                  <div className="entry-name">{Name}</div>
-                  <div className="entry-rating">{Rating}</div>
+                <div className="each-entry-div" key={i}>
                   <div className="entry-text">{Text}</div>
+                  <div className="entry-bottom-div">
+                    <div className="entry-name">{Name}</div> | &nbsp;
+                    <div className="entry-rating">{Rating}</div> | &nbsp;
+                    <div className="entry-type">{EntryType}</div>
+                  </div>
                 </div>
               );
             })}
@@ -179,22 +173,35 @@ export default function ExternalPage() {
         ) : (
           <div className="no-entries-div">No entries yet.</div>
         )}
-        {currentIter && !addEntry ? <button onClick={() => AddEntry()}>+ Create an Entry</button> : ""}
+        {!addEntry ? <button className="add-entry-btn" onClick={() => AddEntry()}>+ Create an Entry</button> : <button className="add-entry-btn" onClick={() => AddEntry()}>Cancel Entry</button>}
         {addEntry && (
           <div className="create-entry-div">
+            <h3>Creating an Entry...</h3>
             <div>
-              Entry
-              <input
-                type="text"
+              <textarea
+                id="textarea"
+                placeholder="Enter your entry here"
+                className="create-entry-textfield"
                 onChange={(e) => setEntryField(e.target.value)}
                 value={EntryField}
               />
+              <div className="create-entry-type-div">
+                <span>Type of Review</span>
+                <input type="checkbox"
+                  onChange={(e) => e.classList.toggle("checked")}
+                />
+                <label className="check-label">Completion Entry</label>
+                <input type="checkbox"
+                  onChange={(e) => e.classList.toggle("checked")}
+                />
+                <label className="check-label">Review</label>
+              </div>
             </div>
             <button
-              className="submit-entry-btn"
+              className="submit-entry-btn add-entry-btn"
               onClick={(e) => SubmitEntry(e)}
             >
-              Create Entry
+              Submit Entry
             </button>
           </div>
         )}
@@ -205,3 +212,21 @@ export default function ExternalPage() {
     </>
   );
 }
+
+{/* <div className="current-pathers-div">
+    <div className="current-pathers-title">Current Pathers</div>
+      <div className="current-pathers-count">
+        {currentPathersCount}
+      </div>
+    </div>
+</div>
+
+  <Spacer height={10} />
+  <div className="current-completed-div">
+    <div className="current-completed-title">People Completed</div>
+    <div className="current-completed-count">
+      {currentCompletedCount}
+    </div>
+  </div>
+  </div> */}
+// {currentIter && !addEntry ? <button onClick={() => AddEntry()}>+ Create an Entry</button> : ""}

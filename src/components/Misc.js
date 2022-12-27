@@ -103,3 +103,12 @@ var year = d.getFullYear();
 
 export const dateMonthYear = date + " " + month + " " + year;
 export const monthYear = month + " " + year;
+
+export function TextAreaAutoSize() {
+  const textarea = document.querySelector("#textarea");
+  textarea.addEventListener('input', autoResize, false);
+  function autoResize() {
+    this.style.height = 'auto';
+    this.style.height = this.scrollHeight + 'px';
+  }
+}

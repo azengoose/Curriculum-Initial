@@ -11,6 +11,11 @@ import {
 import { useEffect } from "react";
 import db from "./config.js";
 
+export function Example() {
+  const ref = doc(db, "submitted_curriculums", " CKkrzgxx528eUgV9qPWP");
+  const docSnap = getDoc(ref);
+  console.log("", ref, docSnap);
+}
 export function CollectionRef(collect, setState) {
   const collectionRef = collection(db, collect);
   useEffect(() => {
@@ -18,20 +23,15 @@ export function CollectionRef(collect, setState) {
   }, []);
 }
 
-// export function DocumentRef(collect, id, setState) {
-//   const docRef = doc(db, collect, id);
-//   useEffect(() => {
-//     getDoc(docRef).then((doc) => {
-//       setState(doc.data());
-//     });
-//   }, []);
-// }
-
 export function DocumentRef(collect, id, setState) {
-  const docRef = doc(db, collect, id);
-  getDoc(docRef).then((doc) => {
-    setState(doc.data());
-  });
+  try {
+    const docRef = doc(db, collect, id);
+    getDoc(docRef).then((doc) => {
+      setState(doc.data());
+    });
+  }
+  catch (error) { //
+  }
 }
 
 export function AuditLog(title, link, action) {
@@ -51,12 +51,6 @@ export function AuditLog(title, link, action) {
 //   // const num = snapshot.data().count;
 // }
 
-export function Example() {
-  const ref = doc(db, "submitted_curriculums", " CKkrzgxx528eUgV9qPWP");
-  const docSnap = getDoc(ref);
-  console.log("", ref, docSnap);
-}
-
 export function AddAgentToFirestore(userid, displayName) {
   var sortName = displayName.replace(/\s/g, "").toLowerCase();
   setDoc(doc(db, "users", userid), {
@@ -68,6 +62,22 @@ export function AddAgentToFirestore(userid, displayName) {
   }).then(() => {
     console.log("new agent has been created");
   });
+}
+
+export function SaveItertoFirestore(iterid, userid, sortTitle, saved) {
+  try {
+    const iterRef = doc(db, `users/${userid}/Saved`, iterid);
+    setDoc(iterRef, {
+      sortTitle: sortTitle.toString(),
+      savedBoolean: saved,
+      dateSaved: serverTimestamp(),
+    }).then(() => {
+      console.log("new iter saved: ", iterid, saved);
+    });
+  }
+  catch (error) {
+    console.log('error', error)
+  }
 }
 
 export function AddEntrytoFirestore(iterid, name, text) {

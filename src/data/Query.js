@@ -126,15 +126,18 @@ export function QueryMatchingTitle(matchingTitle, setState) {
 }
 
 export function QueryMatchingEntries(matchingID, setState) {
-  const entriesRef = collection(db, "entries");
-  var q = query(entriesRef, where("Iter", "==", matchingID));
-  onSnapshot(q, (snapshot) => {
-    setState(
-      snapshot.docs.map((doc) => ({
-        Name: doc.data().Name,
-        Rating: doc.data().Rating,
-        Text: doc.data().Text,
-      }))
-    );
-  });
+  try {
+    const entriesRef = collection(db, "entries");
+    var q = query(entriesRef, where("Iter", "==", matchingID));
+    onSnapshot(q, (snapshot) => {
+      setState(
+        snapshot.docs.map((doc) => ({
+          Name: doc.data().Name,
+          Rating: doc.data().Rating,
+          Text: doc.data().Text,
+        }))
+      );
+    });
+  } catch (e) { //
+  }
 }

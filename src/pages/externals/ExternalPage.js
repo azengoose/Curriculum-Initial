@@ -12,16 +12,17 @@ import { Icon, HostLink } from "../../components/curriculums/LinkPreview";
 
 import { QueryIfSavedIter } from "../../data/UserQuery";
 import { QueryMatchingEntries, QueryMatchingTitle } from "../../data/Query";
-import { AddEntrytoFirestore, DocumentRef, SaveItertoFirestore } from "../../data/Ref";
+import { DocumentRef, SaveItertoFirestore } from "../../data/Ref";
+import EntryForm from "../../components/forms/EntryForm";
+import parse from "html-react-parser";
 
 export default function ExternalPage() {
   const [curriculum, setCurriculum] = useState([]);
   const [saved, setSaved] = useState(false);
   const [entries, setEntries] = useState([]);
   const [paramID, setParamID] = useState("");
+  const [iterID, setIterID] = useState("")
 
-  const [addEntry, setAddEntry] = useState(false);
-  const [EntryField, setEntryField] = useState("");
   const [loading, setLoading] = useState(true);
 
   const auth = getAuth();
@@ -35,13 +36,15 @@ export default function ExternalPage() {
       DocumentRef("external_curriculums", id, setCurriculum);
       QueryMatchingEntries(id, setEntries);
       setParamID([{ iterid: id }]);
-    } else {
+    }
+    else {
       QueryMatchingTitle(sortTitle, setParamID);
       if (typeof paramID == "object")
         try {
           DocumentRef("external_curriculums", paramID[0].iterid, setCurriculum);
-          QueryIfSavedIter(u.uid, paramID[0].iterid, setSaved);
-          QueryMatchingEntries(paramID, setEntries);
+          if (u) QueryIfSavedIter(u.uid, paramID[0].iterid, setSaved);
+          QueryMatchingEntries(paramID[0].iterid, setEntries);
+          setIterID(paramID[0].iterid);
           setLoading(false)
         } catch (e) {
           console.log("error:", e);
@@ -53,8 +56,7 @@ export default function ExternalPage() {
   }, [paramID]);
 
   function SaveIter() {
-    if (auth) {
-      //console.log("Attempting to save:", paramID[0].iterid, u.uid, curriculum.sortTitle, !saved)
+    if (u) {
       SaveItertoFirestore(paramID[0].iterid, u.uid, curriculum.sortTitle, !saved);
       setSaved(!saved);
     }
@@ -62,27 +64,9 @@ export default function ExternalPage() {
       alert("Please log in to save iters and write entries.");
     }
   }
-  //   function CurrentItersCount() {
-  //     // Count the number of people on the path
-  //      // Also count number of people completed
-  //   }
 
   function FeedbackModal() {
     // Show a modal to give feedback on the path
-  }
-
-  function AddEntry() {
-    setAddEntry(!addEntry);
-  }
-
-  function SubmitEntry() {
-    if (EntryField !== "") {
-      AddEntrytoFirestore(paramID, u.displayName, EntryField)
-      setAddEntry(false);
-      setEntryField("");
-    } else {
-      alert("Please enter a valid entry");
-    }
   }
 
   return (
@@ -157,14 +141,13 @@ export default function ExternalPage() {
 
         {entries.length !== 0 ? (
           <div className="entries-div">
-            {entries.map(({ Name, Rating, Text, EntryType }, i) => {
+            {entries.map(({ Name, monthYear, Text }, i) => {
               return (
                 <div className="each-entry-div" key={i}>
-                  <div className="entry-text">{Text}</div>
+                  <div className="entry-text">{parse(Text)}</div>
                   <div className="entry-bottom-div">
-                    <div className="entry-name">{Name}</div> | &nbsp;
-                    <div className="entry-rating">{Rating}</div> | &nbsp;
-                    <div className="entry-type">{EntryType}</div>
+                    <div className="entry-name">{Name}</div> |
+                    <div className="entry-created">{monthYear}</div>
                   </div>
                 </div>
               );
@@ -173,38 +156,9 @@ export default function ExternalPage() {
         ) : (
           <div className="no-entries-div">No entries yet.</div>
         )}
-        {!addEntry ? <button className="add-entry-btn" onClick={() => AddEntry()}>+ Create an Entry</button> : <button className="add-entry-btn" onClick={() => AddEntry()}>Cancel Entry</button>}
-        {addEntry && (
-          <div className="create-entry-div">
-            <h3>Creating an Entry...</h3>
-            <div>
-              <textarea
-                id="textarea"
-                placeholder="Enter your entry here"
-                className="create-entry-textfield"
-                onChange={(e) => setEntryField(e.target.value)}
-                value={EntryField}
-              />
-              <div className="create-entry-type-div">
-                <span>Type of Review</span>
-                <input type="checkbox"
-                  onChange={(e) => e.classList.toggle("checked")}
-                />
-                <label className="check-label">Completion Entry</label>
-                <input type="checkbox"
-                  onChange={(e) => e.classList.toggle("checked")}
-                />
-                <label className="check-label">Review</label>
-              </div>
-            </div>
-            <button
-              className="submit-entry-btn add-entry-btn"
-              onClick={(e) => SubmitEntry(e)}
-            >
-              Submit Entry
-            </button>
-          </div>
-        )}
+
+        <EntryForm iterID={iterID} />
+
       </div>
 
       <ArrowBtn link="/explore" text="Explore other Curriculums" />
@@ -212,6 +166,11 @@ export default function ExternalPage() {
     </>
   );
 }
+
+//   function CurrentItersCount() {
+//     // Count the number of people on the path
+//      // Also count number of people completed
+//   }
 
 {/* <div className="current-pathers-div">
     <div className="current-pathers-title">Current Pathers</div>

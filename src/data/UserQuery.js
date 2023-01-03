@@ -99,9 +99,28 @@ export function QueryIfSavedIter(userid, iterid, setSaved) {
   }
 }
 
-export function SaveUpdatedDetails(userid, updatedDetails) {
-  const userRef = doc(db, "users", userid);
+export function QueryUserEntries(user, setState) {
   try {
+    const entriesRef = collection(db, "entries");
+    var q = query(entriesRef, where("Name", "==", user));
+    onSnapshot(q, (snapshot) => {
+      setState(
+        snapshot.docs.map((doc) => ({
+          Iter: doc.data().Iter,
+          Name: user,
+          Text: doc.data().Text,
+          monthYear: doc.data().monthYear
+        }))
+      );
+    });
+  } catch (e) {
+    console.log("Error getting user entries: ", e);
+  }
+}
+
+export function SaveUpdatedDetails(userid, updatedDetails) {
+  try {
+    const userRef = doc(db, "users", userid);
     updateDoc(userRef, updatedDetails);
     console.log("Updated user details successful");
   } catch (error) {

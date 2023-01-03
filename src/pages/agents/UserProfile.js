@@ -107,7 +107,7 @@ export default function UserProfile() {
                             </Link>
                             <Link
                               className="profile-nav-link"
-                              to={`/agent/${name}/completed`}
+                              to={`/agent/${name}/entries`}
                               onClick={(e) => filterToggle(e)}
                             >
                               <img
@@ -115,7 +115,7 @@ export default function UserProfile() {
                                 src={CompletedIcon}
                                 alt="completed icon"
                               />
-                              Completed
+                              Entries
                             </Link>
                           </div>
 

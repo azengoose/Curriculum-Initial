@@ -11,6 +11,8 @@ export default function UserProfileDetails() {
   function CheckLoggedIn() {
     if (user !== null) {
       setIsLoggedIn(true);
+      setName(user.displayName);
+      setEmail(user.email);
     }
   }
 
@@ -19,13 +21,13 @@ export default function UserProfileDetails() {
     setEditMode(true);
   }
 
-  const [Name, setName] = useState(user.displayName);
-  const [Email, setEmail] = useState(user.email);
+  const [Name, setName] = useState("");
+  const [Email, setEmail] = useState("");
 
   function SaveDetails(e) {
     e.preventDefault();
     setEditMode(false);
-    var sortName = Name.toLowerCase().replace(/\s/g, ""); 
+    var sortName = Name.toLowerCase().replace(/\s/g, "");
     SaveUpdatedDetails(user.uid, { Name, Email, sortName });
   }
   // not yet introduced a query to completely change all user
@@ -82,7 +84,10 @@ export default function UserProfileDetails() {
           )}
         </>
       ) : (
-        "You should not be able to view this."
+        <div>
+          <p>You are not the the individual that is logged in.</p>
+          <p>Please log in to edit your name and email details.</p>
+        </div>
       )}
     </>
   );

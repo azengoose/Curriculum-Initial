@@ -105,7 +105,7 @@ export default function Navbar() {
                     <SubNav
                       mainLink={`/agent/${getUserName()}`}
                       fLink={`/agent/${getUserName()}/saved`}
-                      sLink={`/agent/${getUserName()}/completed`}
+                      sLink={`/agent/${getUserName()}/entries`}
                       tLink={`/agent/${getUserName()}/profile`}
                       outpanel={
                         <button

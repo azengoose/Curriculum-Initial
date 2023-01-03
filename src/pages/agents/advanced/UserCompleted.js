@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { QueryMatchingUserState, QueryUserIters } from "../../data/UserQuery";
-import CurriculumOutput from "../../components/curriculums/CurriculumOutput";
+import { QueryMatchingUserState, QueryUserIters } from "../../../data/UserQuery";
+import CurriculumOutput from "../../../components/curriculums/CurriculumOutput";
 
 export default function UserProfileCompleted() {
   const [completed, setCompleted] = useState(null);

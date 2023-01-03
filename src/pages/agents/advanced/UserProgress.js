@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { QueryUserIters, QueryMatchingUserState } from "../../data/UserQuery";
-import CurriculumOutput from "../../components/curriculums/CurriculumOutput";
+import { QueryUserIters, QueryMatchingUserState } from "../../../data/UserQuery";
+import CurriculumOutput from "../../../components/curriculums/CurriculumOutput";
 
 export default function UserProfileProgress() {
   const [progress, setProgress] = useState(null);

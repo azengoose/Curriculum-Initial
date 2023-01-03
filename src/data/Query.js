@@ -133,8 +133,9 @@ export function QueryMatchingEntries(matchingID, setState) {
       setState(
         snapshot.docs.map((doc) => ({
           Name: doc.data().Name,
-          Rating: doc.data().Rating,
           Text: doc.data().Text,
+          monthYear: doc.data().monthYear,
+          EntryType: doc.data().EntryType,
         }))
       );
     });

@@ -80,12 +80,13 @@ export function SaveItertoFirestore(iterid, userid, sortTitle, saved) {
   }
 }
 
-export function AddEntrytoFirestore(iterid, name, text) {
+export function AddEntrytoFirestore(iterid, name, text, monthYear) {
   const entryRef = collection(db, "entries");
   addDoc(entryRef, {
     Iter: iterid,
     Name: name,
     Text: text,
+    monthYear: monthYear,
     dateCreated: serverTimestamp(),
   }).then(() => {
     console.log("new entry has been created: ", text);

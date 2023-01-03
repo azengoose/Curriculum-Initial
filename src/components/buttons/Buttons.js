@@ -122,7 +122,7 @@ export function SubNav({ mainLink, fLink, sLink, tLink, outpanel }) {
               src={CompletedIcon}
               alt="completed icon"
             />
-            Completed
+            Entries
           </Link>
         </div>
         <div>

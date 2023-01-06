@@ -14,9 +14,10 @@ export default function EntryForm(iterID) {
 		setAddEntry(!addEntry);
 	}
 	function SubmitEntry() {
-		if (EntryField !== "" && u) {
+		console.log(u, iterID)
+		if (EntryField !== "" && u && iterID.iterID) {
 			try {
-				AddEntrytoFirestore(iterID.iterID, u.displayName, EntryField, monthYear)
+				AddEntrytoFirestore(iterID.iter[0], iterID.iterID, u.displayName, EntryField, monthYear)
 				setAddEntry(false);
 				setEntryField("");
 			}
@@ -29,14 +30,12 @@ export default function EntryForm(iterID) {
 		else alert("Please enter a valid entry");
 	}
 
-	const sizeLimit = 250;
+	const sizeLimit = 450;
 	const [value, setValue] = useState('');
 	const [length, setLength] = useState(0);
-
 	const handleInit = (evt, editor) => {
 		setLength(editor.getContent({ format: 'text' }).length);
 	};
-
 	const handleUpdate = (value, editor) => {
 		const length = editor.getContent({ format: 'text' }).length;
 		if (length <= sizeLimit) {
@@ -45,11 +44,9 @@ export default function EntryForm(iterID) {
 			setEntryField(value)
 		}
 	};
-
 	const handleBeforeAddUndo = (evt, editor) => {
 		const length = editor.getContent({ format: 'text' }).length;
-		// note that this is the opposite test as in handleUpdate
-		// because we are determining when to deny adding an undo level
+		// opposite test of handleUpdate determining when to deny undo
 		if (length > sizeLimit) {
 			evt.preventDefault();
 		}
@@ -66,12 +63,11 @@ export default function EntryForm(iterID) {
 						<Editor
 							apiKey="75js8wu5xg8q1ormqe95j9rkax16ny3j1ct8bswh30i4sxgf"
 							value={value}
-							init={{ height: 250, menubar: false, toolbar: false }}
+							init={{ height: 250, menubar: false, toolbar: false, paste_as_text: true }}
 							onInit={handleInit}
 							onEditorChange={handleUpdate}
 							onBeforeAddUndo={handleBeforeAddUndo}
 							className="create-entry-textfield"
-
 						/>
 						<p>Remaining: {sizeLimit - length}</p>
 					</div>

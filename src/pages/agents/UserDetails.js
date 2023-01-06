@@ -52,6 +52,7 @@ export default function UserProfileDetails() {
                   value={Name}
                 />
               </div>
+              <br></br>
               <div>
                 Email:
                 <input
@@ -71,8 +72,8 @@ export default function UserProfileDetails() {
             <>
               {/* For when Edit Mode is OFF */}
               <div className="profile-details">
-                <div>Name: {Name}</div>
-                <div>Email: {Email}</div>
+                <p>Name: {Name}</p>
+                <p>Email: {Email}</p>
               </div>
               <button
                 className="profile-details-change-btn"

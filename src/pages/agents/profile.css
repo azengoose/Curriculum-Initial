@@ -1,78 +1,118 @@
 .profile-box {
-    border: 1px solid purple;
-    border-radius: 7px;
-    display: flex;
-    padding: 12px 10px;;
-    margin: auto;
-    max-width: 800px;
-    align-items: center;
-    text-align: left;
+	padding: 12px 10px;;
+	margin: auto;
+	max-width: 800px;
+	align-items: center;
+	text-align: left;
 }
 .profile-box-name-div {
-    font-family: HK Grotesk;
-    font-weight: bold;
-    width: 50%;
-    margin-left: 20px;
+	font-family: HK Grotesk;
+	font-weight: bold;
+	margin-left: 20px;
 }
 #profile-box-name {
-    font-size: 2.3em;
-    line-height: 10px;
+	font-size: 2.3em;
+	line-height: 10px;
+	width: fit-content;
+	margin-top: auto;
 }
 .profile-nav-box {
-    border: 1px solid rgba(182, 147, 255, 1);
-    padding: 10px;
-    border-radius: 5px;
-    display: flex;
-    width: 400px;
-    gap: 0px;
-}
-.profile-nav-box-left, .profile-nav-box-right {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    text-align: right;
+	padding: 10px;
+	border-top: 1px solid rgb(104, 92, 206);
+	border-bottom: 1px solid rgb(104, 92, 206);
 }
 .profile-nav-link {
-    font-family: HK Grotesk;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 1.2em;
-    color: rgb(15, 0, 47);
-    text-decoration: none;
-    padding: 10px;
-    align-items: center;
-    display: flex;
-    transition: 0.3s ease-in-out;
-    border-radius: 4px;
+	font-family: HK Grotesk;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 1.2em;
+	color: rgb(15, 0, 47);
+	text-decoration: none;
+	padding: 10px;
+	align-items: center;
+	display: flex;
+	transition: 0.3s ease-in-out;
+	border-radius: 4px;
 }
 .profile-nav-link:hover {
-    color: rgb(43, 10, 113);
-    background-color: #F8E3FF;
+	color: rgb(43, 10, 113);
+	background-color: #F8E3FF;
 }
 .profile-nav-img {
-    height: 20px;
-    padding-right: 10px;
+	height: 20px;
+	padding-right: 10px;
 }
 #sign-out {
-    margin: 10px 10px;
-    padding: 5px 10px;
-    transition: 0.3s ease-in-out;
+	margin: 10px 10px;
+	padding: 5px 10px;
+	transition: 0.3s ease-in-out;
 }
 #sign-out:hover {
-    background-color: #ffe2e8;
+	background-color: #ffe2e8;
 }
 .profile-details-change-btn {
-    background-color: white;
-    border-radius: 7px;
-    border: 2px solid rgba(162, 35, 157, 1);
-    font-family: 'HK GROTESK';
-    font-size: 1.2em;
-    padding: 8px 15px;
-    margin: 20px;
-    font-weight: bold;
-    transition: 0.2s ease-in-out;
-    cursor: pointer;
+	background-color: white;
+	border-radius: 7px;
+	border: 2px solid rgba(162, 35, 157, 1);
+	font-family: 'HK GROTESK';
+	font-size: 1.2em;
+	padding: 8px 15px;
+	margin: 20px;
+	font-weight: bold;
+	transition: 0.2s ease-in-out;
+	cursor: pointer;
 }
 .profile-details-change-btn:hover {
-    background-color: #F8E3FF;
+  background-color: #F8E3FF;
+}
+.no-saved-entries-div {
+	padding: 20px 0 20px;
+  font-size: 1.2em;
+  font-family: HK Grotesk;
+}
+/* Tablet */
+@media only screen and (min-width: 480px) {
+	.profile-box {
+		padding: 12px 20px;
+	}
+	.profile-nav-box {
+		margin: 0 20px;
+		max-width: 400px;
+		padding: 10px;
+		display: flex;
+		border: 1px solid rgba(182, 147, 255, 1);
+		border-radius: 5px;
+	}
+	.profile-nav-box-left, .profile-nav-box-right {
+		width: 50%;
+	}
+}
+/* Desktop */
+@media only screen and (min-width: 840px) {
+	.profile-box {
+		display: flex;
+	}
+	#profile-box-name::before {
+		content: "";
+		background-color: rgba(156, 0, 253, 0.189);
+		height: 0.7em;
+		top: 30px;
+		display: block;
+		position: relative;
+		z-index: -1;
+		margin-right: -25px;
+	}
+	.profile-box-name-div {
+		width: 50%;
+	}
+	.profile-nav-box {
+		border-bottom: 3px solid rgb(104, 92, 206);
+		width: 400px;
+		gap: 0px;
+	}
+	.profile-nav-box-left, .profile-nav-box-right {
+		display: flex;
+		flex-direction: column;
+		text-align: right;
+	}
 }

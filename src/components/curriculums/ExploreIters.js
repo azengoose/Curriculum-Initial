@@ -9,14 +9,18 @@ import ExternalIcon from "../../data/images/external-link.svg";
 import { Icon, HostLink } from "./LinkPreview";
 import { subjectList } from "../Misc";
 import { ArrowBtn } from "../buttons/Buttons";
+import { CountCollection } from "../../data/Ref";
 
 export default function ExploreIters() {
+  // const [loading, setLoading] = useState(true);
   const [simple, setSimple] = useState(false);
   const [curriculums, setCurriculums] = useState([]);
+  const [curriculumsCount, setCurriculumsCount] = useState(0);
   const [activeFiltersNum, setActiveFiltersNum] = useState(0);
   const [activeSubjects, setActiveSubjects] = useState([]);
 
   QueryFilterContains(setCurriculums, activeFiltersNum, activeSubjects);
+  CountCollection("external_curriculums", setCurriculumsCount);
 
   function ToggleSimple() {
     setSimple(!simple);
@@ -85,6 +89,7 @@ export default function ExploreIters() {
       </div>
 
       <div className="data-ouput" style={{ minHeight: 200 }}>
+        {/* {loading && <div className="loader"></div>} */}
         <div
           className={simple ? "simple-wrapper" : `external-curriculums-wrapper`}
         >
@@ -101,8 +106,7 @@ export default function ExploreIters() {
                         key={i}
                         className={simple ? "simple-each" : `each-ext-cur-div`}
                       >
-                        <div className="ext-cur-title">
-                          {/* The link in a link does not work */}
+                        <div className={`ext-cur-title ${simple && 'simple-title'}`}>
                           <a
                             className="ext-cur-title-link"
                             href={Link}
@@ -120,6 +124,9 @@ export default function ExploreIters() {
                         <ReactLink
                           to={`/iters/${sortTitle}`}
                           state={{ id: id }}
+                          className={
+                            simple ? "simple-reactlink" : ""
+                          }
                         >
                           <div
                             className={
@@ -141,19 +148,19 @@ export default function ExploreIters() {
                           <div className="subject-tag-div">
                             {Subjects
                               ? Subjects.map((e, i) => {
-                                  return (
-                                    <span
-                                      className={
-                                        simple
-                                          ? `${e} simple-subject`
-                                          : `${e} subject-tag`
-                                      }
-                                      key={i}
-                                    >
-                                      {e}
-                                    </span>
-                                  );
-                                })
+                                return (
+                                  <span
+                                    className={
+                                      simple
+                                        ? `${e} simple-subject`
+                                        : `${e} subject-tag`
+                                    }
+                                    key={i}
+                                  >
+                                    {e}
+                                  </span>
+                                );
+                              })
                               : ""}
                           </div>
                         </ReactLink>
@@ -171,7 +178,7 @@ export default function ExploreIters() {
         <div className="marauto">
           <ArrowBtn link="/all" text="All Curriculums" />
           <div style={{ marginLeft: 10, marginTop: 10 }}>
-            Total Curriculums: 30+
+            Total Curriculums: {curriculumsCount}
           </div>
         </div>
         <div className="marauto">

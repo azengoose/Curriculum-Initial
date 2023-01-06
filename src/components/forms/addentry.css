@@ -6,7 +6,6 @@
 	font-family: 'HK GROTESK';
 	font-size: 1.1em;
 	padding: 5px 12px;
-	margin: 0 0 20px 5px;
 	font-weight: bold;
 	transition: 0.2s ease-in-out;
 	cursor: pointer;
@@ -21,7 +20,6 @@
 	font-family: 'HK GROTESK';
 	font-size: 1.1em;
 	padding: 5px 12px;
-	margin: 0 0 0 5px;
 	font-weight: bold;
 	transition: 0.2s ease-in-out;
 	cursor: pointer;

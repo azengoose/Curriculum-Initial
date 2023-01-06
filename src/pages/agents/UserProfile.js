@@ -3,15 +3,19 @@
 // and editing options.
 
 import "./profile.css";
-import ProgressIcon from "../../data/images/progress-icon.svg";
-import CompletedIcon from "../../data/images/completed-icon.svg";
+import PinnedIcon from "../../data/images/pinned-icon.svg";
+import StarIcon from "../../data/images/star-icon.svg";
 import ProfileIcon from "../../data/images/profile-icon.svg";
 import SignOutIcon from "../../data/images/sign-out.svg";
 
 import { getAuth, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useParams, Link, Outlet } from "react-router-dom";
+import { Helmet } from "react-helmet";
+
 import { QueryMatchingUserName } from "../../data/UserQuery";
+import NotFound from "../static/NotFound";
+import { ArrowBtn, Spacer } from "../../components/buttons/Buttons";
 
 export default function UserProfile() {
   const [user, setUser] = useState(null);
@@ -33,19 +37,8 @@ export default function UserProfile() {
   function signOutUser() {
     signOut(getAuth());
     window.location.reload();
-    //ToggleLogIn();
+    setIsLoggedIn(false);
   }
-
-  // const monitorAuthState = async () => {
-  //   onAuthStateChanged(auth, user => {
-  //     if (user) {
-  //       loggedIntrue
-  //     }
-  //     else {
-
-  //     }
-  //   })
-  // }
 
   function CheckExists() {
     try {
@@ -67,18 +60,13 @@ export default function UserProfile() {
     CheckExists();
   }, [user, auth]);
 
-  function filterToggle(e) {
-    if (e.target.id === "isProgress") {
-      console.log("", auth);
-      // output Progress
-      // set other checkboxes to unchecked
-    }
-  }
-
   return (
     <>
       {userExists ? (
         <div>
+          <Helmet>
+            <title>Profile | {user[0].Data[0].Name} </title>
+          </Helmet>
           {user.map(({ Data }, index) => {
             return (
               <div key={index}>
@@ -88,8 +76,7 @@ export default function UserProfile() {
                       <div className="profile-box">
                         <div className="profile-box-name-div">
                           <h2 id="profile-box-name">{Name}</h2>
-                          <p>Optional Subtitle Bio</p>
-                          {/* Optional subtitle */}
+                          {/* <p>Optional Subtitle Bio</p> */}
                         </div>
 
                         <div className="profile-nav-box">
@@ -100,40 +87,42 @@ export default function UserProfile() {
                             >
                               <img
                                 className="profile-nav-img"
-                                src={ProgressIcon}
-                                alt="progress icon"
+                                src={PinnedIcon}
+                                alt="location icon"
                               />
                               Saved
                             </Link>
-                            <Link
-                              className="profile-nav-link"
-                              to={`/agent/${name}/entries`}
-                              onClick={(e) => filterToggle(e)}
-                            >
-                              <img
-                                className="profile-nav-img"
-                                src={CompletedIcon}
-                                alt="completed icon"
-                              />
-                              Entries
-                            </Link>
+                            {isLoggedIn && (
+                              <Link
+                                className="profile-nav-link"
+                                to={`/agent/${name}/profile`}
+
+                              >
+                                <img
+                                  className="profile-nav-img"
+                                  src={ProfileIcon}
+                                  alt="profile icon"
+                                />
+                                Profile Details
+                              </Link>
+                            )}
                           </div>
 
                           <div className="profile-nav-box-right">
+                            <Link
+                              className="profile-nav-link"
+                              to={`/agent/${name}/entries`}
+
+                            >
+                              <img
+                                className="profile-nav-img"
+                                src={StarIcon}
+                                alt="star icon"
+                              />
+                              Entries
+                            </Link>
                             {isLoggedIn ? (
                               <div>
-                                <Link
-                                  className="profile-nav-link"
-                                  to={`/agent/${name}/profile`}
-                                  onClick={(e) => filterToggle(e)}
-                                >
-                                  <img
-                                    className="profile-nav-img"
-                                    src={ProfileIcon}
-                                    alt="profile icon"
-                                  />
-                                  Profile Details
-                                </Link>
                                 <button
                                   id="sign-out"
                                   className="sign-btn"
@@ -160,20 +149,20 @@ export default function UserProfile() {
           <Outlet />
         </div>
       ) : (
-        <div>This user does not exist.</div>
+        <NotFound />
       )}
+      <Spacer height={60} />
+      <ArrowBtn link="/explore" text="Explore Curriculums" />
     </>
   );
 }
 
-// If param matches logged in user
-// const currentuser = auth.currentUser;
-// if (currentuser !== null) {
-//     const displayName = currentuser.displayName;
-//     const email = currentuser.email;
-//     const photoURL = currentuser.photoURL;
-//     const uid = currentuser.uid;
-
-//     console.log("", displayName, user)
-
+// const monitorAuthState = async () => {
+//   onAuthStateChanged(auth, user => {
+//     if (user) {
+//       loggedIntrue
+//     }
+//     else {
+//     }
+//   })
 // }

@@ -104,7 +104,8 @@ export function SubNav({ mainLink, fLink, sLink, tLink, outpanel }) {
         <img id="main-nav-profile-img" src={ProfileIcon} alt="profile icon" />
       </Link>
 
-      <div className="sub-nav-menu">
+      <div className="sub-nav-menu"
+      >
         <div>
           <Link className="sub-nav-menu-div" to={fLink}>
             <img

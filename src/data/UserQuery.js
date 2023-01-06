@@ -106,7 +106,8 @@ export function QueryUserEntries(user, setState) {
     onSnapshot(q, (snapshot) => {
       setState(
         snapshot.docs.map((doc) => ({
-          Iter: doc.data().Iter,
+          iterData: doc.data().iterData,
+          iterID: doc.data().iterID,
           Name: user,
           Text: doc.data().Text,
           monthYear: doc.data().monthYear

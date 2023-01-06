@@ -14,8 +14,17 @@
   margin: 0 5px;
 }
 a#nav-logo {
+  display: none;
+}
+.nav-link {
+  font-size: 1em;
+  font-family: HK Grotesk;
   font-weight: bold;
-  font-size: 1.2em;
+  color: black;
+  align-items: center;
+  display: flex;
+  padding: 5px 0px 5px 5px;
+  border: 2px solid white;
 }
 .nav-right {
   display: flex;
@@ -31,4 +40,12 @@ a#nav-logo {
 }
 i {
   cursor: pointer;
+}
+/* Tablet */
+@media only screen and (min-width: 480px) {
+  a#nav-logo {
+    display: block;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
 }

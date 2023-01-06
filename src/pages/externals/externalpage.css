@@ -1,5 +1,5 @@
 .external-page-hero {
-  max-width: 680px;
+  max-width: 720px;
   margin: auto;
   padding: 10% 0 20px 0;
   text-align: left;
@@ -17,6 +17,7 @@
   margin-top: 10px;
   font-size: 1.7em;
 }
+
 .ext-pg-btns-div {
   display: flex;
   gap: 20px;
@@ -31,21 +32,12 @@
 }
 .page-join-btn {
   font-weight: bold;
-  background: #FFF6FD;
+  background: #fbdfff;
   box-shadow: 0px 0px 4px rgba(200, 109, 255, 0.54);
-  padding: 8px 12px;
+  padding: 6px 10px;
 }
 .page-join-btn:hover {
   background: #e8e2ff;
-  box-shadow: 0px 0px 4px rgba(244, 225, 255, 0.54);
-}
-.suggest-feedback-btn {
-  background: #F6F4FF;
-  box-shadow: 0px 0px 4px rgba(200, 109, 255, 0.54);
-  padding: 8px 12px;
-}
-.suggest-feedback-btn:hover {
-  background: #ffe2fa;
   box-shadow: 0px 0px 4px rgba(244, 225, 255, 0.54);
 }
 .leftalign-entries-div {
@@ -62,23 +54,43 @@
   margin: 10px auto;
   border: 2px solid #8C56FF;
   border-radius: 3px;
+  max-width: 720px;
+  font-family: HK Grotesk;
 }
 .entry-text {
   text-align: left;
-  padding: 20px;
+  padding: 0 10px;
+  overflow-wrap: break-word;
 }
 .entry-bottom-div {
   display: flex;
-  padding: 5px 20px 12px 20px;
+  padding: 5px 20px 12px 10px;
   gap: 10px;
   font-size: 0.9em;
+}
+.entry-iterdata {
+  text-align: left;
+  font-size: 0.9em;
+  padding-left: 10px;
 }
 .no-entries-div {
   padding: 20px 0 70px;
   font-size: 1.2em;
+  font-family: HK Grotesk;
 }
 
-/* .current-pathers-div,
+/* 
+.suggest-feedback-btn {
+  background: #F6F4FF;
+  box-shadow: 0px 0px 4px rgba(200, 109, 255, 0.54);
+  padding: 8px 12px;
+}
+.suggest-feedback-btn:hover {
+  background: #ffe2fa;
+  box-shadow: 0px 0px 4px rgba(244, 225, 255, 0.54);
+}
+
+.current-pathers-div,
 .current-completed-div {
   display: flex;
   justify-content: space-between;

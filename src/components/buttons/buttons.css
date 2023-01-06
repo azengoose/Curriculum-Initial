@@ -107,10 +107,8 @@
   border-radius: 5px;
 }
 .profile-nav-active {
-  border: 2px solid black;
+  border: 2px solid black !important;
   border-radius: 4px;
-  margin-right: -4px;
-  margin-top: -4px;
 }
 .menu-active {
   display: block;

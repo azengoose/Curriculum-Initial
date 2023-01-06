@@ -128,14 +128,14 @@ export function QueryMatchingTitle(matchingTitle, setState) {
 export function QueryMatchingEntries(matchingID, setState) {
   try {
     const entriesRef = collection(db, "entries");
-    var q = query(entriesRef, where("Iter", "==", matchingID));
+    var q = query(entriesRef, where("iterID", "==", matchingID));
     onSnapshot(q, (snapshot) => {
       setState(
         snapshot.docs.map((doc) => ({
+          iterData: doc.data().iterData,
           Name: doc.data().Name,
           Text: doc.data().Text,
           monthYear: doc.data().monthYear,
-          EntryType: doc.data().EntryType,
         }))
       );
     });

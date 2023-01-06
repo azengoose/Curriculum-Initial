@@ -4,7 +4,7 @@
 import "./externalpage.css";
 
 import { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { ArrowBtn } from "../../components/buttons/Buttons";
 import ExternalIcon from "../../data/images/external-link.svg";
@@ -20,39 +20,36 @@ export default function ExternalPage() {
   const [curriculum, setCurriculum] = useState([]);
   const [saved, setSaved] = useState(false);
   const [entries, setEntries] = useState([]);
+
   const [paramID, setParamID] = useState("");
   const [iterID, setIterID] = useState("")
+  const [iterData, setIterData] = useState("")
 
   const [loading, setLoading] = useState(true);
 
   const auth = getAuth();
   const u = auth.currentUser;
-  const location = useLocation();
   const { sortTitle } = useParams();
 
   function setExternalPage() {
-    if (location.state !== null) {
-      const { id } = location.state;
-      DocumentRef("external_curriculums", id, setCurriculum);
-      QueryMatchingEntries(id, setEntries);
-      setParamID([{ iterid: id }]);
-    }
-    else {
-      QueryMatchingTitle(sortTitle, setParamID);
-      if (typeof paramID == "object")
-        try {
-          DocumentRef("external_curriculums", paramID[0].iterid, setCurriculum);
-          if (u) QueryIfSavedIter(u.uid, paramID[0].iterid, setSaved);
-          QueryMatchingEntries(paramID[0].iterid, setEntries);
-          setIterID(paramID[0].iterid);
-          setLoading(false)
-        } catch (e) {
-          console.log("error:", e);
-        }
-    }
+    QueryMatchingTitle(sortTitle, setParamID);
+    if (typeof paramID == "object")
+      try {
+        DocumentRef("external_curriculums", paramID[0].iterid, setCurriculum);
+        if (u) QueryIfSavedIter(u.uid, paramID[0].iterid, setSaved);
+        QueryMatchingEntries(paramID[0].iterid, setEntries);
+        setIterID(paramID[0].iterid);
+        setIterData(paramID[0].Data)
+        setLoading(false)
+      } catch (e) {
+        console.log("error:", e);
+      }
   }
+  //const [saveCount, setSaveCount] = useState(0);
   useEffect(() => {
     if (loading) setExternalPage();
+    // CountCollectionGroup("Saved", setSaveCount, "sortTitle", sortTitle);
+    // console.log(saveCount)
   }, [paramID]);
 
   function SaveIter() {
@@ -65,9 +62,6 @@ export default function ExternalPage() {
     }
   }
 
-  function FeedbackModal() {
-    // Show a modal to give feedback on the path
-  }
 
   return (
     <>
@@ -125,22 +119,16 @@ export default function ExternalPage() {
                   + Save
                 </button>
               )}
-              <button
-                className="ext-pg-btns suggest-feedback-btn"
-                onClick={(e) => FeedbackModal(e)}
-              >
-                Suggest an Edit <img className="arrow-icon" src="https://cdn-icons-png.flaticon.com/512/271/271226.png" />
-              </button>
             </div>
           </div>
         </div>
       </div>
 
       <div className="leftalign-entries-div">
-        <h3 className="theme-h3">Entries</h3>
-
+        <h3 className="theme-h3">Entries </h3>
         {entries.length !== 0 ? (
           <div className="entries-div">
+            <p>Total Entries: {entries.length}</p>
             {entries.map(({ Name, monthYear, Text }, i) => {
               return (
                 <div className="each-entry-div" key={i}>
@@ -157,7 +145,9 @@ export default function ExternalPage() {
           <div className="no-entries-div">No entries yet.</div>
         )}
 
-        <EntryForm iterID={iterID} />
+        {!loading &&
+          < EntryForm iterID={iterID} iter={iterData} />
+        }
 
       </div>
 
@@ -166,6 +156,13 @@ export default function ExternalPage() {
     </>
   );
 }
+
+{/* <button
+  className="ext-pg-btns suggest-feedback-btn"
+  onClick={(e) => FeedbackModal(e)}
+>
+  Suggest an Edit <img className="arrow-icon" src="https://cdn-icons-png.flaticon.com/512/271/271226.png" />
+</button> */}
 
 //   function CurrentItersCount() {
 //     // Count the number of people on the path
@@ -189,3 +186,12 @@ export default function ExternalPage() {
   </div>
   </div> */}
 // {currentIter && !addEntry ? <button onClick={() => AddEntry()}>+ Create an Entry</button> : ""}
+
+// const location = useLocation();
+// if (location.state !== null) {
+//   const { id } = location.state;
+//   DocumentRef("external_curriculums", id, setCurriculum);
+//   QueryMatchingEntries(id, setEntries);
+//   setParamID([{ iterid: id }]);
+//   setIterID(id);
+// }

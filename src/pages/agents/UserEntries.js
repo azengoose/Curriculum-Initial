@@ -1,6 +1,6 @@
 import "../externals/externalpage.css";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import parse from "html-react-parser";
 
 import { QueryUserEntries } from "../../data/UserQuery";
@@ -12,14 +12,14 @@ export default function UserProfileEntries() {
 
 	useEffect(() => {
 		QueryUserEntries(sortName, setEntries);
-	}, [entries]);
+	}, []);
 
 	return (
 		<>
 			<h3 className="theme-h3">Entries</h3>
 			{entries.length !== 0 ? (
 				<div className="entries-div">
-					{entries.map(({ Name, monthYear, Text }, i) => {
+					{entries.map(({ Name, monthYear, Text, iterData }, i) => {
 						return (
 							<div className="each-entry-div" key={i}>
 								<div className="entry-text">{parse(Text)}</div>
@@ -27,13 +27,30 @@ export default function UserProfileEntries() {
 									<div className="entry-name">{Name}</div> |
 									<div className="entry-created">{monthYear}</div>
 								</div>
+								<div className="entry-iterdata">
+									{iterData && (<div>
+										<Link
+											to={`/iters/${iterData.sortTitle}`}>
+											{iterData.Title}</Link>
+									</div>)}
+								</div>
 							</div>
 						);
 					})}
 				</div>
 			) : (
-				<div className="no-entries-div">No entries yet.</div>
+				<div className="no-saved-entries-div">No entries yet. You may create an entry while or after attempting an iter.</div>
 			)}
+			<p>Total Entries: {entries.length}</p>
 		</>
 	);
 }
+
+// function ConnectEntryIter(Iter) {
+// 	DocumentRef("external_curriculums", Iter, setCurriculum)
+// 	if (curriculum.length !== 0) {
+// 		setCurriculumList([...curriculumList, curriculum]);
+// 	}
+// }
+// ConnectEntryIter(Iter)
+// console.log(curriculumList, i)

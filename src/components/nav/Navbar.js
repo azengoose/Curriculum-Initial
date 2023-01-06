@@ -103,7 +103,7 @@ export default function Navbar() {
                 ) : (
                   <div>
                     <SubNav
-                      mainLink={`/agent/${getUserName()}`}
+                      mainLink={`/agent/${getUserName()}/saved`}
                       fLink={`/agent/${getUserName()}/saved`}
                       sLink={`/agent/${getUserName()}/entries`}
                       tLink={`/agent/${getUserName()}/profile`}

@@ -181,15 +181,6 @@ a:hover {
 a:active {
   color: rgba(255, 0, 34, 0.842);
 }
-.nav-link {
-  font-size: 1em;
-  font-family: HK Grotesk;
-  font-weight: bold;
-  color: black;
-  align-items: center;
-  display: flex;
-  padding: 5px 0px 5px 5px;
-}
 
 /* LOADING */
 .loader {

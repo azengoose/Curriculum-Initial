@@ -7,6 +7,10 @@ import {
   getDoc,
   setDoc,
   serverTimestamp,
+  getCountFromServer,
+  query,
+  where,
+  // collectionGroup,
 } from "firebase/firestore";
 import { useEffect } from "react";
 import db from "./config.js";
@@ -44,11 +48,29 @@ export function AuditLog(title, link, action) {
   });
 }
 
-// Try again later with updated count
-// export function TotalAcceptedCurriculumsNumber() {
-//   const collectionRef = collection(db, "external_curriculums");
-//   // const snapshot = getCountFromServer(collectionRef);
-//   // const num = snapshot.data().count;
+export async function CountCollection(collect, setState, field, value) {
+  const collectionRef = collection(db, collect);
+  if (field && value) {
+    const query_ = query(collectionRef, where(field, '==', value))
+    const snapshot = await getCountFromServer(query_);
+    setState(snapshot.data().count)
+  }
+  else {
+    const snapshot = await getCountFromServer(collectionRef);
+    setState(snapshot.data().count)
+  }
+}
+// export async function CountCollectionGroup(collect, setState, field, value) {
+//   const collectionRef = collectionGroup(db, collect);
+//   if (field && value) {
+//     const query_ = query(collectionRef, where(field, '==', value))
+//     const snapshot = await getCountFromServer(query_);
+//     setState(snapshot.data().count)
+//   }
+//   else {
+//     const snapshot = await getCountFromServer(collectionRef);
+//     setState(snapshot.data().count)
+//   }
 // }
 
 export function AddAgentToFirestore(userid, displayName) {
@@ -80,10 +102,11 @@ export function SaveItertoFirestore(iterid, userid, sortTitle, saved) {
   }
 }
 
-export function AddEntrytoFirestore(iterid, name, text, monthYear) {
+export function AddEntrytoFirestore(iterData, iterID, name, text, monthYear) {
   const entryRef = collection(db, "entries");
   addDoc(entryRef, {
-    Iter: iterid,
+    iterData: iterData,
+    iterID: iterID,
     Name: name,
     Text: text,
     monthYear: monthYear,

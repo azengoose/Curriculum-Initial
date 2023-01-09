@@ -68,82 +68,77 @@ export default function UserProfile() {
             <title>Profile | {user[0].Data[0].Name} </title>
           </Helmet>
           {user.map(({ Data }, index) => {
-            return (
-              <div key={index}>
-                {Data.map(({ Name }, i) => {
-                  return (
-                    <div key={i}>
-                      <div className="profile-box">
-                        <div className="profile-box-name-div">
-                          <h2 id="profile-box-name">{Name}</h2>
-                          {/* <p>Optional Subtitle Bio</p> */}
+            return (<div key={index}>
+              {Data.map(({ Name }, i) => {
+                return (
+                  <div key={i}>
+                    <div className="profile-box">
+                      <div className="profile-box-name-div">
+                        <h2 id="profile-box-name">{Name}</h2>
+                      </div>
+                      <div className="profile-nav-box">
+                        <div className="profile-nav-box-left">
+                          <Link
+                            className="profile-nav-link"
+                            to={`/agent/${name}/saved`}
+                          >
+                            <img
+                              className="profile-nav-img"
+                              src={PinnedIcon}
+                              alt="location icon"
+                            />
+                            Saved
+                          </Link>
+                          {isLoggedIn && (
+                            <Link
+                              className="profile-nav-link"
+                              to={`/agent/${name}/profile`}
+                            >
+                              <img
+                                className="profile-nav-img"
+                                src={ProfileIcon}
+                                alt="profile icon"
+                              />
+                              Profile Details
+                            </Link>
+                          )}
                         </div>
 
-                        <div className="profile-nav-box">
-                          <div className="profile-nav-box-left">
-                            <Link
-                              className="profile-nav-link"
-                              to={`/agent/${name}/saved`}
-                            >
-                              <img
-                                className="profile-nav-img"
-                                src={PinnedIcon}
-                                alt="location icon"
-                              />
-                              Saved
-                            </Link>
-                            {isLoggedIn && (
-                              <Link
-                                className="profile-nav-link"
-                                to={`/agent/${name}/profile`}
-
+                        <div className="profile-nav-box-right">
+                          <Link
+                            className="profile-nav-link"
+                            to={`/agent/${name}/entries`}
+                          >
+                            <img
+                              className="profile-nav-img"
+                              src={StarIcon}
+                              alt="star icon"
+                            />
+                            Entries
+                          </Link>
+                          {isLoggedIn && (
+                            <div>
+                              <button
+                                id="sign-out"
+                                className="sign-btn"
+                                onClick={signOutUser}
                               >
+                                Sign Out
                                 <img
-                                  className="profile-nav-img"
-                                  src={ProfileIcon}
-                                  alt="profile icon"
+                                  style={{ height: 10, paddingLeft: 10 }}
+                                  src={SignOutIcon}
+                                  alt="sign out icon"
                                 />
-                                Profile Details
-                              </Link>
-                            )}
-                          </div>
-
-                          <div className="profile-nav-box-right">
-                            <Link
-                              className="profile-nav-link"
-                              to={`/agent/${name}/entries`}
-
-                            >
-                              <img
-                                className="profile-nav-img"
-                                src={StarIcon}
-                                alt="star icon"
-                              />
-                              Entries
-                            </Link>
-                            {isLoggedIn ? (
-                              <div>
-                                <button
-                                  id="sign-out"
-                                  className="sign-btn"
-                                  onClick={signOutUser}
-                                >
-                                  Sign Out
-                                  <img
-                                    style={{ height: 10, paddingLeft: 10 }}
-                                    src={SignOutIcon}
-                                    alt="sign out icon"
-                                  />
-                                </button>
-                              </div>
-                            ) : null}
-                          </div>
+                              </button>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
+                  </div>
+                );
+              })}
+            </div>
             );
           })}
           <Outlet />

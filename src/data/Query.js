@@ -14,17 +14,13 @@ export function QueryAllByTime(collect, setState, changeState) {
   function DatabaseQuery() {
     var q = query(curriculumRef, orderBy("created", "desc"));
     onSnapshot(q, (snapshot) => {
-      setState(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          Data: [doc.data()],
-        }))
-      );
+      setState(snapshot.docs.map((doc) => ({
+        id: doc.id,
+        Data: [doc.data()],
+      })));
     });
   }
-  useEffect(() => {
-    DatabaseQuery();
-  }, [changeState]);
+  useEffect(() => { DatabaseQuery() }, [changeState]);
 }
 
 export function QueryAllBySubject(collect, setState, changeState) {
@@ -36,42 +32,31 @@ export function QueryAllBySubject(collect, setState, changeState) {
         snapshot.docs.map((doc) => ({
           id: doc.id,
           Data: [doc.data()],
-        }))
-      );
+        })));
     });
   }
-  useEffect(() => {
-    DatabaseQuery();
-  }, [changeState]);
+  useEffect(() => { DatabaseQuery() }, [changeState]);
 }
 
 export function QueryFilterContains(setState, FiltersNum, activeSubjects) {
   const curriculumRef = collection(db, "external_curriculums");
   function DatabaseQuery() {
     if (FiltersNum > 0) {
-      var q = query(
-        curriculumRef,
+      var q = query(curriculumRef,
         where("Subjects", "array-contains-any", activeSubjects),
         orderBy("Subjects", "asc")
       );
       onSnapshot(q, (snapshot) => {
-        setState(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            Data: [doc.data()],
-          }))
-        );
+        setState(snapshot.docs.map((doc) => ({
+          id: doc.id,
+          Data: [doc.data()],
+        })));
       });
-    } else {
-      setState([]);
-    }
+    } else { setState([]); }
   }
   useEffect(() => {
-    try {
-      DatabaseQuery();
-    } catch (e) {
-      console.log("", e);
-    }
+    try { DatabaseQuery() }
+    catch (e) { console.log("", e) }
   }, [activeSubjects]);
 }
 
@@ -88,9 +73,7 @@ export function QueryRecent(collect, num, setState, changeState) {
       );
     });
   }
-  useEffect(() => {
-    RecentQuery();
-  }, [changeState]);
+  useEffect(() => { RecentQuery() }, [changeState]);
 }
 
 export function QueryRecentRejected(num, setState, changeState) {
@@ -107,9 +90,7 @@ export function QueryRecentRejected(num, setState, changeState) {
       );
     });
   }
-  useEffect(() => {
-    RecentQuery();
-  }, [changeState]);
+  useEffect(() => { RecentQuery() }, [changeState]);
 }
 
 export function QueryMatchingTitle(matchingTitle, setState) {

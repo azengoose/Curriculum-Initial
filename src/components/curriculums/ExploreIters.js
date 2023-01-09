@@ -1,6 +1,6 @@
 // Externally completed curriculums for Explore
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link as ReactLink } from "react-router-dom";
 import { QueryFilterContains } from "../../data/Query";
 
@@ -12,19 +12,35 @@ import { ArrowBtn } from "../buttons/Buttons";
 import { CountCollection } from "../../data/Ref";
 
 export default function ExploreIters() {
-  // const [loading, setLoading] = useState(true);
   const [simple, setSimple] = useState(false);
   const [curriculums, setCurriculums] = useState([]);
   const [curriculumsCount, setCurriculumsCount] = useState(0);
   const [activeFiltersNum, setActiveFiltersNum] = useState(0);
-  const [activeSubjects, setActiveSubjects] = useState([]);
+
+  var isLocal = (localStorage.length > 0 || localStorage !== null) ? true : false;
+  var startBlankCondition = ((localStorage.getItem("activeSubjects")) == 'null') ? true : false;
+  const [activeSubjects, setActiveSubjects] = useState(() => {
+    return (startBlankCondition) ? [] : JSON.parse(localStorage.getItem("activeSubjects"));
+  });
 
   QueryFilterContains(setCurriculums, activeFiltersNum, activeSubjects);
   CountCollection("external_curriculums", setCurriculumsCount);
 
-  function ToggleSimple() {
-    setSimple(!simple);
+  function activesFromLocal() {
+    const local = JSON.parse(localStorage.getItem("activeSubjects"));
+    if (local.length > 0 && !null) {
+      for (let i = 0; i < local.length; i++) {
+        const check = document.getElementById(local[i]);
+        if (!check.checked) check.click()
+      }
+    }
   }
+  function localUpdate() {
+    localStorage.setItem("activeSubjects", JSON.stringify(activeSubjects));
+  }
+
+  useEffect(() => { if (isLocal) activesFromLocal() }, []);
+  useEffect(() => { if (isLocal) localUpdate() }, [activeSubjects]);
 
   function ToggleCheck(e, subject) {
     const match = document.getElementById(subject);
@@ -32,18 +48,18 @@ export default function ExploreIters() {
     if (e.target.checked) {
       console.log(`✅ ${subject} Checkbox is checked`);
       const next_array = [...activeSubjects, subject];
-      setActiveSubjects(next_array);
+      let unique = [...new Set(next_array)];
+      setActiveSubjects(unique);
+      console.log(curriculums, activeSubjects)
     } else {
       console.log(`⛔️ ${subject} Checkbox is NOT checked`);
-      const index = activeSubjects.indexOf(subject);
-      const next_arr = [
-        ...activeSubjects.slice(0, index),
-        ...activeSubjects.slice(index + 1),
-      ];
+      let next_arr = activeSubjects.filter((e) => e !== subject);
       setActiveSubjects(next_arr);
     }
     setActiveFiltersNum(document.getElementsByClassName("checked").length);
   }
+  function ToggleSimple() { setSimple(!simple); }
+
 
   return (
     <>
@@ -57,116 +73,72 @@ export default function ExploreIters() {
                 id={subject}
                 onChange={(e) => ToggleCheck(e, subject)}
               />
-              <label htmlFor={subject} className="check-label">
-                {subject}
-              </label>
+              <label htmlFor={subject} className="check-label"> {subject} </label>
             </div>
           );
         })}
-        {activeFiltersNum > 0 ? (
+        {activeFiltersNum > 0 && (
           <div className="selected-div">
             <span className="selected-title">Selected Subjects: </span>
             {activeSubjects.map((e, i) => {
-              return (
-                <span className="subject-tag" key={i}>
-                  {e}
-                </span>
-              );
+              return (<span className="subject-tag" key={i}>{e}</span>);
             })}
             <div style={{ margin: "10px 0 -10px" }}>
               Total Curriculums Displayed: {curriculums.length}
             </div>
-          </div>
-        ) : (
-          ""
-        )}
-        {activeFiltersNum == 0 ? <div id="max-msg">Select a Subject.</div> : ""}
-        {activeFiltersNum > 9 ? (
-          <div id="max-msg">10 Maximum Filters Reached</div>
-        ) : (
-          ""
-        )}
+          </div>)}
+        {activeFiltersNum == 0 && <div id="max-msg">Select a Subject.</div>}
+        {activeFiltersNum > 9 && <div id="max-msg">10 Maximum Filters Reached</div>}
       </div>
 
       <div className="data-ouput" style={{ minHeight: 200 }}>
         {/* {loading && <div className="loader"></div>} */}
-        <div
-          className={simple ? "simple-wrapper" : `external-curriculums-wrapper`}
-        >
+        <div className={simple ? "simple-wrapper" : `external-curriculums-wrapper`}>
           {curriculums.map(({ Data, id }, index) => {
             return (
               <div key={index}>
-                {Data.map(
-                  (
-                    { Title, Link, LastUpdated, Authors, Subjects, sortTitle },
-                    i
-                  ) => {
-                    return (
-                      <div
-                        key={i}
-                        className={simple ? "simple-each" : `each-ext-cur-div`}
-                      >
-                        <div className={`ext-cur-title ${simple && 'simple-title'}`}>
-                          <a
-                            className="ext-cur-title-link"
-                            href={Link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {Title} &nbsp;
-                            <img
-                              style={{ height: 10 }}
-                              src={ExternalIcon}
-                              alt="external link"
-                            />
-                          </a>
-                        </div>
-                        <ReactLink
-                          to={`/iters/${sortTitle}`}
-                          state={{ id: id }}
-                          className={
-                            simple ? "simple-reactlink" : ""
-                          }
+                {Data.map(({ Title, Link, LastUpdated, Authors, Subjects, sortTitle }, i) => {
+                  return (
+                    <div key={i} className={simple ? "simple-each" : `each-ext-cur-div`}>
+                      <div className={`ext-cur-title ${simple && 'simple-title'}`}>
+                        <a
+                          className="ext-cur-title-link"
+                          href={Link}
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
-                          <div
-                            className={
-                              simple ? "simple-summary" : "ext-cur-summary"
-                            }
-                          >
-                            <p>
-                              {simple ? (
-                                <span>Last Updated: {LastUpdated}</span>
-                              ) : (
-                                <span>
-                                  {LastUpdated} | {HostLink(Link)} {Icon(Link)}
-                                </span>
-                              )}
-                            </p>
-
-                            <p>{Authors}</p>
-                          </div>
-                          <div className="subject-tag-div">
-                            {Subjects
-                              ? Subjects.map((e, i) => {
-                                return (
-                                  <span
-                                    className={
-                                      simple
-                                        ? `${e} simple-subject`
-                                        : `${e} subject-tag`
-                                    }
-                                    key={i}
-                                  >
-                                    {e}
-                                  </span>
-                                );
-                              })
-                              : ""}
-                          </div>
-                        </ReactLink>
+                          {Title} &nbsp;
+                          <img
+                            style={{ height: 10 }}
+                            src={ExternalIcon}
+                            alt="external link"
+                          />
+                        </a>
                       </div>
-                    );
-                  }
+                      <ReactLink
+                        to={`/iters/${sortTitle}`}
+                        state={{ id: id, filters: activeSubjects }}
+                        className={simple ? "simple-reactlink" : ""}
+                      >
+                        <div className={simple ? "simple-summary" : "ext-cur-summary"}>
+                          <p>
+                            {simple ? (<span>Last Updated: {LastUpdated}</span>)
+                              : (<span> {LastUpdated} | {HostLink(Link)} {Icon(Link)} </span>)
+                            }
+                          </p>
+                          <p>{Authors}</p>
+                        </div>
+                        <div className="subject-tag-div">
+                          {Subjects && Subjects.map((e, i) => {
+                            return (
+                              <span className={simple ? `${e} simple-subject` : `${e} subject-tag`} key={i}>{e}</span>
+                            );
+                          })}
+                        </div>
+                      </ReactLink>
+                    </div>
+                  );
+                }
                 )}
               </div>
             );
@@ -195,19 +167,10 @@ export default function ExploreIters() {
   );
 }
 
-// // For adjusting GLOBAL Toggle Button Styles when Checked
-// const [checked, setChecked] = useState(false);
-// const [palette, setPalette] = useState("unchecked");
-// useEffect(() => {}, [checked]);
-// function toggleButton(e, sub) {
-//   const match = document.getElementById(sub);
-//   console.log(match);
-//   if (e.target.id === sub) {
-//     setChecked(true);
-//     setPalette("checked");
-//     if (checked) {
-//       setChecked(false);
-//       setPalette("unchecked");
-//     }
-//   }
-// }
+// console.log("UE2 local, actives: ", JSON.parse(localStorage.getItem("activeSubjects")), activeSubjects)
+// console.log("UE1 local, actives: ", local, activeSubjects)
+// const index = activeSubjects.indexOf(subject);
+// const next_arr = [
+//   ...activeSubjects.slice(0, index),
+//   ...activeSubjects.slice(index + 1),
+// ];

@@ -5,6 +5,7 @@ import {
   doc,
   addDoc,
   getDoc,
+  deleteDoc,
   setDoc,
   serverTimestamp,
   getCountFromServer,
@@ -27,6 +28,9 @@ export function CollectionRef(collect, setState) {
   }, []);
 }
 
+export async function DeleteDocument(collect, id) {
+  await deleteDoc(doc(db, collect, id));
+}
 export function DocumentRef(collect, id, setState) {
   try {
     const docRef = doc(db, collect, id);
@@ -73,13 +77,13 @@ export async function CountCollection(collect, setState, field, value) {
 //   }
 // }
 
-export function AddAgentToFirestore(userid, displayName) {
+// Adds a new agent to the firestore database
+export function AddAgentToFirestore(userid, displayName, email) {
   var sortName = displayName.replace(/\s/g, "").toLowerCase();
   setDoc(doc(db, "users", userid), {
     Name: displayName,
     sortName: sortName,
-    Progress: [],
-    Completed: [],
+    Email: email,
     dateJoined: serverTimestamp(),
   }).then(() => {
     console.log("new agent has been created");

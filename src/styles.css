@@ -241,8 +241,9 @@ a:active {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: 15px;
-    margin: 70px 40px 90px 40px;
+    margin: 70px auto;
     text-align: left;
+    max-width: 960px;
   }
 }
 .marauto {

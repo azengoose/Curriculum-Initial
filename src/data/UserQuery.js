@@ -1,16 +1,8 @@
 import { useState, useEffect } from "react";
-import {
-  collection,
-  onSnapshot,
-  query,
-  where,
-  doc,
-  getDoc,
-  updateDoc
-} from "firebase/firestore";
+import { collection, onSnapshot, query, where, doc, getDoc, updateDoc } from "firebase/firestore";
 import db from "./config.js";
 
-// CURRENT: Progress & Completed are subcollections of users
+// Progress & Completed are subcollections of users
 //    Query for pathway e.g. (users/:id/progress)
 export function QueryUserIters(idArray, setState) {
   const curriculumRef = collection(db, "external_curriculums");
@@ -28,9 +20,7 @@ export function QueryUserIters(idArray, setState) {
     }
     setState(arr);
   }
-  useEffect(() => {
-    PopulateArray();
-  }, [idArray]);
+  useEffect(() => { PopulateArray() }, [idArray]);
 }
 
 export function QueryMatchingUserName(matchingUserName, setState) {
@@ -46,9 +36,7 @@ export function QueryMatchingUserName(matchingUserName, setState) {
       );
     });
   }
-  useEffect(() => {
-    DatabaseQuery();
-  }, []);
+  useEffect(() => { DatabaseQuery() }, []);
 }
 
 export function QueryMatchingUserState(userState, matchingUserName, setState) {
@@ -114,9 +102,7 @@ export function QueryUserEntries(user, setState) {
         }))
       );
     });
-  } catch (e) {
-    console.log("Error getting user entries: ", e);
-  }
+  } catch (e) { console.log("Error getting user entries: ", e) }
 }
 
 export function SaveUpdatedDetails(userid, updatedDetails) {
@@ -124,7 +110,8 @@ export function SaveUpdatedDetails(userid, updatedDetails) {
     const userRef = doc(db, "users", userid);
     updateDoc(userRef, updatedDetails);
     console.log("Updated user details successful");
-  } catch (error) {
+  }
+  catch (error) {
     console.log("Error updating user details: ", error);
   }
 }

@@ -5,15 +5,16 @@
 //    Also recently added docs.
 
 import { useState } from "react";
-import { addDoc, deleteDoc } from "firebase/firestore";
+import { addDoc } from "firebase/firestore";
 
 import { Icon, HostLink } from "../../components/curriculums/LinkPreview";
 import { QueryAllByTime } from "../../data/Query";
-import { CollectionRef, DocumentRef, AuditLog } from "../../data/Ref";
+import { CollectionRef, AuditLog, DeleteDocument } from "../../data/Ref";
 
 export default function ExternalSubmissions() {
   const [curriculums, setCurriculums] = useState([]);
   const [curriculumRef, setCurriculumRef] = useState();
+  const [sortTitle, setSortTitle] = useState("");
 
   QueryAllByTime("submitted_curriculums", setCurriculums, curriculums);
   CollectionRef("external_curriculums", setCurriculumRef);
@@ -50,6 +51,12 @@ export default function ExternalSubmissions() {
   }
 
   function AcceptSubmitted(index) {
+    if (sortTitle === "") {
+      msg.classList.add("msg-error");
+      msg.textContent = "Please enter a subdirectory.";
+      setTimeout(tempMessage, 5000);
+      return;
+    }
     let dataref = curriculums[index].Data[0];
     try {
       addDoc(curriculumRef, {
@@ -59,11 +66,11 @@ export default function ExternalSubmissions() {
         Link: dataref.Link,
         Title: dataref.Title,
         Subjects: dataref.Subjects,
+        sortTitle: sortTitle
       });
       acceptSuccess(dataref.Title);
       AuditLog(dataref.Title, dataref.Link, "Accepted");
-      DocumentRef("submitted_curriculums", curriculums[index].id, setDocRef);
-      deleteDoc(docRef);
+      DeleteDocument("submitted_curriculums", curriculums[index].id)
     } catch (error) {
       acceptError(error);
     }
@@ -71,20 +78,17 @@ export default function ExternalSubmissions() {
     closePopup(index);
   }
 
-  var [docRef, setDocRef] = useState();
-
   function RejectSubmitted(index) {
-    let documentref = curriculums[index].Data[0];
-    DocumentRef("submitted_curriculums", curriculums[index].id, setDocRef);
     try {
-      console.log("", `${documentref.Title} has been rejected.`);
+      let documentref = curriculums[index].Data[0];
       AuditLog(documentref.Title, documentref.Link, "Rejected");
-      deleteDoc(docRef);
+      console.log("", `${documentref.Title} has been rejected.`);
+      DeleteDocument("submitted_curriculums", curriculums[index].id);
     } catch (error) {
       console.log("", error);
     }
+    closePopup(index);
   }
-  //have to click twice to delete...
 
   function checkAcceptOrReject(index) {
     const matchedModal = document.getElementById(`modal-popup-${index}`);
@@ -98,9 +102,22 @@ export default function ExternalSubmissions() {
   return (
     <>
       <div className="data-ouput">
+
+        <h3 className="theme-h3">
+          {curriculums.length === 0 ? ("All curriculums have been accepted!") : (
+            "Pending Submissions:")}
+        </h3>
+        <label>Enter subdirectory before Accepting: </label>
+        <input
+          type="text"
+          placeholder="memorable-shorthand"
+          value={sortTitle}
+          onChange={(e) => setSortTitle(e.target.value)}
+        />
+        <br /><br />
         <span id="form-message"></span>
         <div className="external-curriculums-wrapper">
-          {curriculums ? (
+          {curriculums && (
             curriculums.map(({ Data }, index) => {
               return (
                 <div className="accept-curriculums-div" key={index}>
@@ -126,15 +143,15 @@ export default function ExternalSubmissions() {
                             <div className="subject-tag-div">
                               {Subjects
                                 ? Subjects.map((e, i) => {
-                                    return (
-                                      <span
-                                        className={`${e} subject-tag`}
-                                        key={i}
-                                      >
-                                        {e}
-                                      </span>
-                                    );
-                                  })
+                                  return (
+                                    <span
+                                      className={`${e} subject-tag`}
+                                      key={i}
+                                    >
+                                      {e}
+                                    </span>
+                                  );
+                                })
                                 : ""}
                             </div>
                           </div>
@@ -186,10 +203,6 @@ export default function ExternalSubmissions() {
                 </div> // end of index div
               );
             })
-          ) : (
-            <div>
-              <p>All curriculums have been accepted!</p>
-            </div>
           )}
         </div>
       </div>

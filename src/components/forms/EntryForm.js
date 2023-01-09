@@ -14,7 +14,9 @@ export default function EntryForm(iterID) {
 		setAddEntry(!addEntry);
 	}
 	function SubmitEntry() {
-		console.log(u, iterID)
+		const warn = document.getElementById("entry-warn")
+		function tempwarn() { warn.setAttribute("hidden", "hidden") }
+		console.log(warn, u, iterID)
 		if (EntryField !== "" && u && iterID.iterID) {
 			try {
 				AddEntrytoFirestore(iterID.iter[0], iterID.iterID, u.displayName, EntryField, monthYear)
@@ -26,11 +28,14 @@ export default function EntryForm(iterID) {
 				console.log("error:", e);
 			}
 		}
-		else if (!u) alert("Please log in to save iters and write entries.");
+		else if (!u) {
+			warn.removeAttribute("hidden")
+			setTimeout(tempwarn, 5000)
+		}
 		else alert("Please enter a valid entry");
 	}
 
-	const sizeLimit = 450;
+	const sizeLimit = 1200;
 	const [value, setValue] = useState('');
 	const [length, setLength] = useState(0);
 	const handleInit = (evt, editor) => {
@@ -69,7 +74,7 @@ export default function EntryForm(iterID) {
 							onBeforeAddUndo={handleBeforeAddUndo}
 							className="create-entry-textfield"
 						/>
-						<p>Remaining: {sizeLimit - length}</p>
+						<p style={{ fontSize: "0.8em" }}>Remaining: {sizeLimit - length}</p>
 					</div>
 					<button
 						className="submit-entry-btn add-entry-btn"
@@ -77,6 +82,10 @@ export default function EntryForm(iterID) {
 					>
 						Submit Entry
 					</button>
+					<div id="entry-warn" className="login-warning" hidden>
+						{/* <Link to="/login"><b>Login</b></Link> */}
+						<span>Please <b>Login</b> to save iters and write entries.</span>
+					</div>
 				</div>
 			)}
 		</>

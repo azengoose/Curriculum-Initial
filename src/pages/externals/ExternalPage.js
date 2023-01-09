@@ -6,18 +6,20 @@ import "./externalpage.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getAuth } from "firebase/auth";
-import { ArrowBtn } from "../../components/buttons/Buttons";
+import { ArrowBtn, Spacer } from "../../components/buttons/Buttons";
 import ExternalIcon from "../../data/images/external-link.svg";
 import { Icon, HostLink } from "../../components/curriculums/LinkPreview";
 
 import { QueryIfSavedIter } from "../../data/UserQuery";
 import { QueryMatchingEntries, QueryMatchingTitle } from "../../data/Query";
-import { DocumentRef, SaveItertoFirestore } from "../../data/Ref";
+import { CountCollection, DocumentRef, SaveItertoFirestore } from "../../data/Ref";
 import EntryForm from "../../components/forms/EntryForm";
 import parse from "html-react-parser";
 
 export default function ExternalPage() {
+  const [loading, setLoading] = useState(true);
   const [curriculum, setCurriculum] = useState([]);
+  const [curriculumsCount, setCurriculumsCount] = useState(0);
   const [saved, setSaved] = useState(false);
   const [entries, setEntries] = useState([]);
 
@@ -25,11 +27,11 @@ export default function ExternalPage() {
   const [iterID, setIterID] = useState("")
   const [iterData, setIterData] = useState("")
 
-  const [loading, setLoading] = useState(true);
-
   const auth = getAuth();
   const u = auth.currentUser;
   const { sortTitle } = useParams();
+
+  CountCollection("external_curriculums", setCurriculumsCount);
 
   function setExternalPage() {
     QueryMatchingTitle(sortTitle, setParamID);
@@ -53,15 +55,17 @@ export default function ExternalPage() {
   }, [paramID]);
 
   function SaveIter() {
+    const warn = document.getElementsByClassName("login-warning")
+    function tempwarn() { warn[0].setAttribute("hidden", "hidden") }
     if (u) {
       SaveItertoFirestore(paramID[0].iterid, u.uid, curriculum.sortTitle, !saved);
       setSaved(!saved);
     }
     else {
-      alert("Please log in to save iters and write entries.");
+      warn[0].removeAttribute("hidden")
+      setTimeout(tempwarn, 5000)
     }
   }
-
 
   return (
     <>
@@ -70,21 +74,18 @@ export default function ExternalPage() {
           {curriculum.length !== 0 && (
             <>
               <div className="each-ext-cur-div">
-                <div className="ext-cur-title">
-                  <a
-                    className="ext-cur-title-link"
-                    href={curriculum.Link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {curriculum.Title} &nbsp;
-                    <img
-                      style={{ height: 10 }}
-                      src={ExternalIcon}
-                      alt="external link"
-                    />
-                  </a>
-                </div>
+                <a
+                  className="ext-cur-title-link ext-cur-title"
+                  href={curriculum.Link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                > {curriculum.Title} &nbsp;
+                  <img
+                    style={{ height: 10 }}
+                    src={ExternalIcon}
+                    alt="external link"
+                  />
+                </a>
                 <div className="ext-cur-summary">
                   <p>
                     <span>
@@ -111,17 +112,21 @@ export default function ExternalPage() {
             <p id="ext-pg-right-title">{curriculum.Title}</p>
             <div className="ext-pg-btns-div">
               {saved ? (
-                <button className="ext-pg-btns page-join-btn" onClick={() => SaveIter()}>
+                <button id="saved-btn" className="ext-pg-btns" onClick={() => SaveIter()}>
                   - Saved
                 </button>
               ) : (
-                <button className="ext-pg-btns page-join-btn" onClick={() => SaveIter()}>
+                <button id="not-saved-btn" className="ext-pg-btns" onClick={() => SaveIter()}>
                   + Save
                 </button>
               )}
             </div>
           </div>
         </div>
+      </div>
+      <div className="login-warning" hidden>
+        <span>Please <b>Login</b> to save iters and write entries.</span>
+        {/* <Link to="/login"><b>Login</b></Link> */}
       </div>
 
       <div className="leftalign-entries-div">
@@ -142,17 +147,21 @@ export default function ExternalPage() {
             })}
           </div>
         ) : (
-          <div className="no-entries-div">No entries yet.</div>
+          <>
+            <div className="centered-p"><p>No entries yet.</p>
+              <p>Write the first review and help others choose and navigate this iter.</p>
+            </div>
+            <Spacer height={20} />
+          </>
         )}
 
-        {!loading &&
-          < EntryForm iterID={iterID} iter={iterData} />
-        }
-
+        {!loading && <EntryForm iterID={iterID} iter={iterData} />}
       </div>
 
+      <Spacer height={40} />
       <ArrowBtn link="/explore" text="Explore other Curriculums" />
-      {/* Total Curriculum Count */}
+      <Spacer height={10} />
+      <span>Total Curriculums: {curriculumsCount}</span>
     </>
   );
 }

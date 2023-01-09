@@ -1,25 +1,29 @@
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { SaveUpdatedDetails } from "../../data/UserQuery";
+import { useParams } from "react-router-dom";
+import { QueryMatchingUserName, SaveUpdatedDetails } from "../../data/UserQuery";
 
 export default function UserProfileDetails() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const auth = getAuth();
-  const user = auth.currentUser;
+  const [user, setUser] = useState(null);
+  const { name } = useParams();
+  const lowerCaseName = name.toLowerCase();
+
+  QueryMatchingUserName(lowerCaseName, setUser)
 
   function CheckLoggedIn() {
-    if (user !== null) {
+    if (getAuth().currentUser !== null && user !== null) {
+      console.log(user)
       setIsLoggedIn(true);
-      setName(user.displayName);
-      setEmail(user.email);
+      setName(user[0].Data[0].Name);
+      setEmail(user[0].Data[0].Email);
     }
   }
-
-  function ChangeDetails(e) {
-    e.preventDefault();
-    setEditMode(true);
-  }
+  // function ChangeDetails(e) {
+  //   e.preventDefault();
+  //   setEditMode(true);
+  // }
 
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
@@ -29,13 +33,15 @@ export default function UserProfileDetails() {
     setEditMode(false);
     var sortName = Name.toLowerCase().replace(/\s/g, "");
     SaveUpdatedDetails(user.uid, { Name, Email, sortName });
+    window.location.redirect(`/agent/${sortName}/profile`);
   }
   // not yet introduced a query to completely change all user
   // properties. First evaluate if this is necessary.
+  // entry name needs to connect to user id in database
 
   useEffect(() => {
-    CheckLoggedIn();
-  }, [auth]);
+    CheckLoggedIn()
+  }, [user]);
 
   return (
     <>
@@ -44,8 +50,7 @@ export default function UserProfileDetails() {
         <>
           {editMode ? (
             <div className="profile-details">
-              <div>
-                Name:
+              <div> Name:
                 <input
                   type="text"
                   onChange={(e) => setName(e.target.value)}
@@ -53,8 +58,7 @@ export default function UserProfileDetails() {
                 />
               </div>
               <br></br>
-              <div>
-                Email:
+              <div> Email:
                 <input
                   type="text"
                   onChange={(e) => setEmail(e.target.value)}
@@ -64,8 +68,7 @@ export default function UserProfileDetails() {
               <button
                 className="profile-details-change-btn"
                 onClick={(e) => SaveDetails(e)}
-              >
-                Save
+              > Save
               </button>
             </div>
           ) : (
@@ -75,12 +78,11 @@ export default function UserProfileDetails() {
                 <p>Name: {Name}</p>
                 <p>Email: {Email}</p>
               </div>
-              <button
+              {/* <button
                 className="profile-details-change-btn"
                 onClick={(e) => ChangeDetails(e)}
-              >
-                Change Details
-              </button>
+              > Change Details
+              </button> */}
             </>
           )}
         </>

@@ -1,6 +1,8 @@
 #recent-admin-div {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  max-width: 1080px;
+  margin: auto;
 }
 .gatekeeper-btn {
   padding: 3px 10px;
@@ -48,4 +50,12 @@
 }
 #confirm-cross:hover {
   background-color: RGBA(255, 192, 203, 1);
+}
+.admin-logs {
+  text-align: left;
+  padding: 0 20px;
+}
+.admin-p {
+  line-height: 0.9em;
+  font-size: 0.9em;
 }

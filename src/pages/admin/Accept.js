@@ -27,30 +27,34 @@ export default function Accept() {
       <div id="recent-admin-div">
         <div>
           <h3>Recently Accepted:</h3>
-          {recentAccepts.map(({ Data }, index) => {
-            return (
-              <div key={index}>
-                {Data.map(({ Title }, i) => {
-                  return <div key={i}>{Title}</div>;
-                })}
-              </div>
-            );
-          })}
+          <div className="admin-logs">
+            {recentAccepts.map(({ Data }, index) => {
+              return (
+                <div key={index}>
+                  {Data.map(({ Title }, i) => {
+                    return <p className="admin-p" key={i}>{Title}</p>;
+                  })}
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         <div>
-          <h3>Recently Audit Log:</h3>
-          {recentRejects.map(({ Title, Action }, index) => {
-            return (
-              <div key={index}>
-                {Title}: {Action}
-              </div>
-            );
-          })}
+          <h3>Recent Audit Log:</h3>
+          <div className="admin-logs">
+            {recentRejects.map(({ Title, Action }, index) => {
+              return (
+                <p className="admin-p" key={index}>
+                  {Title}: {Action}
+                </p>
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      <h3 className="theme-h3">Pending Submissions: </h3>
+      <Spacer height={20} />
       <ExternalSubmissions />
 
       <Spacer height={40} />

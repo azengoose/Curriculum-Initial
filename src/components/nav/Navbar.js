@@ -12,54 +12,19 @@ import { useEffect, useState } from "react";
 import {
   getAuth,
   onAuthStateChanged,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-  getAdditionalUserInfo,
 } from "firebase/auth";
-import { AddAgentToFirestore } from "../../data/Ref";
+import { signIn, signOutUser } from "./Auth"
 
 export default function Navbar() {
-  const [logInState, setLogInState] = useState(true);
-  function ToggleLogIn() {
-    setLogInState(!logInState);
-  }
-
   const auth = getAuth();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
+      if (user) { setUser(user) }
+      else { setUser(null) }
     });
-  }, [logInState]);
-
-  function signIn() {
-    try {
-      var provider = new GoogleAuthProvider();
-      signInWithPopup(getAuth(), provider).then((result) => {
-        var isNew = getAdditionalUserInfo(result).isNewUser;
-        console.log("isNew: " + isNew);
-        if (isNew) {
-          AddAgentToFirestore(result.user.uid, result.user.displayName);
-        } else {
-          console.log("old agent has been logged in");
-        }
-      });
-      ToggleLogIn();
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  function signOutUser() {
-    signOut(getAuth());
-    ToggleLogIn();
-    window.location.reload();
-  }
+  }, [user]);
 
   function getUserName() {
     if (getAuth().currentUser) {
@@ -71,64 +36,62 @@ export default function Navbar() {
 
   return (
     <>
-      <div>
-        <header id="nav">
-          <div id="nav-bar">
-            <div className="nav-item">
-              <Link id="nav-logo" className="link nav-link" to="/">
-                iters
+      <header id="nav">
+        <div id="nav-bar">
+          <div className="nav-item">
+            <Link id="nav-logo" className="link nav-link" to="/">
+              iters
+            </Link>
+          </div>
+          <div className="nav-right">
+            <div className="nav-about nav-item">
+              <Link className="link nav-link" to="/about">
+                About
               </Link>
             </div>
-            <div className="nav-right">
-              <div className="nav-about nav-item">
-                <Link className="link nav-link" to="/about">
-                  About
-                </Link>
-              </div>
-              <div className="nav-item">
-                <Link className="link nav-link" to="/explore">
-                  Curriculums
-                </Link>
-              </div>
+            <div className="nav-item">
+              <Link className="link nav-link" to="/explore">
+                Curriculums
+              </Link>
+            </div>
 
-              <div id="user-container" className="nav-item">
-                {!user ? (
-                  <button id="sign-in" className="sign-btn" onClick={signIn}>
-                    <img
-                      className="profile-nav-img"
-                      src={ProfileIcon}
-                      alt="profile icon"
-                    />{" "}
-                  </button>
-                ) : (
-                  <div>
-                    <SubNav
-                      mainLink={`/agent/${getUserName()}/saved`}
-                      fLink={`/agent/${getUserName()}/saved`}
-                      sLink={`/agent/${getUserName()}/entries`}
-                      tLink={`/agent/${getUserName()}/profile`}
-                      outpanel={
-                        <button
-                          id="sub-nav-sign-out"
-                          className="sign-btn"
-                          onClick={signOutUser}
-                        >
-                          Sign Out
-                          <img
-                            style={{ height: 12, paddingLeft: 5 }}
-                            src={SignOutIcon}
-                            alt="sign out icon"
-                          />
-                        </button>
-                      }
-                    />
-                  </div>
-                )}
-              </div>
+            <div id="user-container" className="nav-item">
+              {!user ? (
+                <button id="sign-in" className="sign-btn" onClick={signIn}>
+                  <img
+                    className="profile-nav-img"
+                    src={ProfileIcon}
+                    alt="profile icon"
+                  />{" "}
+                </button>
+              ) : (
+                <div>
+                  <SubNav
+                    mainLink={`/agent/${getUserName()}/saved`}
+                    fLink={`/agent/${getUserName()}/saved`}
+                    sLink={`/agent/${getUserName()}/entries`}
+                    tLink={`/agent/${getUserName()}/profile`}
+                    outpanel={
+                      <button
+                        id="sub-nav-sign-out"
+                        className="sign-btn"
+                        onClick={signOutUser}
+                      >
+                        Sign Out
+                        <img
+                          style={{ height: 12, paddingLeft: 5 }}
+                          src={SignOutIcon}
+                          alt="sign out icon"
+                        />
+                      </button>
+                    }
+                  />
+                </div>
+              )}
             </div>
           </div>
-        </header>
-      </div>
+        </div>
+      </header>
     </>
   );
 }

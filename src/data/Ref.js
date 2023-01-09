@@ -16,29 +16,22 @@ import {
 import { useEffect } from "react";
 import db from "./config.js";
 
-export function Example() {
-  const ref = doc(db, "submitted_curriculums", " CKkrzgxx528eUgV9qPWP");
-  const docSnap = getDoc(ref);
-  console.log("", ref, docSnap);
-}
 export function CollectionRef(collect, setState) {
   const collectionRef = collection(db, collect);
-  useEffect(() => {
-    setState(collectionRef);
-  }, []);
+  useEffect(() => { setState(collectionRef) }, []);
 }
 
 export async function DeleteDocument(collect, id) {
   await deleteDoc(doc(db, collect, id));
 }
+
 export function DocumentRef(collect, id, setState) {
   try {
     const docRef = doc(db, collect, id);
     getDoc(docRef).then((doc) => {
       setState(doc.data());
     });
-  }
-  catch (error) { //
+  } catch (error) { //
   }
 }
 
@@ -111,6 +104,7 @@ export function AddEntrytoFirestore(iterData, iterID, name, text, monthYear) {
   addDoc(entryRef, {
     iterData: iterData,
     iterID: iterID,
+    sortName: name.replace(/\s/g, "").toLowerCase(),
     Name: name,
     Text: text,
     monthYear: monthYear,

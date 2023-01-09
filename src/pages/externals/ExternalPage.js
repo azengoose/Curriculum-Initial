@@ -47,19 +47,21 @@ export default function ExternalPage() {
         console.log("error:", e);
       }
   }
-  //const [saveCount, setSaveCount] = useState(0);
+
   useEffect(() => {
-    if (loading) setExternalPage();
-    // CountCollectionGroup("Saved", setSaveCount, "sortTitle", sortTitle);
-    // console.log(saveCount)
+    if (loading) setExternalPage(); // count saved iters
   }, [paramID]);
 
   function SaveIter() {
     const warn = document.getElementsByClassName("login-warning")
+    const saveMsg = document.getElementsByClassName("save-msg")
     function tempwarn() { warn[0].setAttribute("hidden", "hidden") }
+    function tempsavemsg() { saveMsg[0].setAttribute("hidden", "hidden") }
     if (u) {
       SaveItertoFirestore(paramID[0].iterid, u.uid, curriculum.sortTitle, !saved);
       setSaved(!saved);
+      saveMsg[0].removeAttribute("hidden")
+      setTimeout(tempsavemsg, 2000)
     }
     else {
       warn[0].removeAttribute("hidden")
@@ -71,7 +73,7 @@ export default function ExternalPage() {
     <>
       <div className="data-ouput" style={{ minHeight: 200 }}>
         <div className="external-page-hero">
-          {curriculum.length !== 0 && (
+          {curriculum.length !== 0 ? (
             <>
               <div className="each-ext-cur-div">
                 <a
@@ -106,20 +108,19 @@ export default function ExternalPage() {
                 </div>
               </div>
             </>
-          )}
+          ) :
+            <div className="each-ext-cur-div" style={{ padding: 40 }}><div className="loader"></div></div>
+          }
 
           <div id="external-page-right-hero">
             <p id="ext-pg-right-title">{curriculum.Title}</p>
             <div className="ext-pg-btns-div">
               {saved ? (
-                <button id="saved-btn" className="ext-pg-btns" onClick={() => SaveIter()}>
-                  - Saved
-                </button>
+                <button id="saved-btn" className="ext-pg-btns" onClick={() => SaveIter()}> - Saved</button>
               ) : (
-                <button id="not-saved-btn" className="ext-pg-btns" onClick={() => SaveIter()}>
-                  + Save
-                </button>
+                <button id="not-saved-btn" className="ext-pg-btns" onClick={() => SaveIter()}> + Save </button>
               )}
+              {saved ? <div className="save-msg" id="saved" hidden>Saved successfully.</div> : <div className="save-msg" id="unsaved" hidden>Removed from saved.</div>}
             </div>
           </div>
         </div>

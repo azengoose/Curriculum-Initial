@@ -10,9 +10,8 @@ export default function UserProfileEntries() {
 	const { name } = useParams();
 	const sortName = name.toLowerCase();
 
-	useEffect(() => {
-		QueryUserEntries(sortName, setEntries);
-	}, []);
+	useEffect(() => { QueryUserEntries(sortName, setEntries) }, []);
+	console.log(entries)
 
 	return (
 		<>

@@ -87,16 +87,16 @@ export function QueryIfSavedIter(userid, iterid, setSaved) {
   }
 }
 
-export function QueryUserEntries(user, setState) {
+export function QueryUserEntries(sortName, setState) {
   try {
     const entriesRef = collection(db, "entries");
-    var q = query(entriesRef, where("Name", "==", user));
+    var q = query(entriesRef, where("sortName", "==", sortName));
     onSnapshot(q, (snapshot) => {
       setState(
         snapshot.docs.map((doc) => ({
           iterData: doc.data().iterData,
           iterID: doc.data().iterID,
-          Name: user,
+          Name: doc.data().Name,
           Text: doc.data().Text,
           monthYear: doc.data().monthYear
         }))

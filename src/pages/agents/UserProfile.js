@@ -42,17 +42,22 @@ export default function UserProfile() {
 
   function CheckExists() {
     try {
-      if (user === null || user.length === 0) {
+      if (user === null) {
+        setUserExists(null);
+        console.log("Loading user...");
+      }
+      else if (user.length === 0) {
         setUserExists(false);
-        console.log("User does not exist");
-      } else {
+        console.log("This person does not exist.");
+      }
+      else {
         setUserExists(true);
         CheckLoggedIn();
-        console.log("User exists");
+        console.log("This person exists.");
       }
     } catch (error) {
       setUserExists(false);
-      console.log("User does not exist", error);
+      console.log("Hmm...something bad happened.", error);
     }
   }
 
@@ -62,90 +67,93 @@ export default function UserProfile() {
 
   return (
     <>
-      {userExists ? (
-        <div>
-          <Helmet>
-            <title>Profile | {user[0].Data[0].Name} </title>
-          </Helmet>
-          {user.map(({ Data }, index) => {
-            return (<div key={index}>
-              {Data.map(({ Name }, i) => {
-                return (
-                  <div key={i}>
-                    <div className="profile-box">
-                      <div className="profile-box-name-div">
-                        <h2 id="profile-box-name">{Name}</h2>
-                      </div>
-                      <div className="profile-nav-box">
-                        <div className="profile-nav-box-left">
-                          <Link
-                            className="profile-nav-link"
-                            to={`/agent/${name}/saved`}
-                          >
-                            <img
-                              className="profile-nav-img"
-                              src={PinnedIcon}
-                              alt="location icon"
-                            />
-                            Saved
-                          </Link>
-                          {isLoggedIn && (
-                            <Link
-                              className="profile-nav-link"
-                              to={`/agent/${name}/profile`}
-                            >
-                              <img
-                                className="profile-nav-img"
-                                src={ProfileIcon}
-                                alt="profile icon"
-                              />
-                              Profile Details
-                            </Link>
-                          )}
-                        </div>
-
-                        <div className="profile-nav-box-right">
-                          <Link
-                            className="profile-nav-link"
-                            to={`/agent/${name}/entries`}
-                          >
-                            <img
-                              className="profile-nav-img"
-                              src={StarIcon}
-                              alt="star icon"
-                            />
-                            Entries
-                          </Link>
-                          {isLoggedIn && (
-                            <div>
-                              <button
-                                id="sign-out"
-                                className="sign-btn"
-                                onClick={signOutUser}
+      {(userExists === null) ? <div style={{ padding: 80 }}><div className="loader"></div></div> :
+        <>
+          {userExists ? (
+            <div>
+              <Helmet>
+                <title>Profile | {user[0].Data[0].Name} </title>
+              </Helmet>
+              {user.map(({ Data }, index) => {
+                return (<div key={index}>
+                  {Data.map(({ Name }, i) => {
+                    return (
+                      <div key={i}>
+                        <div className="profile-box">
+                          <div className="profile-box-name-div">
+                            <h2 id="profile-box-name">{Name}</h2>
+                          </div>
+                          <div className="profile-nav-box">
+                            <div className="profile-nav-box-left">
+                              <Link
+                                className="profile-nav-link"
+                                to={`/agent/${name}/saved`}
                               >
-                                Sign Out
                                 <img
-                                  style={{ height: 10, paddingLeft: 10 }}
-                                  src={SignOutIcon}
-                                  alt="sign out icon"
+                                  className="profile-nav-img"
+                                  src={PinnedIcon}
+                                  alt="location icon"
                                 />
-                              </button>
+                                Saved
+                              </Link>
+                              {isLoggedIn && (
+                                <Link
+                                  className="profile-nav-link"
+                                  to={`/agent/${name}/profile`}
+                                >
+                                  <img
+                                    className="profile-nav-img"
+                                    src={ProfileIcon}
+                                    alt="profile icon"
+                                  />
+                                  Profile Details
+                                </Link>
+                              )}
                             </div>
-                          )}
+
+                            <div className="profile-nav-box-right">
+                              <Link
+                                className="profile-nav-link"
+                                to={`/agent/${name}/entries`}
+                              >
+                                <img
+                                  className="profile-nav-img"
+                                  src={StarIcon}
+                                  alt="star icon"
+                                />
+                                Entries
+                              </Link>
+                              {isLoggedIn && (
+                                <div>
+                                  <button
+                                    id="sign-out"
+                                    className="sign-btn"
+                                    onClick={signOutUser}
+                                  >
+                                    Sign Out
+                                    <img
+                                      style={{ height: 10, paddingLeft: 10 }}
+                                      src={SignOutIcon}
+                                      alt="sign out icon"
+                                    />
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    );
+                  })}
+                </div>
                 );
               })}
+              <Outlet />
             </div>
-            );
-          })}
-          <Outlet />
-        </div>
-      ) : (
-        <NotFound />
-      )}
+          ) : (
+            <NotFound />
+          )}
+        </>}
       <Spacer height={60} />
       <ArrowBtn link="/explore" text="Explore Curriculums" />
     </>

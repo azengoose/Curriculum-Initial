@@ -33,7 +33,8 @@ export default function ExploreIters() {
           if (!check.checked) check.click()
         }
       }
-    } catch (e) { console.log(e) }
+    } catch (e) { //      
+    }
   }
   function localUpdate() {
     localStorage.setItem("activeSubjects", JSON.stringify(activeSubjects));

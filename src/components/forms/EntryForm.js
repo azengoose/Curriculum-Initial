@@ -16,7 +16,6 @@ export default function EntryForm(iterID) {
 	function SubmitEntry() {
 		const warn = document.getElementById("entry-warn")
 		function tempwarn() { warn.setAttribute("hidden", "hidden") }
-		console.log(warn, u, iterID)
 		if (EntryField !== "" && u && iterID.iterID) {
 			try {
 				AddEntrytoFirestore(iterID.iter[0], iterID.iterID, u.displayName, EntryField, monthYear)

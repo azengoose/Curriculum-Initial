@@ -63,10 +63,8 @@ export function QueryMatchingUserState(userState, matchingUserName, setState) {
   }
   QueryMatchingUserName(matchingUserName, setUser);
   useEffect(() => {
-    try {
-      //console.log("User", matchingUserName, user, user[0].userid, qu)
-      DatabaseQuery();
-    } catch (e) { //console.log("", e);
+    try { DatabaseQuery() }
+    catch (e) { //console.log("", e);
     }
   }, [user]);
 }

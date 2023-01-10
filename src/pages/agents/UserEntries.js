@@ -11,7 +11,6 @@ export default function UserProfileEntries() {
 	const sortName = name.toLowerCase();
 
 	useEffect(() => { QueryUserEntries(sortName, setEntries) }, []);
-	console.log(entries)
 
 	return (
 		<>
@@ -44,12 +43,3 @@ export default function UserProfileEntries() {
 		</>
 	);
 }
-
-// function ConnectEntryIter(Iter) {
-// 	DocumentRef("external_curriculums", Iter, setCurriculum)
-// 	if (curriculum.length !== 0) {
-// 		setCurriculumList([...curriculumList, curriculum]);
-// 	}
-// }
-// ConnectEntryIter(Iter)
-// console.log(curriculumList, i)

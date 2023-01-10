@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link as ReactLink } from "react-router-dom";
 
@@ -6,20 +6,10 @@ import ExternalIcon from "../data/images/external-link.svg";
 import { Icon, HostLink } from "../components/curriculums/LinkPreview";
 import { QueryAllBySubject } from "../data/Query";
 import { ArrowBtn } from "../components/buttons/Buttons";
-import CurriculumOutput from "../components/curriculums/CurriculumOutput";
 
 export default function All() {
   const [curriculums, setCurriculums] = useState([]);
-
   QueryAllBySubject("external_curriculums", setCurriculums, curriculums);
-  
-  const [curricOut, setCurricOut] = useState("");
-  async function OUT() {    
-    setCurricOut(CurriculumOutput([curriculums]));
-  }
-  useEffect(() => {
-    OUT();
-  }, [curriculums]);
 
   return (
     <>
@@ -36,75 +26,58 @@ export default function All() {
           Total Curriculums: {curriculums.length}
         </div>
 
-        {curricOut}
-
-        <div className="data-ouput">
-          <div className="external-curriculums-wrapper">
-            {curriculums.map(({ Data, id }, index) => {
-              return (
-                <div key={index}>
-                  {Data.map(
-                    (
-                      {
-                        Title,
-                        Link,
-                        LastUpdated,
-                        Authors,
-                        Subjects,
-                        sortTitle,
-                      },
-                      i
-                    ) => {
+        {curriculums.length === 0 ? <div className="loader"></div> :
+          <div className="data-ouput">
+            <div className="external-curriculums-wrapper">
+              {curriculums.map(({ Data, id }, index) => {
+                return (
+                  <div key={index}>
+                    {Data.map(({ Title, Link, LastUpdated, Authors, Subjects, sortTitle, }, i) => {
                       return (
-                          <div className="each-ext-cur-div" key={i}>
-                            <div className="ext-cur-title">
-                              <a
-                                className="ext-cur-title-link"
-                                href={Link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {Title} &nbsp;
-                                <img
-                                  style={{ height: 10 }}
-                                  src={ExternalIcon}
-                                  alt="external link"
-                                />
-                              </a>
-                            </div>
-                            <ReactLink
-                                to={`/iters/${sortTitle}`}
-                                 state={{ id: id }}
-                            > 
-                                <div className="ext-cur-summary">
-                                <p>
-                                    <span>
-                                    {LastUpdated} | {HostLink(Link)} {Icon(Link)}
-                                    </span>
-                                </p>
-                                <p>{Authors}</p>
-                                </div>
-                                <div className="subject-tag-div">
-                                {Subjects
-                                    ? Subjects.map((e, i) => {
-                                        return (
-                                        <span className="subject-tag" key={i}>
-                                            {e}
-                                        </span>
-                                        );
-                                    })
-                                    : ""}
-                                </div>
-                            </ReactLink>
+                        <div className="each-ext-cur-div" key={i}>
+                          <div className="ext-cur-title">
+                            <a
+                              className="ext-cur-title-link"
+                              href={Link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            > {Title} &nbsp;
+                              <img
+                                style={{ height: 10 }}
+                                src={ExternalIcon}
+                                alt="external link"
+                              />
+                            </a>
                           </div>
+                          <ReactLink
+                            to={`/iters/${sortTitle}`}
+                            state={{ id: id }}
+                          >
+                            <div className="ext-cur-summary">
+                              <p><span>
+                                {LastUpdated} | {HostLink(Link)} {Icon(Link)}
+                              </span></p>
+                              <p>{Authors}</p>
+                            </div>
+                            <div className="subject-tag-div">
+                              {Subjects && Subjects.map((e, i) => {
+                                return (
+                                  <span className="subject-tag" key={i}>{e}</span>
+                                )
+                              })}
+                            </div>
+                          </ReactLink>
+                        </div>
                       );
                     }
-                  )}
-                </div>
-              );
-            })}
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        }
+
         <div className="two-columns">
           <div className="marauto">
             <ArrowBtn link="/explore" text="Explore Filtered Curriculums" />

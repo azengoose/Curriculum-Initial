@@ -70,6 +70,20 @@ export async function CountCollection(collect, setState, field, value) {
 //   }
 // }
 
+export function AddExternalIter(authorsName, lastUpdate, curriculumLink, title, subjects) {
+  const curriculumRef = collection(db, "submitted_curriculums");
+  addDoc(curriculumRef, {
+    created: serverTimestamp(),
+    Authors: authorsName,
+    LastUpdated: lastUpdate,
+    Link: curriculumLink,
+    Title: title,
+    Subjects: subjects,
+    //Favicon: favicon, // will need reference to storage
+  });
+  console.log("Curriculum successfully submitted.");
+}
+
 // Adds a new agent to the firestore database
 export function AddAgentToFirestore(userid, displayName, email) {
   var sortName = displayName.replace(/\s/g, "").toLowerCase();

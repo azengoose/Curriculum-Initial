@@ -43,7 +43,7 @@ export default function Info() {
           Unmistakably, the internet is the limitless, bottomless well of
           knowledge and information that humans once only dreamed of. In this
           chaos, lies the opportunity for order. My hope is that this broadens the landscape for what it means to
-          undergo a learning path in society, and also 
+          undergo a learning path in society, and also
           contributes to a renewed sense of clarity in a newly disorienting, yet
           blooming world.
         </p>
@@ -89,6 +89,7 @@ export default function Info() {
 // export function TextCredits() {
 //   return (
 //     <>
+// <a href="https://www.flaticon.com/free-icons/globe" title="globe icons">Globe icons created by vectorsmarket15 - Flaticon</a>
 //<div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>
 //       <h3 className="theme-h3">Credits for Site</h3>
 //       <a href="https://www.flaticon.com/free-icons/info" title="info icons">

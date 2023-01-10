@@ -21,16 +21,11 @@ export default function UserProfileSaved() {
 		setCurricOut(x);
 		setLoading(false);
 	}
-
-	useEffect(() => {
-		outCurriculum();
-	}, [curriculums]);
+	useEffect(() => { outCurriculum() }, [curriculums]);
 
 	return (
 		<>
-
 			{loading && <div className="loader"></div>}
-
 			<h3 className="theme-h3">Saved</h3>
 			{curriculums.length !== 0 && (
 				<div className="data-ouput">

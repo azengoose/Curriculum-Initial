@@ -54,10 +54,7 @@ export function QueryFilterContains(setState, FiltersNum, activeSubjects) {
       });
     } else { setState([]); }
   }
-  useEffect(() => {
-    try { DatabaseQuery() }
-    catch (e) { console.log("", e) }
-  }, [activeSubjects]);
+  DatabaseQuery();
 }
 
 export function QueryRecent(collect, num, setState, changeState) {

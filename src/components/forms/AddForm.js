@@ -1,14 +1,10 @@
 // For submitting externally completed curriculums
-
 import "./add.css";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import db from "../../data/config.js";
 import { useState } from "react";
 import Select from "react-select";
 import { optionList } from "../Misc";
 import { Icon, HostLink } from "../curriculums/LinkPreview";
-
-const curriculumRef = collection(db, "submitted_curriculums");
+import { AddExternalIter } from "../../data/Ref";
 
 export default function AddForm() {
   const [authorsName, setAuthorsName] = useState("");
@@ -19,26 +15,13 @@ export default function AddForm() {
   const [confirmSubmit, setConfirmSubmit] = useState(false);
   // const [curriculumType] = useState("");
 
-  // Submission Panel
-  // const [confirmSubmit, setConfirmSubmit] = useState(false)
-  // default is confirmSubmit is false, display the form
-  // when press add another, set confirmSubmit to false and display the form
-  //    and reset all values to null
   function ToggleSubmit() {
     setConfirmSubmit(!confirmSubmit);
     if (confirmSubmit) {
-      setAuthorsName("");
-      setLastUpdate("");
-      setCurriculumLink("");
-      setTitle("");
+      setTitle(""); setAuthorsName("");
+      setLastUpdate(""); setCurriculumLink("");
       setSubjects("");
     }
-  }
-
-  var msg = document.getElementById("form-message");
-  function tempMessage() {
-    msg.textContent = "";
-    msg.className = "";
   }
 
   const [validUrl, setValidUrl] = useState(false);
@@ -48,19 +31,14 @@ export default function AddForm() {
   }
 
   const submit = (e) => {
+    var msg = document.getElementById("form-message");
+    function tempMessage() { msg.textContent = ""; msg.className = "" }
     e.preventDefault();
     console.log(authorsName, lastUpdate, curriculumLink, title, subjects);
     if (authorsName && validUrl && title && lastUpdate && subjects) {
+      // var favicon = Icon(curriculumLink);
       try {
-        addDoc(curriculumRef, {
-          created: serverTimestamp(),
-          Authors: authorsName,
-          LastUpdated: lastUpdate,
-          Link: curriculumLink,
-          Title: title,
-          Subjects: subjects,
-        });
-        console.log("Curriculum successfully submitted.");
+        AddExternalIter(authorsName, lastUpdate, curriculumLink, title, subjects);
         ToggleSubmit();
       } catch (error) {
         console.log(error);
@@ -90,7 +68,6 @@ export default function AddForm() {
   }
 
   const [helperText, setHelperText] = useState("Add a curriculum.");
-
   const HelperTextChange = {
     Title: "Enter the informative, summative and not-too-clickbait title",
     Subjects: "The closest matching subjects the curriculum is part of",
@@ -100,20 +77,14 @@ export default function AddForm() {
     Updated: "Year last updated, e.g. 2027 or 1995",
   };
   function HelperFunction(e) {
-    if (e.id === "add-input-title") {
-      setHelperText(HelperTextChange.Title);
-    } else if (e.id === "add-input-subjects") {
-      setHelperText(HelperTextChange.Subjects);
-    } else if (e.id === "add-input-link") {
-      setHelperText(HelperTextChange.Link);
-    } else if (e.id === "add-input-authors") {
-      setHelperText(HelperTextChange.Authors);
-    } else if (e.id === "add-input-updated") {
-      setHelperText(HelperTextChange.Updated);
-    } else {
-      setHelperText("");
-    }
+    if (e.id === "add-input-title") { setHelperText(HelperTextChange.Title) }
+    else if (e.id === "add-input-subjects") { setHelperText(HelperTextChange.Subjects) }
+    else if (e.id === "add-input-link") { setHelperText(HelperTextChange.Link) }
+    else if (e.id === "add-input-authors") { setHelperText(HelperTextChange.Authors) }
+    else if (e.id === "add-input-updated") { setHelperText(HelperTextChange.Updated) }
+    else { setHelperText("") }
   }
+
   return (
     <>
       <div className="form-div">
@@ -218,10 +189,10 @@ export default function AddForm() {
                   <div id="add-submitted-div">
                     <p>Details of submission:</p>
                     {authorsName &&
-                    validUrl &&
-                    title &&
-                    lastUpdate &&
-                    subjects ? (
+                      validUrl &&
+                      title &&
+                      lastUpdate &&
+                      subjects ? (
                       <a
                         href={curriculumLink}
                         target="_blank"
